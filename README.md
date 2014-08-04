@@ -1,4 +1,5 @@
-###iptools
+iptools
+===============================================================================
 
 `iptools` is a set of tools for a working with IPv4 addresses. The aim is to
 provide functionality not presently available with any existing R package
