@@ -1,12 +1,7 @@
 iptools
 ===============================================================================
 
-`iptools` is a set of tools for a working with IPv4 addresses. The aim is to
-provide functionality not presently available with any existing R package
-and to do so with as much speed as possible. To that end, many of the operations
-are written in `Rcpp` and require installation of the `Boost` libraries.
-A current, lofty goal is to mimic most of the functionality of the Python
-`iptools` module and make IP addresses first class R objects.
+`iptools` is a set of tools for a working with IPv4 addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
 Currently, the following functions are implemented:
 
