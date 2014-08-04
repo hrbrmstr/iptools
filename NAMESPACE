@@ -1,0 +1,3 @@
+useDynLib(iptools)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)

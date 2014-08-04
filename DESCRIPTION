@@ -1,0 +1,13 @@
+Package: iptools
+Type: Package
+Title: Various IPv4 tools
+Version: 0.1
+Date: 2014-08-04
+Author: Bob Rudis <bob.rudis@verizon.com>
+Maintainer: Bob Rudis <bob.rudis@verizon.com>
+Description: This package contains various IPv4 (will eventually support IPv6)
+    functions/utilities, hoping to eventually mimic the Python iptools module.
+License: GPL-2
+Imports:
+    Rcpp (>= 0.11.2),
+LinkingTo: BH, Rcpp
