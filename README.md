@@ -10,3 +10,5 @@ Currently, the following functions are implemented:
 - `ip2long` - Character (dotted-decimal) IPv4 Address Conversion to long integer
 - `iptools` - A package to help perform various tasks with/on IPv4 addresses
 - `long2ip` - Intger IPv4 Address Conversion to Character
+- `validateIP` - Validate IPv4 addresses in dotted-decimal notation
+- `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
