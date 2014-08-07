@@ -25,9 +25,6 @@ The following data sets are included:
 - `ianaipv4spar` - IANA IPv4 Special-Purpose Address Registry
 - `ianaipv4assignments` - IANA IPv4 Address Space Registry
 
-### Current Version
-
-0.1.2pac
 
 ### Installation
 
