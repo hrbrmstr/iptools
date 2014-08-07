@@ -1,7 +1,7 @@
 ---
 title: "README"
 author: "Bob Rudis"
-date: "August 6, 2014"
+date: "August 7, 2014"
 output:
   md_document:
     variant: markdown_github
@@ -9,7 +9,7 @@ output:
 
 `iptools` is a set of tools for a working with IPv4 addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
-Currently, the following functions are implemented:
+The following functions are implemented:
 
 - `gethostbyaddr` - Returns all 'PTR' records associated with an IPv4 address
 - `gethostbyname` - Returns all 'A' records associated with a hostname
@@ -18,6 +18,16 @@ Currently, the following functions are implemented:
 - `long2ip` - Intger IPv4 Address Conversion to Character
 - `validateIP` - Validate IPv4 addresses in dotted-decimal notation
 - `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
+
+The following data sets are included:
+
+- `ianaports` - IANA Service Name and Transport Protocol Port Number Registry
+- `ianaipv4spar` - IANA IPv4 Special-Purpose Address Registry
+- `ianaipv4assignments` - IANA IPv4 Address Space Registry
+
+### Current Version
+
+0.1.2pac
 
 ### Installation
 
@@ -29,6 +39,9 @@ devtools::install_git("https://gitlab.dds.ec/bob.rudis/iptools.git")
 
 ```{r}
 library(iptools)
+
+# current verison
+packageVersion("iptools")
 
 # lookup google
 gethostbyname("google.com")

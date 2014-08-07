@@ -1,6 +1,6 @@
 `iptools` is a set of tools for a working with IPv4 addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
-Currently, the following functions are implemented:
+The following functions are implemented:
 
 -   `gethostbyaddr` - Returns all 'PTR' records associated with an IPv4 address
 -   `gethostbyname` - Returns all 'A' records associated with a hostname
@@ -9,6 +9,16 @@ Currently, the following functions are implemented:
 -   `long2ip` - Intger IPv4 Address Conversion to Character
 -   `validateIP` - Validate IPv4 addresses in dotted-decimal notation
 -   `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
+
+The following data sets are included:
+
+-   `ianaports` - IANA Service Name and Transport Protocol Port Number Registry
+-   `ianaipv4spar` - IANA IPv4 Special-Purpose Address Registry
+-   `ianaipv4assignments` - IANA IPv4 Address Space Registry
+
+### Current Version
+
+0.1.2pac
 
 ### Installation
 
@@ -21,23 +31,30 @@ devtools::install_git("https://gitlab.dds.ec/bob.rudis/iptools.git")
 ``` {.r}
 library(iptools)
 
+# current verison
+packageVersion("iptools")
+```
+
+    ## [1] '0.1.2'
+
+``` {.r}
 # lookup google
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:807::100e" "74.125.226.162"          
-    ##  [3] "74.125.226.167"           "74.125.226.163"          
-    ##  [5] "74.125.226.161"           "74.125.226.168"          
-    ##  [7] "74.125.226.165"           "74.125.226.164"          
-    ##  [9] "74.125.226.160"           "74.125.226.169"          
-    ## [11] "74.125.226.174"           "74.125.226.166"
+    ##  [1] "2607:f8b0:4006:807::100e" "74.125.226.40"           
+    ##  [3] "74.125.226.37"            "74.125.226.39"           
+    ##  [5] "74.125.226.35"            "74.125.226.46"           
+    ##  [7] "74.125.226.33"            "74.125.226.32"           
+    ##  [9] "74.125.226.41"            "74.125.226.34"           
+    ## [11] "74.125.226.38"            "74.125.226.36"
 
 ``` {.r}
 # lookup apple (in reverse)
 gethostbyaddr("17.178.96.59")
 ```
 
-    ## [1] "apple.com"
+    ## [1] "desktopmovie.org"
 
 ``` {.r}
 # decimal and back
@@ -57,13 +74,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:807::100e           74.125.226.162           74.125.226.167 
+    ## 2607:f8b0:4006:807::100e            74.125.226.40            74.125.226.37 
     ##                    FALSE                     TRUE                     TRUE 
-    ##           74.125.226.163           74.125.226.161           74.125.226.168 
+    ##            74.125.226.39            74.125.226.35            74.125.226.46 
     ##                     TRUE                     TRUE                     TRUE 
-    ##           74.125.226.165           74.125.226.164           74.125.226.160 
+    ##            74.125.226.33            74.125.226.32            74.125.226.41 
     ##                     TRUE                     TRUE                     TRUE 
-    ##           74.125.226.169           74.125.226.174           74.125.226.166 
+    ##            74.125.226.34            74.125.226.38            74.125.226.36 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}

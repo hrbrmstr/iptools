@@ -3,8 +3,8 @@
 \name{iptools}
 \alias{iptools}
 \alias{iptools-package}
-\title{A package to help perform various tasks with/on IPv4 addresses}
+\title{A package to help perform various tasks with/on IPv4 addresses, CIDR blocks & ports}
 \description{
-A package to help perform various tasks with/on IPv4 addresses
+A package to help perform various tasks with/on IPv4 addresses, CIDR blocks & ports
 }
 
