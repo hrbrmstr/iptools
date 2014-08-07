@@ -56,3 +56,11 @@ validateIP(gethostbyname("google.com"))
 validateCIDR("8.0.0.0/8")
 ```
 
+### Test Results
+
+```{r}
+library(iptools)
+library(testthat)
+test_dir("tests/", lis)
+
+```

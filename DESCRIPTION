@@ -10,6 +10,8 @@ Description: This package contains various IPv4 (will eventually support IPv6)
     functions/utilities, hoping to eventually mimic functionality of the Python
     iptools module.
 License: GPL-2
+Suggests:
+    testthat
 Imports:
     Rcpp (>= 0.11.2)
 LinkingTo: BH, Rcpp
