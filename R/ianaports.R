@@ -3,7 +3,7 @@
 #' \itemize{
 #'   \item \code{Service.Name}. service name for the port assignment (chr)
 #'   \item \code{Port.Number}. port(s) assigned (chr) - can be a range (e.g. 6629-6630)
-#'   \item \code{Transport.Protocol}. transport protocol(s) of the port assignment (chr) - [dccp|sctp|tcp|udp]
+#'   \item \code{Transport.Protocol}. transport protocol(s) of the port assignment (chr) - [\code{dccp}|\code{sctp}|\code{tcp}|\code{udp}]
 #'   \item \code{Description}. explanation of the port assignment (chr)
 #'   \item \code{Assignee}. Name and email address of the party to whom the assignment is made (chr)
 #'   \item \code{Contact}. Name and email address of the Contact person for the assignment (chr)

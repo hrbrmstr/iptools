@@ -24,6 +24,7 @@ The following data sets are included:
 - `ianaports` - IANA Service Name and Transport Protocol Port Number Registry
 - `ianaipv4spar` - IANA IPv4 Special-Purpose Address Registry
 - `ianaipv4assignments` - IANA IPv4 Address Space Registry
+- `ianarootzonetlds` - IANA Root Zone Database
 
 
 ### Installation

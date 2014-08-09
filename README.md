@@ -15,6 +15,7 @@ The following data sets are included:
 -   `ianaports` - IANA Service Name and Transport Protocol Port Number Registry
 -   `ianaipv4spar` - IANA IPv4 Special-Purpose Address Registry
 -   `ianaipv4assignments` - IANA IPv4 Address Space Registry
+-   `ianarootzonetlds` - IANA Root Zone Database
 
 ### Installation
 
@@ -40,26 +41,26 @@ library(iptools)
 packageVersion("iptools")
 ```
 
-    ## [1] '0.1.2'
+    ## [1] '0.1.3'
 
 ``` {.r}
 # lookup google
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:806::1002" "74.125.226.35"           
-    ##  [3] "74.125.226.32"            "74.125.226.40"           
-    ##  [5] "74.125.226.46"            "74.125.226.38"           
-    ##  [7] "74.125.226.33"            "74.125.226.34"           
-    ##  [9] "74.125.226.39"            "74.125.226.37"           
-    ## [11] "74.125.226.41"            "74.125.226.36"
+    ##  [1] "2607:f8b0:4006:807::1008" "74.125.226.34"           
+    ##  [3] "74.125.226.38"            "74.125.226.33"           
+    ##  [5] "74.125.226.40"            "74.125.226.46"           
+    ##  [7] "74.125.226.32"            "74.125.226.41"           
+    ##  [9] "74.125.226.37"            "74.125.226.36"           
+    ## [11] "74.125.226.35"            "74.125.226.39"
 
 ``` {.r}
 # lookup apple (in reverse)
 gethostbyaddr("17.178.96.59")
 ```
 
-    ## [1] "universityarts.com"
+    ## [1] "powerbook.cc"
 
 ``` {.r}
 # decimal and back
@@ -79,13 +80,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:806::1002            74.125.226.35            74.125.226.32 
+    ## 2607:f8b0:4006:807::1008            74.125.226.34            74.125.226.38 
     ##                    FALSE                     TRUE                     TRUE 
-    ##            74.125.226.40            74.125.226.46            74.125.226.38 
+    ##            74.125.226.33            74.125.226.40            74.125.226.46 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.33            74.125.226.34            74.125.226.39 
+    ##            74.125.226.32            74.125.226.41            74.125.226.37 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.37            74.125.226.41            74.125.226.36 
+    ##            74.125.226.36            74.125.226.35            74.125.226.39 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}

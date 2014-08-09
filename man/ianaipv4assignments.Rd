@@ -13,8 +13,8 @@ IANA IPv4 Address Space Registry
   \item \code{Prefix}. A block of IPv4 (CIDR notation) addresses that has been registered for a special purpose. (chr) (e.g. "100.64.0.0/10")
   \item \code{Designation}. entity the block is assigned to (chr)
   \item \code{Date}. assignment date (chr)
-  \item \code{Whois}. whois registry (chr) [whois.afrinic.net|whois.apnic.net|whois.arin.net|whois.lacnic.net|whois.ripe.net]
-  \item \code{Status}. status of the assignment (chr) [ALLOCATED|LEGACY|RESERVED]
+  \item \code{Whois}. whois registry (chr) [\code{whois.afrinic.net}|\code{whois.apnic.net}|\code{whois.arin.net}|\code{whois.lacnic.net}|\code{whois.ripe.net}]
+  \item \code{Status}. status of the assignment (chr) [\code{ALLOCATED}|\code{LEGACY}|\code{RESERVED}]
 }
 }
 \note{
