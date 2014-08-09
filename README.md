@@ -25,8 +25,9 @@ devtools::install_git("https://gitlab.dds.ec/bob.rudis/iptools.git")
 > NOTE: Under Ubuntu (it probably applies to other variants), this only works with the current version (1.55) of the boost library, which I installed via the [launchpad boost-latest](https://launchpad.net/~boost-latest/+archive/ubuntu/ppa/+packages) package:
 
     sudo add-apt-repository ppa:boost-latest/ppa
+    # sudo apt-get install python-software-properties if "add-apt-repository" is not found
     sudo apt-get update
-    sudo apt-get install boost1.55
+    sudo apt-get install boost1.55 # might need to use 1.54 on some systems
 
 The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
 
@@ -46,19 +47,19 @@ packageVersion("iptools")
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:807::1006" "74.125.226.162"          
-    ##  [3] "74.125.226.169"           "74.125.226.165"          
-    ##  [5] "74.125.226.174"           "74.125.226.167"          
-    ##  [7] "74.125.226.161"           "74.125.226.160"          
-    ##  [9] "74.125.226.166"           "74.125.226.168"          
-    ## [11] "74.125.226.163"           "74.125.226.164"
+    ##  [1] "2607:f8b0:4006:806::1002" "74.125.226.35"           
+    ##  [3] "74.125.226.32"            "74.125.226.40"           
+    ##  [5] "74.125.226.46"            "74.125.226.38"           
+    ##  [7] "74.125.226.33"            "74.125.226.34"           
+    ##  [9] "74.125.226.39"            "74.125.226.37"           
+    ## [11] "74.125.226.41"            "74.125.226.36"
 
 ``` {.r}
 # lookup apple (in reverse)
 gethostbyaddr("17.178.96.59")
 ```
 
-    ## [1] "velocityengine.com"
+    ## [1] "universityarts.com"
 
 ``` {.r}
 # decimal and back
@@ -78,13 +79,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:807::1006           74.125.226.162           74.125.226.169 
+    ## 2607:f8b0:4006:806::1002            74.125.226.35            74.125.226.32 
     ##                    FALSE                     TRUE                     TRUE 
-    ##           74.125.226.165           74.125.226.174           74.125.226.167 
+    ##            74.125.226.40            74.125.226.46            74.125.226.38 
     ##                     TRUE                     TRUE                     TRUE 
-    ##           74.125.226.161           74.125.226.160           74.125.226.166 
+    ##            74.125.226.33            74.125.226.34            74.125.226.39 
     ##                     TRUE                     TRUE                     TRUE 
-    ##           74.125.226.168           74.125.226.163           74.125.226.164 
+    ##            74.125.226.37            74.125.226.41            74.125.226.36 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}

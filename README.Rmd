@@ -35,8 +35,9 @@ devtools::install_git("https://gitlab.dds.ec/bob.rudis/iptools.git")
 >NOTE: Under Ubuntu (it probably applies to other variants), this only works with the current version (1.55) of the boost library, which I installed via the [launchpad boost-latest](https://launchpad.net/~boost-latest/+archive/ubuntu/ppa/+packages) package:
 
     sudo add-apt-repository ppa:boost-latest/ppa
+    # sudo apt-get install python-software-properties if "add-apt-repository" is not found
     sudo apt-get update
-    sudo apt-get install boost1.55
+    sudo apt-get install boost1.55 # might need to use 1.54 on some systems
     
 The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
 
