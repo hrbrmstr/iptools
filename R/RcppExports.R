@@ -72,3 +72,7 @@ long2ip <- function(ip) {
     .Call('iptools_long2ip', PACKAGE = 'iptools', ip)
 }
 
+geoip <- function(host, datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
+    .Call('iptools_geoip', PACKAGE = 'iptools', host, datafile)
+}
+
