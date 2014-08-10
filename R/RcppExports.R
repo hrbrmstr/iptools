@@ -116,6 +116,7 @@ geofile <- function(datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
 #' }
 #'
 #' @param ip character vector of IPv4 addresses to lookup
+#' @param showMessages show/hide console messages (bool) default: do not show messages
 #' @return data frame of geolocation information for the IP addresses
 #' @note  vectorized
 #' @examples
@@ -131,8 +132,8 @@ geofile <- function(datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
 #' ## 2          NA  37.5700  126.9800       Asia/Seoul          0         0
 #' ## 3          NA  38.0000  -97.0000               NA          0         0
 #' }
-geoip <- function(ip) {
-    .Call('iptools_geoip', PACKAGE = 'iptools', ip)
+geoip <- function(ip, showMessages = FALSE) {
+    .Call('iptools_geoip', PACKAGE = 'iptools', ip, showMessages)
 }
 
 #' Called when finished performing geolocation operations

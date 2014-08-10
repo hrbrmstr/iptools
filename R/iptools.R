@@ -63,5 +63,5 @@ validateCIDR <- Vectorize(.validateCIDR)
 #' randomIPs(10)
 #'
 randomIPs <- function(size) {
-  sprintf("%d.%d.%d.%d", sample(0:255, size), sample(0:255, size), sample(0:255, size), sample(0:255, size))
+  sprintf("%d.%d.%d.%d", sample(0:255, size, replace=TRUE), sample(0:255, size, replace=TRUE), sample(0:255, size, replace=TRUE), sample(0:255, size, replace=TRUE))
 }

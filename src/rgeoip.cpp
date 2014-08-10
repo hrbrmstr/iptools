@@ -172,6 +172,7 @@ void geofile(std::string datafile="/usr/local/share/GeoIP/GeoLiteCity.dat") {
 //' }
 //'
 //' @param ip character vector of IPv4 addresses to lookup
+//' @param showMessages show/hide console messages (bool) default: do not show messages
 //' @return data frame of geolocation information for the IP addresses
 //' @note  vectorized
 //' @examples
@@ -188,10 +189,10 @@ void geofile(std::string datafile="/usr/local/share/GeoIP/GeoLiteCity.dat") {
 //' ## 3          NA  38.0000  -97.0000               NA          0         0
 //' }
 //[[Rcpp::export]]
-DataFrame geoip(CharacterVector ip) {
+DataFrame geoip(CharacterVector ip, bool showMessages=false) {
 
   if (gi == NULL) {
-    message("Error opening database. Did you forget to call geofile()?");
+    if(showMessages) message("Error opening database. Did you forget to call geofile()?");
     return(DataFrame::create());
   }
 
@@ -216,17 +217,31 @@ DataFrame geoip(CharacterVector ip) {
     uint32_t ipnum = 0;
 
     std::string IP = Rcpp::as<std::string>(ip[i]) ;
+    iso2[i]=NA_STRING;
+    iso3[i]=NA_STRING;
+    cname[i]=NA_STRING;
+    reg[i]=NA_STRING;
+    regname[i]=NA_STRING;
+    city[i]=NA_STRING;
+    postalcode[i]=NA_STRING;
+    lat[i]=NA_REAL;
+    lon[i]=NA_REAL;
+    tz[i]=NA_STRING;
+    metro[i]=NA_INTEGER;
+    area[i]=NA_INTEGER;
+
+    ips[i]=IP;
 
     try {
       ipnum = boost::asio::ip::address_v4::from_string(IP.c_str()).to_ulong();
     } catch(boost::system::system_error& error) {
-      message( "Host/IP error" );
+      if(showMessages) message( "Host/IP error" );
       continue;
     }
 
     if (ipnum == 0) {
 
-      message("Host/IP error");
+      if (showMessages) message("Host/IP error");
       continue ;
 
     } else {
@@ -234,13 +249,12 @@ DataFrame geoip(CharacterVector ip) {
       GeoIPRecord *gir = GeoIP_record_by_ipnum(gi, ipnum);
 
       if (gir == NULL) {
-        message("Error retrieving record");
+        if(showMessages) message("Error retrieving record");
         continue ;
       }
 
       const char *time_zone = GeoIP_time_zone_by_country_and_region(gir->country_code, gir->region);
 
-      ips[i]=IP;
       iso2[i]=mkNAs(gir->country_code);
       iso3[i]=mkNAs(gir->country_code3);
       cname[i]=mkNAs(gir->country_name);

@@ -3,10 +3,12 @@
 \alias{geoip}
 \title{Return a data frame of geolcation values for IPv4 address}
 \usage{
-geoip(ip)
+geoip(ip, showMessages = FALSE)
 }
 \arguments{
 \item{ip}{character vector of IPv4 addresses to lookup}
+
+\item{showMessages}{show/hide console messages (bool) default: do not show messages}
 }
 \value{
 data frame of geolocation information for the IP addresses
