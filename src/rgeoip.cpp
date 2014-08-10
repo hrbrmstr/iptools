@@ -1,5 +1,6 @@
 #include <Rcpp.h>
 #include <boost/asio.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "GeoIP.h"
 #include "GeoIPCity.h"
@@ -9,6 +10,7 @@ using namespace Rcpp;
 extern Function message;
 
 GeoIP *gi = NULL;
+GeoIP *giASN = NULL;
 
 // return either a charactervector of the input C string or NA
 // NA only if the value was null
@@ -66,84 +68,40 @@ List geoNARowL(std::string ip) {
 }
 
 
-//DataFrame geoip(std::string ip) {
-//
-//  if (gi == NULL) {
-//    message("Error opening database. Did you forget to call geofile()?");
-//    return(geoNARow(ip));
-//  }
-//
-//  uint32_t ipnum = 0;
-//
-//  try {
-//    ipnum = boost::asio::ip::address_v4::from_string(ip.c_str()).to_ulong();
-//  } catch(boost::system::system_error& error) {
-//    message( "Host/IP error" );
-//    return(geoNARow(ip));
-//  }
-//
-//  if (ipnum == 0) {
-//
-//    message("Host/IP error");
-//    return(geoNARow(ip));
-//
-//  } else {
-//
-//    GeoIPRecord *gir = GeoIP_record_by_ipnum(gi, ipnum);
-//
-//    if (gir == NULL) {
-//      message("Error retrieving record");
-//      return(geoNARow(ip));
-//    }
-//
-//    const char *time_zone = GeoIP_time_zone_by_country_and_region(gir->country_code, gir->region);
-//
-//    DataFrame geodf = DataFrame::create(
-//      Named("country.code")=CharacterVector(mkNA(gir->country_code)),
-//      Named("country.code3")=CharacterVector(mkNA(gir->country_code3)),
-//      Named("country.name")=CharacterVector(mkNA(gir->country_name)),
-//      Named("region")=CharacterVector(mkNA(gir->region)),
-//      Named("region.name")=CharacterVector(mkNA(GeoIP_region_name_by_code(gir->country_code, gir->region))),
-//      Named("city")=CharacterVector(mkNA(gir->city)),
-//      Named("postal.code")=CharacterVector(mkNA(gir->postal_code)),
-//      Named("latitude")=NumericVector(Rcpp::wrap(gir->latitude)),
-//      Named("longitude")=NumericVector(Rcpp::wrap(gir->longitude)),
-//      Named("time.zone")=CharacterVector(mkNA(time_zone)),
-//      Named("metro.code")=IntegerVector(Rcpp::wrap(gir->metro_code)),
-//      Named("area.code")=IntegerVector(Rcpp::wrap(gir->area_code)));
-//
-//    GeoIPRecord_delete(gir);
-//
-//    return(geodf);
-//  }
-//
-//}
-
-
-//' Initializes the maxmind library and opens the \code{GeoLiteCity.dat} file
+//' Initializes the MaxMind library and opens the \code{GeoLiteCity.dat} & \code{GeoLiteASNum.dat} file
 //'
-//' This function must be called before performing a lookup with \code{geoip()}.
-//' The default full path spec defaults to \code{/usr/local/share/GeoIP/GeoLiteCity.dat}
-//' and can be overriden by changing the value of the \code{datafile} parameter.
+//' This function must be called before performing a lookup with \code{geoip()} or \code{asnip()}.
+//' Each full path spec prefix defaults to \code{/usr/local/share/GeoIP/}
+//' and can be overriden by changing the value of the \code{citydata}  & \code{asndata} parameters.
 //'
-//' NOTE: You must manually retrieve the \code{GeoLiteCity.dat.gz} file from maxmind
-//' via \url{http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz} and
-//' unzip it to the location you will be specifying in \code{datafile}.
+//' NOTE: You must manually retrieve the \code{GeoLiteCity.dat.gz} \code{GeoLiteASNum.dat.gz} files from MaxMind
+//' via \url{http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz} &
+//' \url{http://geolite.maxmind.com/download/geoip/database/GeoLiteASNum.dat.gz}  and
+//' unzip each to the locations you will be specifying in the parameters.
 //'
-//' Any errors reading the file will result in a console message.
+//' Any errors reading the files will result in a console message.
 //'
-//' @param datafile full path (including filename) to the \code{GeoLiteCity.dat} file
+//' @param citydata full path (including filename) to the \code{GeoLiteCity.dat} file
+//' @param asndata full path (including filename) to the \code{GeoLiteASNum.dat} file
 //' @examples
 //' \dontrun{
-//' geofile()
+//' maxmindinit()
 //' }
 //[[Rcpp::export]]
-void geofile(std::string datafile="/usr/local/share/GeoIP/GeoLiteCity.dat") {
+void maxmindinit(std::string citydata="/usr/local/share/GeoIP/GeoLiteCity.dat",
+             std::string asndata="/usr/local/share/GeoIP/GeoIPASNum.dat") {
 
   if (gi == NULL) {
-     gi = GeoIP_open(datafile.c_str(), GEOIP_INDEX_CACHE);
+     gi = GeoIP_open(citydata.c_str(), GEOIP_INDEX_CACHE);
      if (gi == NULL) {
-      message("Error opening database");
+      message("Error opening city database");
+     }
+  }
+
+  if (giASN == NULL) {
+     giASN = GeoIP_open(asndata.c_str(), GEOIP_STANDARD);
+     if (giASN == NULL) {
+      message("Error opening ASN database");
      }
   }
 
@@ -153,7 +111,9 @@ void geofile(std::string datafile="/usr/local/share/GeoIP/GeoLiteCity.dat") {
 //'
 //' Uses the maxmind \code{GeoIPCity.dat} binary file to perform a geolocation for
 //' a given IPv4 address and returns a data frame of geolocation records.
-//' You must call \code{geofile()} before calling \code{geoip()}
+//' You should call \code{maxmindinit()} before calling \code{geoip()}, but \code{geoip}
+//' will make a last-ditch effort to load the city database from the default location
+//' in the event you forget.
 //'
 //' Values returned in the data frame:
 //' \itemize{
@@ -177,7 +137,7 @@ void geofile(std::string datafile="/usr/local/share/GeoIP/GeoLiteCity.dat") {
 //' @note  vectorized
 //' @examples
 //' \dontrun{
-//' geofile()
+//' maxmindinit()
 //' geoip(c("24.24.24.24", "42.42.42.42", "8.8.8.8"))
 //' ##            ip country.code country.code3       country.name region region.name      city
 //' ## 1 24.24.24.24           US           USA      United States     NY    New York Deer Park
@@ -192,8 +152,11 @@ void geofile(std::string datafile="/usr/local/share/GeoIP/GeoLiteCity.dat") {
 DataFrame geoip(CharacterVector ip, bool showMessages=false) {
 
   if (gi == NULL) {
-    if(showMessages) message("Error opening database. Did you forget to call geofile()?");
-    return(DataFrame::create());
+    maxmindinit();
+    if (gi == NULL) {
+      if(showMessages) message("Error opening database. Did you forget to call madmindinit()?");
+      return(DataFrame::create());
+    }
   }
 
   int sz = ip.size();
@@ -217,6 +180,7 @@ DataFrame geoip(CharacterVector ip, bool showMessages=false) {
     uint32_t ipnum = 0;
 
     std::string IP = Rcpp::as<std::string>(ip[i]) ;
+
     iso2[i]=NA_STRING;
     iso3[i]=NA_STRING;
     cname[i]=NA_STRING;
@@ -275,19 +239,126 @@ DataFrame geoip(CharacterVector ip, bool showMessages=false) {
   }
 
   return(DataFrame::create(
-        Named("ip")=ips,
-        Named("country.code")=iso2,
-        Named("country.code3")=iso3,
-        Named("country.name")=cname,
-        Named("region")=reg,
-        Named("region.name")=regname,
-        Named("city")=city,
-        Named("postal.code")=postalcode,
-        Named("latitude")=lat,
-        Named("longitude")=lon,
-        Named("time.zone")=tz,
-        Named("metro.code")=metro,
-        Named("area.code")=area));
+    Named("ip")=ips,
+    Named("country.code")=iso2,
+    Named("country.code3")=iso3,
+    Named("country.name")=cname,
+    Named("region")=reg,
+    Named("region.name")=regname,
+    Named("city")=city,
+    Named("postal.code")=postalcode,
+    Named("latitude")=lat,
+    Named("longitude")=lon,
+    Named("time.zone")=tz,
+    Named("metro.code")=metro,
+    Named("area.code")=area));
+
+}
+
+//' Return a data frame of IPv4 to ASN & org mappings
+//'
+//' Uses the maxmind \code{GeoIPASNum.dat} binary file to perform an AS number & org
+//' identification for a given IPv4 address and returns a data frame of results.
+//' You should call \code{maxmindinit()} before calling \code{asnip()}, but \code{asnip}
+//' will make a last-ditch effort to load the ASNum database from the default location
+//' in the event you forget.
+//'
+//' Values returned in the data frame:
+//' \itemize{
+//'   \item \code{ip}. original IP address (chr)
+//'   \item \code{asn}. ASN (chr)
+//'   \item \code{org}. Assigned org (chr)
+//' }
+//'
+//' @param ip character vector of IPv4 addresses to lookup
+//' @param includeAS (bool) whether to include or not include the "AS" prefix in the \code{asnum} column (default TRUE)
+//' @param showMessages show/hide console messages (bool) default: do not show messages
+//' @return data frame of AS # & org information for the IP addresses
+//' @note vectorized
+//' @examples
+//' \dontrun{
+//' maxmindinit()
+//' set.seed(1000000); asnip(randomIPs(10))
+//' ##                 ip     asn                         org
+//' ## 1       70.5.34.39  AS3651                      Sprint
+//' ## 2    79.32.183.102  AS3269       Telecom Italia S.p.a.
+//' ## 3     70.166.53.78 AS36801   New Wave Industries, Inc.
+//' ## 4  131.199.143.169  AS1341 Allen-Bradley Company, Inc.
+//' ## 5    160.150.52.98  AS1515        Headquarters, USAISC
+//' ## 6   242.119.216.60    <NA>                        <NA>
+//' ## 7     53.55.24.145 AS31399   Daimler Autonomous System
+//' ## 8   151.141.222.29 AS19956          BellSouth.net Inc.
+//' ## 9  243.118.250.204    <NA>                        <NA>
+//' ## 10   83.173.28.251 AS31441  Gagnaveita Reykjavikur ehf
+//' }
+//[[Rcpp::export]]
+DataFrame asnip(CharacterVector ip, bool includeAS=true, bool showMessages=false) {
+
+  if (giASN == NULL) {
+    maxmindinit();
+    if (giASN == NULL) {
+      if(showMessages) message("Error opening database. Did you forget to call maxmindinit()?");
+      return(DataFrame::create());
+    }
+  }
+
+  int sz = ip.size();
+
+  CharacterVector ips(sz);
+  CharacterVector asns(sz);
+  CharacterVector orgs(sz);
+
+  for (int i=0; i<ip.size(); i++) {
+
+    uint32_t ipnum = 0;
+
+    std::string IP = Rcpp::as<std::string>(ip[i]) ;
+
+    asns[i]=NA_STRING;
+    orgs[i]=NA_STRING;
+
+    ips[i]=IP;
+
+    try {
+      ipnum = boost::asio::ip::address_v4::from_string(IP.c_str()).to_ulong();
+    } catch(boost::system::system_error& error) {
+      if(showMessages) message( "Host/IP error" );
+      continue;
+    }
+
+    if (ipnum == 0) {
+
+      if (showMessages) message("Host/IP error");
+      continue ;
+
+    } else {
+
+      char *org = GeoIP_org_by_ipnum(giASN, ipnum);
+
+      if (org == NULL) {
+        if(showMessages) message("Not found");
+        continue ;
+      }
+
+      std::string Org = std::string(GeoIP_org_by_ipnum(giASN, ipnum)) ;
+      std::string AS = Org.substr(0, Org.find(" ")) ;
+      Org = Org.substr(Org.find(" ")+1);
+
+      if (!includeAS) {
+        boost::replace_all(AS, "AS", "");
+      }
+
+      asns[i]=mkNAs(AS.c_str());
+      orgs[i]=mkNAs(Org.c_str());
+
+    }
+
+  }
+
+  return(DataFrame::create(
+    Named("ip")=ips,
+    Named("asn")=asns,
+    Named("org")=orgs));
 
 }
 
@@ -302,8 +373,15 @@ DataFrame geoip(CharacterVector ip, bool showMessages=false) {
 //' }
 //[[Rcpp::export]]
 void geoCleanup() {
+
   if (gi != NULL) {
     GeoIP_delete(gi);
     gi = NULL ;
   }
+
+  if (giASN != NULL) {
+    GeoIP_delete(giASN);
+    giASN = NULL ;
+  }
+
 }

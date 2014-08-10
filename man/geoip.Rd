@@ -16,7 +16,9 @@ data frame of geolocation information for the IP addresses
 \description{
 Uses the maxmind \code{GeoIPCity.dat} binary file to perform a geolocation for
 a given IPv4 address and returns a data frame of geolocation records.
-You must call \code{geofile()} before calling \code{geoip()}
+You should call \code{maxmindinit()} before calling \code{geoip()}, but \code{geoip}
+will make a last-ditch effort to load the city database from the default location
+in the event you forget.
 }
 \details{
 Values returned in the data frame:
@@ -40,7 +42,7 @@ vectorized
 }
 \examples{
 \dontrun{
-geofile()
+maxmindinit()
 geoip(c("24.24.24.24", "42.42.42.42", "8.8.8.8"))
 ##            ip country.code country.code3       country.name region region.name      city
 ## 1 24.24.24.24           US           USA      United States     NY    New York Deer Park

@@ -1,3 +1,25 @@
+#' @title Vectorized version of \code{gethostbyaddr}
+#' @description Returns a list (slots are named by the input IPv4 addresses) with lookup results per slot
+#' @param ipv4 vector of IPv4 address (character - dotted-decimal)
+#' @return list
+#' @export
+#' @examples
+#' set.seed(1492)
+#' gethostsbyaddr(randomIPs(5))
+#'
+gethostsbyaddr <- Vectorize(gethostbyaddr, SIMPLIFY=FALSE)
+
+#' @title Vectorized version of \code{gethostbyname}
+#' @description Returns a list (slots are named by the input host names) with lookup results per slot
+#' @param hostname vector of host names (character - FQDN)
+#' @return list
+#' @export
+#' @examples
+#' gethostsbyname(c("google.com", "stackoverflow.com", "twitter.com", "r-bloggers.com"))
+#'
+gethostsbyname <- Vectorize(gethostbyname, SIMPLIFY=FALSE)
+
+
 #
 # non-vectorized version of validateIP
 #

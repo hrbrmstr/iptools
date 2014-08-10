@@ -1,6 +1,6 @@
 `iptools` is a set of tools for a working with IPv4 addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
-The package also uses the v1 [GeoLite](http://dev.maxmind.com/geoip/legacy/geolite/) MaxMind library to perform basic geolocation of a given IPv4 address. You must manually install both the maxmind library (`brew install geoip` on OS X, `sudo apt-get install libgeoip-dev` on Ubuntu) and the `GeoLiteCity.dat` file [] for the geolocation functions to work.
+The package also uses the v1 [GeoLite](http://dev.maxmind.com/geoip/legacy/geolite/) MaxMind library to perform basic geolocation of a given IPv4 address. You must manually install both the maxmind library (`brew install geoip` on OS X, `sudo apt-get install libgeoip-dev` on Ubuntu) and the `GeoLiteCity.dat` [] & `GeoLiteASNum.dat` [] files for the geolocation/ASN functions to work. If there's interest in porting to the newer library/GeoLite2 format, I'll consider updating the package.
 
 The following functions are implemented:
 
@@ -12,6 +12,7 @@ The following functions are implemented:
 -   `validateIP` - Validate IPv4 addresses in dotted-decimal notation
 -   `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
 -   `geoip` - Perform (local) maxmind geolocation on IPv4 addresses (see `?geoip` for details)
+-   `asnip` - Perform (local) maxmind AS \# & org lookup on IPv4 addresses (see `?asnip` for details)
 -   `randomIPs` - generate a vector of valid, random IPv4 addresses
 
 The following data sets are included:
@@ -52,19 +53,19 @@ packageVersion("iptools")
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:807::1006" "74.125.226.168"          
-    ##  [3] "74.125.226.169"           "74.125.226.162"          
-    ##  [5] "74.125.226.164"           "74.125.226.165"          
-    ##  [7] "74.125.226.163"           "74.125.226.161"          
-    ##  [9] "74.125.226.166"           "74.125.226.167"          
-    ## [11] "74.125.226.174"           "74.125.226.160"
+    ##  [1] "2607:f8b0:4006:807::1007" "74.125.226.33"           
+    ##  [3] "74.125.226.32"            "74.125.226.46"           
+    ##  [5] "74.125.226.34"            "74.125.226.37"           
+    ##  [7] "74.125.226.38"            "74.125.226.36"           
+    ##  [9] "74.125.226.41"            "74.125.226.35"           
+    ## [11] "74.125.226.40"            "74.125.226.39"
 
 ``` {.r}
 # lookup apple (in reverse)
 gethostbyaddr("17.178.96.59")
 ```
 
-    ## [1] "darwinsourcecode.com"
+    ## [1] "appledarwin.net"
 
 ``` {.r}
 # decimal and back
@@ -84,13 +85,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:807::1006           74.125.226.168           74.125.226.169 
+    ## 2607:f8b0:4006:807::1007            74.125.226.33            74.125.226.32 
     ##                    FALSE                     TRUE                     TRUE 
-    ##           74.125.226.162           74.125.226.164           74.125.226.165 
+    ##            74.125.226.46            74.125.226.34            74.125.226.37 
     ##                     TRUE                     TRUE                     TRUE 
-    ##           74.125.226.163           74.125.226.161           74.125.226.166 
+    ##            74.125.226.38            74.125.226.36            74.125.226.41 
     ##                     TRUE                     TRUE                     TRUE 
-    ##           74.125.226.167           74.125.226.174           74.125.226.160 
+    ##            74.125.226.35            74.125.226.40            74.125.226.39 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}
@@ -102,7 +103,7 @@ validateCIDR("8.0.0.0/8")
 
 ``` {.r}
 # geo
-geofile()
+maxmindinit()
 set.seed(1492)
 geoip(randomIPs(25))
 ```
@@ -186,6 +187,28 @@ geoip(randomIPs(25))
     ## 24  America/New_York        535       614
     ## 25  America/New_York        506       617
 
+``` {.r}
+set.seed(100000)
+asnip(randomIPs(15))
+```
+
+    ##                 ip      asn                                     org
+    ## 1  172.218.158.139    AS852               TELUS Communications Inc.
+    ## 2    122.30.148.37   AS4713          NTT Communications Corporation
+    ## 3    166.78.178.16  AS33070                       Rackspace Hosting
+    ## 4    240.37.137.24     <NA>                                    <NA>
+    ## 5      27.30.25.28   AS4134                                Chinanet
+    ## 6  119.190.124.103   AS4837              CNCGROUP China169 Backbone
+    ## 7     44.167.43.28   AS7377   University of California at San Diego
+    ## 8  101.165.102.119   AS1221                         Telstra Pty Ltd
+    ## 9   245.189.210.92     <NA>                                    <NA>
+    ## 10   22.173.243.85     <NA>                                    <NA>
+    ## 11  186.219.208.57 AS262996  TELECOMUNICACOES E INFORMATICA LTDA ME
+    ## 12    66.162.92.26   AS4323               tw telecom holdings, inc.
+    ## 13   86.66.214.138  AS15557 Societe Francaise du Radiotelephone S.A
+    ## 14   3.220.143.125     <NA>                                    <NA>
+    ## 15    187.97.8.132  AS26615                        Tim Celular S.A.
+
 ### Test Results
 
 ``` {.r}
@@ -197,3 +220,4 @@ test_dir("tests/")
     ## Host/IPv4 resolution : ..
     ## IPv4 string/integer conversion : ....
     ## IPv4/CIDR validation : ......
+    ## Geolocation : ..

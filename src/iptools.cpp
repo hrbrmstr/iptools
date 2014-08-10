@@ -127,7 +127,7 @@ std::vector< std::string > gethostbyaddr(std::string ipv4) {
 //' @return vector of equivalent long integer IP addresses
 //' @examples
 //' \dontrun{
-//' ip2long("24.0.5.11")
+//' ip2long("24.0.5.11")ghb
 //' ip2long(c("24.0.5.11", "211.3.77.96"))
 //' }
 // [[Rcpp::export]]

@@ -50,7 +50,7 @@ gethostbyaddr <- function(ipv4) {
 #' @return vector of equivalent long integer IP addresses
 #' @examples
 #' \dontrun{
-#' ip2long("24.0.5.11")
+#' ip2long("24.0.5.11")ghb
 #' ip2long(c("24.0.5.11", "211.3.77.96"))
 #' }
 ip2long <- function(ip) {
@@ -72,32 +72,36 @@ long2ip <- function(ip) {
     .Call('iptools_long2ip', PACKAGE = 'iptools', ip)
 }
 
-#' Initializes the maxmind library and opens the \code{GeoLiteCity.dat} file
+#' Initializes the MaxMind library and opens the \code{GeoLiteCity.dat} & \code{GeoLiteASNum.dat} file
 #'
-#' This function must be called before performing a lookup with \code{geoip()}.
-#' The default full path spec defaults to \code{/usr/local/share/GeoIP/GeoLiteCity.dat}
-#' and can be overriden by changing the value of the \code{datafile} parameter.
+#' This function must be called before performing a lookup with \code{geoip()} or \code{asnip()}.
+#' Each full path spec prefix defaults to \code{/usr/local/share/GeoIP/}
+#' and can be overriden by changing the value of the \code{citydata}  & \code{asndata} parameters.
 #'
-#' NOTE: You must manually retrieve the \code{GeoLiteCity.dat.gz} file from maxmind
-#' via \url{http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz} and
-#' unzip it to the location you will be specifying in \code{datafile}.
+#' NOTE: You must manually retrieve the \code{GeoLiteCity.dat.gz} \code{GeoLiteASNum.dat.gz} files from MaxMind
+#' via \url{http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz} &
+#' \url{http://geolite.maxmind.com/download/geoip/database/GeoLiteASNum.dat.gz}  and
+#' unzip each to the locations you will be specifying in the parameters.
 #'
-#' Any errors reading the file will result in a console message.
+#' Any errors reading the files will result in a console message.
 #'
-#' @param datafile full path (including filename) to the \code{GeoLiteCity.dat} file
+#' @param citydata full path (including filename) to the \code{GeoLiteCity.dat} file
+#' @param asndata full path (including filename) to the \code{GeoLiteASNum.dat} file
 #' @examples
 #' \dontrun{
-#' geofile()
+#' maxmindinit()
 #' }
-geofile <- function(datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
-    invisible(.Call('iptools_geofile', PACKAGE = 'iptools', datafile))
+maxmindinit <- function(citydata = "/usr/local/share/GeoIP/GeoLiteCity.dat", asndata = "/usr/local/share/GeoIP/GeoIPASNum.dat") {
+    invisible(.Call('iptools_maxmindinit', PACKAGE = 'iptools', citydata, asndata))
 }
 
 #' Return a data frame of geolcation values for IPv4 address
 #'
 #' Uses the maxmind \code{GeoIPCity.dat} binary file to perform a geolocation for
 #' a given IPv4 address and returns a data frame of geolocation records.
-#' You must call \code{geofile()} before calling \code{geoip()}
+#' You should call \code{maxmindinit()} before calling \code{geoip()}, but \code{geoip}
+#' will make a last-ditch effort to load the city database from the default location
+#' in the event you forget.
 #'
 #' Values returned in the data frame:
 #' \itemize{
@@ -121,7 +125,7 @@ geofile <- function(datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
 #' @note  vectorized
 #' @examples
 #' \dontrun{
-#' geofile()
+#' maxmindinit()
 #' geoip(c("24.24.24.24", "42.42.42.42", "8.8.8.8"))
 #' ##            ip country.code country.code3       country.name region region.name      city
 #' ## 1 24.24.24.24           US           USA      United States     NY    New York Deer Park
@@ -134,6 +138,46 @@ geofile <- function(datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
 #' }
 geoip <- function(ip, showMessages = FALSE) {
     .Call('iptools_geoip', PACKAGE = 'iptools', ip, showMessages)
+}
+
+#' Return a data frame of IPv4 to ASN & org mappings
+#'
+#' Uses the maxmind \code{GeoIPASNum.dat} binary file to perform an AS number & org
+#' identification for a given IPv4 address and returns a data frame of results.
+#' You should call \code{maxmindinit()} before calling \code{asnip()}, but \code{asnip}
+#' will make a last-ditch effort to load the ASNum database from the default location
+#' in the event you forget.
+#'
+#' Values returned in the data frame:
+#' \itemize{
+#'   \item \code{ip}. original IP address (chr)
+#'   \item \code{asn}. ASN (chr)
+#'   \item \code{org}. Assigned org (chr)
+#' }
+#'
+#' @param ip character vector of IPv4 addresses to lookup
+#' @param includeAS (bool) whether to include or not include the "AS" prefix in the \code{asnum} column (default TRUE)
+#' @param showMessages show/hide console messages (bool) default: do not show messages
+#' @return data frame of AS # & org information for the IP addresses
+#' @note vectorized
+#' @examples
+#' \dontrun{
+#' maxmindinit()
+#' set.seed(1000000); asnip(randomIPs(10))
+#' ##                 ip     asn                         org
+#' ## 1       70.5.34.39  AS3651                      Sprint
+#' ## 2    79.32.183.102  AS3269       Telecom Italia S.p.a.
+#' ## 3     70.166.53.78 AS36801   New Wave Industries, Inc.
+#' ## 4  131.199.143.169  AS1341 Allen-Bradley Company, Inc.
+#' ## 5    160.150.52.98  AS1515        Headquarters, USAISC
+#' ## 6   242.119.216.60    <NA>                        <NA>
+#' ## 7     53.55.24.145 AS31399   Daimler Autonomous System
+#' ## 8   151.141.222.29 AS19956          BellSouth.net Inc.
+#' ## 9  243.118.250.204    <NA>                        <NA>
+#' ## 10   83.173.28.251 AS31441  Gagnaveita Reykjavikur ehf
+#' }
+asnip <- function(ip, includeAS = TRUE, showMessages = FALSE) {
+    .Call('iptools_asnip', PACKAGE = 'iptools', ip, includeAS, showMessages)
 }
 
 #' Called when finished performing geolocation operations

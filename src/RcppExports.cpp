@@ -65,14 +65,15 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
-// geofile
-void geofile(std::string datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat");
-RcppExport SEXP iptools_geofile(SEXP datafileSEXP) {
+// maxmindinit
+void maxmindinit(std::string citydata = "/usr/local/share/GeoIP/GeoLiteCity.dat", std::string asndata = "/usr/local/share/GeoIP/GeoIPASNum.dat");
+RcppExport SEXP iptools_maxmindinit(SEXP citydataSEXP, SEXP asndataSEXP) {
 BEGIN_RCPP
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::string >::type datafile(datafileSEXP );
-        geofile(datafile);
+        Rcpp::traits::input_parameter< std::string >::type citydata(citydataSEXP );
+        Rcpp::traits::input_parameter< std::string >::type asndata(asndataSEXP );
+        maxmindinit(citydata, asndata);
     }
     return R_NilValue;
 END_RCPP
@@ -87,6 +88,23 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP );
         Rcpp::traits::input_parameter< bool >::type showMessages(showMessagesSEXP );
         DataFrame __result = geoip(ip, showMessages);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// asnip
+DataFrame asnip(CharacterVector ip, bool includeAS = true, bool showMessages = false);
+RcppExport SEXP iptools_asnip(SEXP ipSEXP, SEXP includeASSEXP, SEXP showMessagesSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP );
+        Rcpp::traits::input_parameter< bool >::type includeAS(includeASSEXP );
+        Rcpp::traits::input_parameter< bool >::type showMessages(showMessagesSEXP );
+        DataFrame __result = asnip(ip, includeAS, showMessages);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);

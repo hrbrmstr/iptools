@@ -16,7 +16,7 @@ Convert IP addresses in character (dotted-decimal) notation to long integers
 }
 \examples{
 \dontrun{
-ip2long("24.0.5.11")
+ip2long("24.0.5.11")ghb
 ip2long(c("24.0.5.11", "211.3.77.96"))
 }
 }
