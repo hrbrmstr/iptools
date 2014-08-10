@@ -52,3 +52,16 @@ validateCIDR <- Vectorize(.validateCIDR)
 
 }
 
+
+#' @title Generate random sequence of IPv4 addresses
+#' @description Returns a character vector of randomly generated (but valid) IPv4 addresses
+#' @param size number of IP addreses to generate
+#' @return character vector
+#' @export
+#' @examples
+#' set.seed(1492)
+#' randomIPs(10)
+#'
+randomIPs <- function(size) {
+  sprintf("%d.%d.%d.%d", sample(0:255, size), sample(0:255, size), sample(0:255, size), sample(0:255, size))
+}

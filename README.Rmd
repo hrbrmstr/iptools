@@ -20,7 +20,8 @@ The following functions are implemented:
 - `long2ip` - Intger IPv4 Address Conversion to Character
 - `validateIP` - Validate IPv4 addresses in dotted-decimal notation
 - `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
-- `geoip` - Perform (local) maxmind geolocation on an IPv4 address (see `?geoip` for details)
+- `geoip` - Perform (local) maxmind geolocation on IPv4 addresses (see `?geoip` for details)
+- `randomIPs` - generate a vector of valid, random IPv4 addresses
 
 The following data sets are included:
 
@@ -70,7 +71,8 @@ validateCIDR("8.0.0.0/8")
 
 # geo
 geofile()
-geoip("20.30.40.50")
+set.seed(1492)
+geoip(randomIPs(25))
 ```
 
 ### Test Results

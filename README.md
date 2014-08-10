@@ -11,7 +11,8 @@ The following functions are implemented:
 -   `long2ip` - Intger IPv4 Address Conversion to Character
 -   `validateIP` - Validate IPv4 addresses in dotted-decimal notation
 -   `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
--   `geoip` - Perform (local) maxmind geolocation on an IPv4 address (see `?geoip` for details)
+-   `geoip` - Perform (local) maxmind geolocation on IPv4 addresses (see `?geoip` for details)
+-   `randomIPs` - generate a vector of valid, random IPv4 addresses
 
 The following data sets are included:
 
@@ -51,12 +52,12 @@ packageVersion("iptools")
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:806::100e" "74.125.226.73"           
-    ##  [3] "74.125.226.78"            "74.125.226.67"           
-    ##  [5] "74.125.226.72"            "74.125.226.70"           
-    ##  [7] "74.125.226.66"            "74.125.226.71"           
-    ##  [9] "74.125.226.64"            "74.125.226.65"           
-    ## [11] "74.125.226.69"            "74.125.226.68"
+    ##  [1] "2607:f8b0:4006:807::1008" "74.125.226.8"            
+    ##  [3] "74.125.226.4"             "74.125.226.6"            
+    ##  [5] "74.125.226.9"             "74.125.226.0"            
+    ##  [7] "74.125.226.7"             "74.125.226.3"            
+    ##  [9] "74.125.226.2"             "74.125.226.5"            
+    ## [11] "74.125.226.1"             "74.125.226.14"
 
 ``` {.r}
 # lookup apple (in reverse)
@@ -83,13 +84,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:806::100e            74.125.226.73            74.125.226.78 
+    ## 2607:f8b0:4006:807::1008             74.125.226.8             74.125.226.4 
     ##                    FALSE                     TRUE                     TRUE 
-    ##            74.125.226.67            74.125.226.72            74.125.226.70 
+    ##             74.125.226.6             74.125.226.9             74.125.226.0 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.66            74.125.226.71            74.125.226.64 
+    ##             74.125.226.7             74.125.226.3             74.125.226.2 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.65            74.125.226.69            74.125.226.68 
+    ##             74.125.226.5             74.125.226.1            74.125.226.14 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}
@@ -102,13 +103,92 @@ validateCIDR("8.0.0.0/8")
 ``` {.r}
 # geo
 geofile()
-geoip("20.30.40.50")
+set.seed(1492)
+geoip(randomIPs(25))
 ```
 
-    ##   country.code country.code3  country.name region region.name         city
-    ## 1           US           USA United States     VA    Virginia Falls Church
-    ##   postal.code latitude longitude        time.zone metro.code area.code
-    ## 1       22042    38.86    -77.19 America/New_York        511       703
+    ## Error retrieving record
+    ## Error retrieving record
+    ## Error retrieving record
+
+    ##                 ip country.code country.code3       country.name region
+    ## 1   71.238.158.182           US           USA      United States     MI
+    ## 2     55.148.38.65           US           USA      United States     AZ
+    ## 3    46.142.80.133           DE           DEU            Germany     NA
+    ## 4    27.87.221.128           JP           JPN              Japan     NA
+    ## 5   13.244.173.130           US           USA      United States     CT
+    ## 6     2.37.185.173           IT           ITA              Italy     NA
+    ## 7   213.247.175.72           RU           RUS Russian Federation     NA
+    ## 8                                                                      
+    ## 9    96.54.235.149           CA           CAN             Canada     BC
+    ## 10 189.243.201.143           MX           MEX             Mexico     NA
+    ## 11  157.173.28.232           GB           GBR     United Kingdom     NA
+    ## 12 156.103.109.206           US           USA      United States     TX
+    ## 13    47.27.90.166           CA           CAN             Canada     ON
+    ## 14   126.6.129.152           JP           JPN              Japan     NA
+    ## 15                                                                     
+    ## 16 190.180.116.155           BO           BOL            Bolivia     NA
+    ## 17   29.189.160.68           US           USA      United States     OH
+    ## 18   82.39.232.118           GB           GBR     United Kingdom     B8
+    ## 19                                                                     
+    ## 20   217.104.27.16           NL           NLD        Netherlands     NA
+    ## 21   150.56.113.79           JP           JPN              Japan     NA
+    ## 22  89.200.243.215           RO           ROU            Romania     NA
+    ## 23  31.246.182.148           DE           DEU            Germany     NA
+    ## 24   139.25.48.200           DE           DEU            Germany     02
+    ## 25   20.31.144.154           US           USA      United States     VA
+    ##         region.name          city postal.code latitude longitude
+    ## 1          Michigan   Grand Blanc       48439    42.92  -83.6496
+    ## 2           Arizona Fort Huachuca       85613    31.53 -110.3607
+    ## 3                NA            NA          NA    51.00    9.0000
+    ## 4                NA            NA          NA    35.69  139.6900
+    ## 5       Connecticut       Norwalk       06850    41.13  -73.4416
+    ## 6                NA            NA          NA    42.83   12.8333
+    ## 7                NA            NA          NA    60.00  100.0000
+    ## 8                                                 0.00    0.0000
+    ## 9  British Columbia       Nanaimo         V9R    49.14 -123.9483
+    ## 10               NA            NA          NA    19.43  -99.1300
+    ## 11               NA            NA          NA    51.50   -0.1300
+    ## 12            Texas       Houston       77002    29.75  -95.3670
+    ## 13          Ontario        Ottawa         K2H    45.32  -75.8370
+    ## 14               NA            NA          NA    35.69  139.6900
+    ## 15                                                0.00    0.0000
+    ## 16               NA            NA          NA   -17.00  -65.0000
+    ## 17             Ohio      Columbus       43218    39.96  -82.9988
+    ## 18          Bromley         Hayes        UB4B    51.37    0.0167
+    ## 19                                                0.00    0.0000
+    ## 20               NA            NA          NA    52.50    5.7500
+    ## 21               NA            NA          NA    35.69  139.6900
+    ## 22               NA            NA          NA    46.00   25.0000
+    ## 23               NA            NA          NA    51.00    9.0000
+    ## 24           Bayern        Munich          NA    48.15   11.5833
+    ## 25         Virginia  Falls Church       22042    38.86  -77.1922
+    ##            time.zone metro.code area.code
+    ## 1   America/New_York        513       810
+    ## 2    America/Phoenix        789       520
+    ## 3      Europe/Berlin          0         0
+    ## 4         Asia/Tokyo          0         0
+    ## 5   America/New_York        501       203
+    ## 6        Europe/Rome          0         0
+    ## 7                 NA          0         0
+    ## 8                             0         0
+    ## 9  America/Vancouver          0         0
+    ## 10                NA          0         0
+    ## 11     Europe/London          0         0
+    ## 12   America/Chicago        618       713
+    ## 13   America/Toronto          0         0
+    ## 14        Asia/Tokyo          0         0
+    ## 15                            0         0
+    ## 16    America/La_Paz          0         0
+    ## 17  America/New_York        535       614
+    ## 18     Europe/London          0         0
+    ## 19                            0         0
+    ## 20  Europe/Amsterdam          0         0
+    ## 21        Asia/Tokyo          0         0
+    ## 22  Europe/Bucharest          0         0
+    ## 23     Europe/Berlin          0         0
+    ## 24     Europe/Berlin          0         0
+    ## 25  America/New_York        511       703
 
 ### Test Results
 

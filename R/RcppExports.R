@@ -93,7 +93,7 @@ geofile <- function(datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
     invisible(.Call('iptools_geofile', PACKAGE = 'iptools', datafile))
 }
 
-#' Return a data frame of geolcation values for a given IP address
+#' Return a data frame of geolcation values for IPv4 address
 #'
 #' Uses the maxmind \code{GeoIPCity.dat} binary file to perform a geolocation for
 #' a given IPv4 address and returns a data frame of geolocation records.
@@ -101,6 +101,7 @@ geofile <- function(datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
 #'
 #' Values returned in the data frame:
 #' \itemize{
+#'   \item \code{ip}. original IP address (chr)
 #'   \item \code{country.code}. ISO2 country code (chr)
 #'   \item \code{country.code3}. ISO3 country code (chr)
 #'   \item \code{region}. Abbreviated region name (chr)
@@ -114,17 +115,21 @@ geofile <- function(datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
 #'   \item \code{area.code}. Area code (int)
 #' }
 #'
-#' @param ip character string of IPv4 address to lookup
-#' @return data frame row of geolocation information
-#' @note not vectorized
+#' @param ip character vector of IPv4 addresses to lookup
+#' @return data frame of geolocation information for the IP addresses
+#' @note  vectorized
 #' @examples
 #' \dontrun{
 #' geofile()
-#' geoip("20.30.40.50")
-#' ##  country.code country.code3  country.name region region.name         city
-#' ## 1           US           USA United States     VA    Virginia Falls Church
+#' geoip(c("24.24.24.24", "42.42.42.42", "8.8.8.8"))
+#' ##            ip country.code country.code3       country.name region region.name      city
+#' ## 1 24.24.24.24           US           USA      United States     NY    New York Deer Park
+#' ## 2 42.42.42.42           KR           KOR Korea, Republic of     NA          NA        NA
+#' ## 3     8.8.8.8           US           USA      United States     NA          NA        NA
 #' ##   postal.code latitude longitude        time.zone metro.code area.code
-#' ## 1       22042   38.864  -77.1922 America/New_York        511       703
+#' ## 1       11729  40.7627  -73.3227 America/New_York        501       631
+#' ## 2          NA  37.5700  126.9800       Asia/Seoul          0         0
+#' ## 3          NA  38.0000  -97.0000               NA          0         0
 #' }
 geoip <- function(ip) {
     .Call('iptools_geoip', PACKAGE = 'iptools', ip)

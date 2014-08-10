@@ -16,23 +16,109 @@ CharacterVector mkNA( const char * p ){
  return p ? CharacterVector(p) : CharacterVector(NA_STRING);
 }
 
-// return a NA row for a geo record
-DataFrame geoNARow() {
-  return(DataFrame::create(
-    Rcpp::Named("country.code")=CharacterVector::create(NA_STRING),
-    Rcpp::Named("country.code3")=CharacterVector::create(NA_STRING),
-    Rcpp::Named("country.name")=CharacterVector::create(NA_STRING),
-    Rcpp::Named("region")=CharacterVector::create(NA_STRING),
-    Rcpp::Named("region.name")=CharacterVector::create(NA_STRING),
-    Rcpp::Named("city")=CharacterVector::create(NA_STRING),
-    Rcpp::Named("postal.code")=CharacterVector::create(NA_STRING),
-    Rcpp::Named("latitude")=NumericVector::create(NA_REAL),
-    Rcpp::Named("longitude")=NumericVector::create(NA_REAL),
-    Rcpp::Named("time.zone")=CharacterVector::create(NA_STRING),
-    Rcpp::Named("metro.code")=IntegerVector::create(NA_INTEGER),
-    Rcpp::Named("area.code")=IntegerVector::create(NA_INTEGER))
-  );
+std::string mkNAs( const char * p ){
+ return p ? std::string(p) : Rcpp::as<std::string>(NA_STRING);
 }
+
+
+// return a NA row for a geo record
+DataFrame geoNARow(std::string ip) {
+
+  DataFrame nadf = DataFrame::create(
+    Named("ip")=CharacterVector::create(ip),
+    Named("country.code")=CharacterVector::create(NA_STRING),
+    Named("country.code3")=CharacterVector::create(NA_STRING),
+    Named("country.name")=CharacterVector::create(NA_STRING),
+    Named("region")=CharacterVector::create(NA_STRING),
+    Named("region.name")=CharacterVector::create(NA_STRING),
+    Named("city")=CharacterVector::create(NA_STRING),
+    Named("postal.code")=CharacterVector::create(NA_STRING),
+    Named("latitude")=NumericVector::create(NA_REAL),
+    Named("longitude")=NumericVector::create(NA_REAL),
+    Named("time.zone")=CharacterVector::create(NA_STRING),
+    Named("metro.code")=IntegerVector::create(NA_INTEGER),
+    Named("area.code")=IntegerVector::create(NA_INTEGER));
+
+  return(nadf);
+
+}
+
+// return a NA row for a geo record
+List geoNARowL(std::string ip) {
+
+  List nalist = List::create(
+    Named("ip")=CharacterVector::create(ip),
+    Named("country.code")=CharacterVector::create(NA_STRING),
+    Named("country.code3")=CharacterVector::create(NA_STRING),
+    Named("country.name")=CharacterVector::create(NA_STRING),
+    Named("region")=CharacterVector::create(NA_STRING),
+    Named("region.name")=CharacterVector::create(NA_STRING),
+    Named("city")=CharacterVector::create(NA_STRING),
+    Named("postal.code")=CharacterVector::create(NA_STRING),
+    Named("latitude")=NumericVector::create(NA_REAL),
+    Named("longitude")=NumericVector::create(NA_REAL),
+    Named("time.zone")=CharacterVector::create(NA_STRING),
+    Named("metro.code")=IntegerVector::create(NA_INTEGER),
+    Named("area.code")=IntegerVector::create(NA_INTEGER));
+
+  return(nalist);
+
+}
+
+
+//DataFrame geoip(std::string ip) {
+//
+//  if (gi == NULL) {
+//    message("Error opening database. Did you forget to call geofile()?");
+//    return(geoNARow(ip));
+//  }
+//
+//  uint32_t ipnum = 0;
+//
+//  try {
+//    ipnum = boost::asio::ip::address_v4::from_string(ip.c_str()).to_ulong();
+//  } catch(boost::system::system_error& error) {
+//    message( "Host/IP error" );
+//    return(geoNARow(ip));
+//  }
+//
+//  if (ipnum == 0) {
+//
+//    message("Host/IP error");
+//    return(geoNARow(ip));
+//
+//  } else {
+//
+//    GeoIPRecord *gir = GeoIP_record_by_ipnum(gi, ipnum);
+//
+//    if (gir == NULL) {
+//      message("Error retrieving record");
+//      return(geoNARow(ip));
+//    }
+//
+//    const char *time_zone = GeoIP_time_zone_by_country_and_region(gir->country_code, gir->region);
+//
+//    DataFrame geodf = DataFrame::create(
+//      Named("country.code")=CharacterVector(mkNA(gir->country_code)),
+//      Named("country.code3")=CharacterVector(mkNA(gir->country_code3)),
+//      Named("country.name")=CharacterVector(mkNA(gir->country_name)),
+//      Named("region")=CharacterVector(mkNA(gir->region)),
+//      Named("region.name")=CharacterVector(mkNA(GeoIP_region_name_by_code(gir->country_code, gir->region))),
+//      Named("city")=CharacterVector(mkNA(gir->city)),
+//      Named("postal.code")=CharacterVector(mkNA(gir->postal_code)),
+//      Named("latitude")=NumericVector(Rcpp::wrap(gir->latitude)),
+//      Named("longitude")=NumericVector(Rcpp::wrap(gir->longitude)),
+//      Named("time.zone")=CharacterVector(mkNA(time_zone)),
+//      Named("metro.code")=IntegerVector(Rcpp::wrap(gir->metro_code)),
+//      Named("area.code")=IntegerVector(Rcpp::wrap(gir->area_code)));
+//
+//    GeoIPRecord_delete(gir);
+//
+//    return(geodf);
+//  }
+//
+//}
+
 
 //' Initializes the maxmind library and opens the \code{GeoLiteCity.dat} file
 //'
@@ -63,7 +149,7 @@ void geofile(std::string datafile="/usr/local/share/GeoIP/GeoLiteCity.dat") {
 
 }
 
-//' Return a data frame of geolcation values for a given IP address
+//' Return a data frame of geolcation values for IPv4 address
 //'
 //' Uses the maxmind \code{GeoIPCity.dat} binary file to perform a geolocation for
 //' a given IPv4 address and returns a data frame of geolocation records.
@@ -71,6 +157,7 @@ void geofile(std::string datafile="/usr/local/share/GeoIP/GeoLiteCity.dat") {
 //'
 //' Values returned in the data frame:
 //' \itemize{
+//'   \item \code{ip}. original IP address (chr)
 //'   \item \code{country.code}. ISO2 country code (chr)
 //'   \item \code{country.code3}. ISO3 country code (chr)
 //'   \item \code{region}. Abbreviated region name (chr)
@@ -84,71 +171,112 @@ void geofile(std::string datafile="/usr/local/share/GeoIP/GeoLiteCity.dat") {
 //'   \item \code{area.code}. Area code (int)
 //' }
 //'
-//' @param ip character string of IPv4 address to lookup
-//' @return data frame row of geolocation information
-//' @note not vectorized
+//' @param ip character vector of IPv4 addresses to lookup
+//' @return data frame of geolocation information for the IP addresses
+//' @note  vectorized
 //' @examples
 //' \dontrun{
 //' geofile()
-//' geoip("20.30.40.50")
-//' ##  country.code country.code3  country.name region region.name         city
-//' ## 1           US           USA United States     VA    Virginia Falls Church
+//' geoip(c("24.24.24.24", "42.42.42.42", "8.8.8.8"))
+//' ##            ip country.code country.code3       country.name region region.name      city
+//' ## 1 24.24.24.24           US           USA      United States     NY    New York Deer Park
+//' ## 2 42.42.42.42           KR           KOR Korea, Republic of     NA          NA        NA
+//' ## 3     8.8.8.8           US           USA      United States     NA          NA        NA
 //' ##   postal.code latitude longitude        time.zone metro.code area.code
-//' ## 1       22042   38.864  -77.1922 America/New_York        511       703
+//' ## 1       11729  40.7627  -73.3227 America/New_York        501       631
+//' ## 2          NA  37.5700  126.9800       Asia/Seoul          0         0
+//' ## 3          NA  38.0000  -97.0000               NA          0         0
 //' }
 //[[Rcpp::export]]
-DataFrame geoip(std::string ip) {
+DataFrame geoip(CharacterVector ip) {
 
   if (gi == NULL) {
     message("Error opening database. Did you forget to call geofile()?");
-    return(geoNARow());
+    return(DataFrame::create());
   }
 
-  uint32_t ipnum = 0;
+  int sz = ip.size();
 
-  try {
-    ipnum = boost::asio::ip::address_v4::from_string(ip.c_str()).to_ulong();
-  } catch(boost::system::system_error& error) {
-    message( "Host/IP error" );
-    return(geoNARow());
-  }
+  CharacterVector ips(sz);
+  CharacterVector iso2(sz);
+  CharacterVector iso3(sz);
+  CharacterVector cname(sz);
+  CharacterVector reg(sz);
+  CharacterVector regname(sz);
+  CharacterVector city(sz);
+  CharacterVector postalcode(sz);
+  NumericVector lat(sz);
+  NumericVector lon(sz);
+  CharacterVector tz(sz);
+  IntegerVector metro(sz);
+  IntegerVector area(sz);
 
-  if (ipnum == 0) {
+  for (int i=0; i<ip.size(); i++) {
 
-    message("Host/IP error");
-    return(geoNARow());
+    uint32_t ipnum = 0;
 
-  } else {
+    std::string IP = Rcpp::as<std::string>(ip[i]) ;
 
-    GeoIPRecord *gir = GeoIP_record_by_ipnum(gi, ipnum);
-
-    if (gir == NULL) {
-      message("Error retrieving record");
-      return(geoNARow());
+    try {
+      ipnum = boost::asio::ip::address_v4::from_string(IP.c_str()).to_ulong();
+    } catch(boost::system::system_error& error) {
+      message( "Host/IP error" );
+      continue;
     }
 
-    const char *time_zone = GeoIP_time_zone_by_country_and_region(gir->country_code, gir->region);
+    if (ipnum == 0) {
 
-    Rcpp::DataFrame geodf = Rcpp::DataFrame::create(
-      Rcpp::Named("country.code")=CharacterVector(mkNA(gir->country_code)),
-      Rcpp::Named("country.code3")=CharacterVector(mkNA(gir->country_code3)),
-      Rcpp::Named("country.name")=CharacterVector(mkNA(gir->country_name)),
-      Rcpp::Named("region")=CharacterVector(mkNA(gir->region)),
-      Rcpp::Named("region.name")=CharacterVector(mkNA(GeoIP_region_name_by_code(gir->country_code, gir->region))),
-      Rcpp::Named("city")=CharacterVector(mkNA(gir->city)),
-      Rcpp::Named("postal.code")=CharacterVector(mkNA(gir->postal_code)),
-      Rcpp::Named("latitude")=NumericVector(Rcpp::wrap(gir->latitude)),
-      Rcpp::Named("longitude")=NumericVector(Rcpp::wrap(gir->longitude)),
-      Rcpp::Named("time.zone")=CharacterVector(mkNA(time_zone)),
-      Rcpp::Named("metro.code")=IntegerVector(Rcpp::wrap(gir->metro_code)),
-      Rcpp::Named("area.code")=IntegerVector(Rcpp::wrap(gir->area_code)));
+      message("Host/IP error");
+      continue ;
 
-    GeoIPRecord_delete(gir);
+    } else {
 
-    return(geodf);
+      GeoIPRecord *gir = GeoIP_record_by_ipnum(gi, ipnum);
+
+      if (gir == NULL) {
+        message("Error retrieving record");
+        continue ;
+      }
+
+      const char *time_zone = GeoIP_time_zone_by_country_and_region(gir->country_code, gir->region);
+
+      ips[i]=IP;
+      iso2[i]=mkNAs(gir->country_code);
+      iso3[i]=mkNAs(gir->country_code3);
+      cname[i]=mkNAs(gir->country_name);
+      reg[i]=mkNAs(gir->region);
+      regname[i]=mkNAs(GeoIP_region_name_by_code(gir->country_code, gir->region));
+      city[i]=mkNAs(gir->city);
+      postalcode[i]=mkNAs(gir->postal_code);
+      lat[i]=gir->latitude;
+      lon[i]=gir->longitude;
+      tz[i]=mkNAs(time_zone);
+      metro[i]=gir->metro_code;
+      area[i]=gir->area_code;
+
+      GeoIPRecord_delete(gir);
+
+    }
+
   }
 
+  return(DataFrame::create(
+        Named("ip")=ips,
+        Named("country.code")=iso2,
+        Named("country.code3")=iso3,
+        Named("country.name")=cname,
+        Named("region")=reg,
+        Named("region.name")=regname,
+        Named("city")=city,
+        Named("postal.code")=postalcode,
+        Named("latitude")=lat,
+        Named("longitude")=lon,
+        Named("time.zone")=tz,
+        Named("metro.code")=metro,
+        Named("area.code")=area));
+
 }
+
 
 //' Called when finished performing geolocation operations
 //'

@@ -78,13 +78,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // geoip
-DataFrame geoip(std::string ip);
+DataFrame geoip(CharacterVector ip);
 RcppExport SEXP iptools_geoip(SEXP ipSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::string >::type ip(ipSEXP );
+        Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP );
         DataFrame __result = geoip(ip);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
