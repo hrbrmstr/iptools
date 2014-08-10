@@ -65,19 +65,41 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// geofile
+void geofile(std::string datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat");
+RcppExport SEXP iptools_geofile(SEXP datafileSEXP) {
+BEGIN_RCPP
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< std::string >::type datafile(datafileSEXP );
+        geofile(datafile);
+    }
+    return R_NilValue;
+END_RCPP
+}
 // geoip
-DataFrame geoip(std::string host, std::string datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat");
-RcppExport SEXP iptools_geoip(SEXP hostSEXP, SEXP datafileSEXP) {
+DataFrame geoip(std::string ip);
+RcppExport SEXP iptools_geoip(SEXP ipSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::string >::type host(hostSEXP );
-        Rcpp::traits::input_parameter< std::string >::type datafile(datafileSEXP );
-        DataFrame __result = geoip(host, datafile);
+        Rcpp::traits::input_parameter< std::string >::type ip(ipSEXP );
+        DataFrame __result = geoip(ip);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
     return __sexp_result;
+END_RCPP
+}
+// geoCleanup
+void geoCleanup();
+RcppExport SEXP iptools_geoCleanup() {
+BEGIN_RCPP
+    {
+        Rcpp::RNGScope __rngScope;
+        geoCleanup();
+    }
+    return R_NilValue;
 END_RCPP
 }

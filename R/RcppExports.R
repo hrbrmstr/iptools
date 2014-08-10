@@ -72,7 +72,73 @@ long2ip <- function(ip) {
     .Call('iptools_long2ip', PACKAGE = 'iptools', ip)
 }
 
-geoip <- function(host, datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
-    .Call('iptools_geoip', PACKAGE = 'iptools', host, datafile)
+#' Initializes the maxmind library and opens the \code{GeoLiteCity.dat} file
+#'
+#' This function must be called before performing a lookup with \code{geoip()}.
+#' The default full path spec defaults to \code{/usr/local/share/GeoIP/GeoLiteCity.dat}
+#' and can be overriden by changing the value of the \code{datafile} parameter.
+#'
+#' NOTE: You must manually retrieve the \code{GeoLiteCity.dat.gz} file from maxmind
+#' via \url{http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz} and
+#' unzip it to the location you will be specifying in \code{datafile}.
+#'
+#' Any errors reading the file will result in a console message.
+#'
+#' @param datafile full path (including filename) to the \code{GeoLiteCity.dat} file
+#' @examples
+#' \dontrun{
+#' geofile()
+#' }
+geofile <- function(datafile = "/usr/local/share/GeoIP/GeoLiteCity.dat") {
+    invisible(.Call('iptools_geofile', PACKAGE = 'iptools', datafile))
+}
+
+#' Return a data frame of geolcation values for a given IP address
+#'
+#' Uses the maxmind \code{GeoIPCity.dat} binary file to perform a geolocation for
+#' a given IPv4 address and returns a data frame of geolocation records.
+#' You must call \code{geofile()} before calling \code{geoip()}
+#'
+#' Values returned in the data frame:
+#' \itemize{
+#'   \item \code{country.code}. ISO2 country code (chr)
+#'   \item \code{country.code3}. ISO3 country code (chr)
+#'   \item \code{region}. Abbreviated region name (chr)
+#'   \item \code{region.name}. Full region name (chr)
+#'   \item \code{city}. City name (chr)
+#'   \item \code{postal.code}. Postal code (chr)
+#'   \item \code{latitude}. Latitude (numeric)
+#'   \item \code{lontigude}. Longitude (numeric)
+#'   \item \code{time.zone}. Time zone (chr)
+#'   \item \code{metro.code}. Metro code (int)
+#'   \item \code{area.code}. Area code (int)
+#' }
+#'
+#' @param ip character string of IPv4 address to lookup
+#' @return data frame row of geolocation information
+#' @note not vectorized
+#' @examples
+#' \dontrun{
+#' geofile()
+#' geoip("20.30.40.50")
+#' ##  country.code country.code3  country.name region region.name         city
+#' ## 1           US           USA United States     VA    Virginia Falls Church
+#' ##   postal.code latitude longitude        time.zone metro.code area.code
+#' ## 1       22042   38.864  -77.1922 America/New_York        511       703
+#' }
+geoip <- function(ip) {
+    .Call('iptools_geoip', PACKAGE = 'iptools', ip)
+}
+
+#' Called when finished performing geolocation operations
+#'
+#' This frees the memory associated with the geolocation file.
+#'
+#' @examples
+#' \dontrun{
+#' geoCleanup()
+#' }
+geoCleanup <- function() {
+    invisible(.Call('iptools_geoCleanup', PACKAGE = 'iptools'))
 }
 

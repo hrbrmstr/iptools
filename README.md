@@ -1,5 +1,7 @@
 `iptools` is a set of tools for a working with IPv4 addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
+The package also uses the v1 [GeoLite](http://dev.maxmind.com/geoip/legacy/geolite/) MaxMind library to perform basic geolocation of a given IPv4 address. You must manually install both the maxmind library (`brew install geoip` on OS X, `sudo apt-get install libgeoip-dev` on Ubuntu) and the `GeoLiteCity.dat` file [] for the geolocation functions to work.
+
 The following functions are implemented:
 
 -   `gethostbyaddr` - Returns all 'PTR' records associated with an IPv4 address
@@ -9,6 +11,7 @@ The following functions are implemented:
 -   `long2ip` - Intger IPv4 Address Conversion to Character
 -   `validateIP` - Validate IPv4 addresses in dotted-decimal notation
 -   `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
+-   `geoip` - Perform (local) maxmind geolocation on an IPv4 address (see `?geoip` for details)
 
 The following data sets are included:
 
@@ -41,26 +44,26 @@ library(iptools)
 packageVersion("iptools")
 ```
 
-    ## [1] '0.1.3'
+    ## [1] '0.1.4'
 
 ``` {.r}
 # lookup google
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:807::1008" "74.125.226.34"           
-    ##  [3] "74.125.226.38"            "74.125.226.33"           
-    ##  [5] "74.125.226.40"            "74.125.226.46"           
-    ##  [7] "74.125.226.32"            "74.125.226.41"           
-    ##  [9] "74.125.226.37"            "74.125.226.36"           
-    ## [11] "74.125.226.35"            "74.125.226.39"
+    ##  [1] "2607:f8b0:4006:806::100e" "74.125.226.73"           
+    ##  [3] "74.125.226.78"            "74.125.226.67"           
+    ##  [5] "74.125.226.72"            "74.125.226.70"           
+    ##  [7] "74.125.226.66"            "74.125.226.71"           
+    ##  [9] "74.125.226.64"            "74.125.226.65"           
+    ## [11] "74.125.226.69"            "74.125.226.68"
 
 ``` {.r}
 # lookup apple (in reverse)
 gethostbyaddr("17.178.96.59")
 ```
 
-    ## [1] "powerbook.cc"
+    ## [1] "darwinsourcecode.com"
 
 ``` {.r}
 # decimal and back
@@ -80,13 +83,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:807::1008            74.125.226.34            74.125.226.38 
+    ## 2607:f8b0:4006:806::100e            74.125.226.73            74.125.226.78 
     ##                    FALSE                     TRUE                     TRUE 
-    ##            74.125.226.33            74.125.226.40            74.125.226.46 
+    ##            74.125.226.67            74.125.226.72            74.125.226.70 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.32            74.125.226.41            74.125.226.37 
+    ##            74.125.226.66            74.125.226.71            74.125.226.64 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.36            74.125.226.35            74.125.226.39 
+    ##            74.125.226.65            74.125.226.69            74.125.226.68 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}
@@ -95,6 +98,17 @@ validateCIDR("8.0.0.0/8")
 
     ## 8.0.0.0/8 
     ##      TRUE
+
+``` {.r}
+# geo
+geofile()
+geoip("20.30.40.50")
+```
+
+    ##   country.code country.code3  country.name region region.name         city
+    ## 1           US           USA United States     VA    Virginia Falls Church
+    ##   postal.code latitude longitude        time.zone metro.code area.code
+    ## 1       22042    38.86    -77.19 America/New_York        511       703
 
 ### Test Results
 
