@@ -22,7 +22,7 @@ The following functions are implemented:
 - `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
 - `geoip` - Perform (local) maxmind geolocation on IPv4 addresses (see `?geoip` for details)
 - `asnip` - Perform (local) maxmind AS # & org lookup on IPv4 addresses (see `?asnip` for details)
-- `randomIPs` - generate a vector of valid, random IPv4 addresses
+- `randomIPs` - generate a vector of valid, random IPv4 addresses (very helpful for testing)
 
 The following data sets are included:
 
