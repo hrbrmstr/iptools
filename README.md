@@ -1,11 +1,13 @@
 `iptools` is a set of tools for a working with IPv4 addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
-The package also uses the v1 [GeoLite](http://dev.maxmind.com/geoip/legacy/geolite/) MaxMind library to perform basic geolocation of a given IPv4 address. You must manually install both the maxmind library (`brew install geoip` on OS X, `sudo apt-get install libgeoip-dev` on Ubuntu) and the `GeoLiteCity.dat` [] & `GeoLiteASNum.dat` [] files for the geolocation/ASN functions to work. If there's interest in porting to the newer library/GeoLite2 format, I'll consider updating the package.
+The package also uses the v1 [GeoLite](http://dev.maxmind.com/geoip/legacy/geolite/) MaxMind library to perform basic geolocation of a given IPv4 address. You must manually install both the maxmind library (`brew install geoip` on OS X, `sudo apt-get install libgeoip-dev` on Ubuntu) and the `GeoLiteCity.dat` [<http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz>](http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz) & `GeoLiteASNum.dat` [<http://geolite.maxmind.com/download/geoip/database/GeoLiteASNum.dat.gz>](http://geolite.maxmind.com/download/geoip/database/GeoLiteASNum.dat.gz) files for the geolocation/ASN functions to work. If there's interest in porting to the newer library/GeoLite2 format, I'll consider updating the package.
 
 The following functions are implemented:
 
--   `gethostbyaddr` - Returns all 'PTR' records associated with an IPv4 address
--   `gethostbyname` - Returns all 'A' records associated with a hostname
+-   `gethostbyaddr` - Returns all `PTR` records associated with an IPv4 address
+-   `gethostbyname` - Returns all `A` records associated with a hostname
+-   `gethostsbyaddr` - Vectorized version of
+-   `gethostsbyname` - Vectorized version of
 -   `ip2long` - Character (dotted-decimal) IPv4 Address Conversion to long integer
 -   `iptools` - A package to help perform various tasks with/on IPv4 addresses
 -   `long2ip` - Intger IPv4 Address Conversion to Character
@@ -13,7 +15,7 @@ The following functions are implemented:
 -   `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
 -   `geoip` - Perform (local) maxmind geolocation on IPv4 addresses (see `?geoip` for details)
 -   `asnip` - Perform (local) maxmind AS \# & org lookup on IPv4 addresses (see `?asnip` for details)
--   `randomIPs` - generate a vector of valid, random IPv4 addresses
+-   `randomIPs` - generate a vector of valid, random IPv4 addresses (very helpful for testing)
 
 The following data sets are included:
 
@@ -21,6 +23,7 @@ The following data sets are included:
 -   `ianaipv4spar` - IANA IPv4 Special-Purpose Address Registry
 -   `ianaipv4assignments` - IANA IPv4 Address Space Registry
 -   `ianarootzonetlds` - IANA Root Zone Database
+-   `ianarootzonetlds` - IANA Protocol Numbers
 
 ### Installation
 
@@ -35,7 +38,9 @@ devtools::install_git("https://gitlab.dds.ec/bob.rudis/iptools.git")
     sudo apt-get update
     sudo apt-get install boost1.55 # might need to use 1.54 on some systems
 
-The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
+> `homebrew` (OS X) users can do: `brew install boost` and it should work.
+>
+> The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
 
 ### Usage
 
@@ -53,19 +58,19 @@ packageVersion("iptools")
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:807::1007" "74.125.226.33"           
-    ##  [3] "74.125.226.32"            "74.125.226.46"           
-    ##  [5] "74.125.226.34"            "74.125.226.37"           
-    ##  [7] "74.125.226.38"            "74.125.226.36"           
-    ##  [9] "74.125.226.41"            "74.125.226.35"           
-    ## [11] "74.125.226.40"            "74.125.226.39"
+    ##  [1] "2607:f8b0:4006:806::1009" "74.125.226.34"           
+    ##  [3] "74.125.226.33"            "74.125.226.39"           
+    ##  [5] "74.125.226.38"            "74.125.226.40"           
+    ##  [7] "74.125.226.36"            "74.125.226.32"           
+    ##  [9] "74.125.226.46"            "74.125.226.37"           
+    ## [11] "74.125.226.35"            "74.125.226.41"
 
 ``` {.r}
 # lookup apple (in reverse)
 gethostbyaddr("17.178.96.59")
 ```
 
-    ## [1] "appledarwin.net"
+    ## [1] "desktopmovies.net"
 
 ``` {.r}
 # decimal and back
@@ -85,13 +90,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:807::1007            74.125.226.33            74.125.226.32 
+    ## 2607:f8b0:4006:806::1009            74.125.226.34            74.125.226.33 
     ##                    FALSE                     TRUE                     TRUE 
-    ##            74.125.226.46            74.125.226.34            74.125.226.37 
+    ##            74.125.226.39            74.125.226.38            74.125.226.40 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.38            74.125.226.36            74.125.226.41 
+    ##            74.125.226.36            74.125.226.32            74.125.226.46 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.35            74.125.226.40            74.125.226.39 
+    ##            74.125.226.37            74.125.226.35            74.125.226.41 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}
@@ -214,6 +219,13 @@ asnip(randomIPs(15))
 ``` {.r}
 library(iptools)
 library(testthat)
+
+date()
+```
+
+    ## [1] "Sun Aug 10 22:51:06 2014"
+
+``` {.r}
 test_dir("tests/")
 ```
 
