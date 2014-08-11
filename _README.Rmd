@@ -13,17 +13,30 @@ The package also uses the v1 [GeoLite](http://dev.maxmind.com/geoip/legacy/geoli
 
 The following functions are implemented:
 
+*Revolver-ish*
+
 - `gethostbyaddr` - Returns all `PTR` records associated with an IPv4 address
+- `gethostsbyaddr` - Vectorized version of `gethostbyaddr`
 - `gethostbyname` - Returns all `A` records associated with a hostname
-- `gethostsbyaddr` - Vectorized version of \code{gethostbyaddr}
-- `gethostsbyname` - Vectorized version of \code{gethostbyname}
+- `gethostsbyname` - Vectorized version of `gethostbyname`
+
+*IP int/string conversion*
+
 - `ip2long` - Character (dotted-decimal) IPv4 Address Conversion to long integer
-- `iptools` - A package to help perform various tasks with/on IPv4 addresses
 - `long2ip` - Intger IPv4 Address Conversion to Character
+
+*Validation*
+
 - `validateIP` - Validate IPv4 addresses in dotted-decimal notation
 - `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
+
+*Geo/ASN Lookup*
+
 - `geoip` - Perform (local) maxmind geolocation on IPv4 addresses (see `?geoip` for details)
 - `asnip` - Perform (local) maxmind AS # & org lookup on IPv4 addresses (see `?asnip` for details)
+
+*Testing*
+
 - `randomIPs` - generate a vector of valid, random IPv4 addresses (very helpful for testing)
 
 The following data sets are included:
@@ -49,9 +62,8 @@ devtools::install_git("https://gitlab.dds.ec/bob.rudis/iptools.git")
     sudo apt-get install boost1.55 # might need to use 1.54 on some systems
     
 >`homebrew` (OS X) users can do: `brew install boost` and it should work.
->
->The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
 
+The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
 
 ### Usage
 

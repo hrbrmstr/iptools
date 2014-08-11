@@ -4,17 +4,30 @@ The package also uses the v1 [GeoLite](http://dev.maxmind.com/geoip/legacy/geoli
 
 The following functions are implemented:
 
+*Revolver-ish*
+
 -   `gethostbyaddr` - Returns all `PTR` records associated with an IPv4 address
+-   `gethostsbyaddr` - Vectorized version of `gethostbyaddr`
 -   `gethostbyname` - Returns all `A` records associated with a hostname
--   `gethostsbyaddr` - Vectorized version of
--   `gethostsbyname` - Vectorized version of
+-   `gethostsbyname` - Vectorized version of `gethostbyname`
+
+*IP int/string conversion*
+
 -   `ip2long` - Character (dotted-decimal) IPv4 Address Conversion to long integer
--   `iptools` - A package to help perform various tasks with/on IPv4 addresses
 -   `long2ip` - Intger IPv4 Address Conversion to Character
+
+*Validation*
+
 -   `validateIP` - Validate IPv4 addresses in dotted-decimal notation
 -   `validateCIDR` - Validate IPv4 CIDRs in dotted-decimal slash notation
+
+*Geo/ASN Lookup*
+
 -   `geoip` - Perform (local) maxmind geolocation on IPv4 addresses (see `?geoip` for details)
 -   `asnip` - Perform (local) maxmind AS \# & org lookup on IPv4 addresses (see `?asnip` for details)
+
+*Testing*
+
 -   `randomIPs` - generate a vector of valid, random IPv4 addresses (very helpful for testing)
 
 The following data sets are included:
@@ -39,8 +52,8 @@ devtools::install_git("https://gitlab.dds.ec/bob.rudis/iptools.git")
     sudo apt-get install boost1.55 # might need to use 1.54 on some systems
 
 > `homebrew` (OS X) users can do: `brew install boost` and it should work.
->
-> The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
+
+The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
 
 ### Usage
 
@@ -58,12 +71,12 @@ packageVersion("iptools")
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:807::1005" "74.125.226.72"           
-    ##  [3] "74.125.226.70"            "74.125.226.66"           
-    ##  [5] "74.125.226.71"            "74.125.226.69"           
-    ##  [7] "74.125.226.67"            "74.125.226.78"           
-    ##  [9] "74.125.226.73"            "74.125.226.65"           
-    ## [11] "74.125.226.68"            "74.125.226.64"
+    ##  [1] "2607:f8b0:4006:807::1005" "74.125.226.1"            
+    ##  [3] "74.125.226.14"            "74.125.226.6"            
+    ##  [5] "74.125.226.0"             "74.125.226.2"            
+    ##  [7] "74.125.226.3"             "74.125.226.9"            
+    ##  [9] "74.125.226.4"             "74.125.226.7"            
+    ## [11] "74.125.226.8"             "74.125.226.5"
 
 ``` {.r}
 # lookup apple (in reverse)
@@ -90,13 +103,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:807::1005            74.125.226.72            74.125.226.70 
+    ## 2607:f8b0:4006:807::1005             74.125.226.1            74.125.226.14 
     ##                    FALSE                     TRUE                     TRUE 
-    ##            74.125.226.66            74.125.226.71            74.125.226.69 
+    ##             74.125.226.6             74.125.226.0             74.125.226.2 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.67            74.125.226.78            74.125.226.73 
+    ##             74.125.226.3             74.125.226.9             74.125.226.4 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.65            74.125.226.68            74.125.226.64 
+    ##             74.125.226.7             74.125.226.8             74.125.226.5 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}
@@ -223,7 +236,7 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Mon Aug 11 13:38:40 2014"
+    ## [1] "Mon Aug 11 13:44:03 2014"
 
 ``` {.r}
 test_dir("tests/")
