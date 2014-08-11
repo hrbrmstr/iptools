@@ -45,7 +45,7 @@ The following data sets are included:
 - `ianaipv4spar` - IANA IPv4 Special-Purpose Address Registry
 - `ianaipv4assignments` - IANA IPv4 Address Space Registry
 - `ianarootzonetlds` - IANA Root Zone Database
-- `ianarootzonetlds` - IANA Protocol Numbers
+- `ianaprotocolnumbers` - IANA Protocol Numbers
 
 
 ### Installation
@@ -61,7 +61,7 @@ devtools::install_git("https://gitlab.dds.ec/bob.rudis/iptools.git")
     sudo apt-get update
     sudo apt-get install boost1.55 # might need to use 1.54 on some systems
     
->`homebrew` (OS X) users can do: `brew install boost` and it should work.
+>`homebrew` (OS X) users can do: `brew install boost` and it should `#justwork`.
 
 The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
 

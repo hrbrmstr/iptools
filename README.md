@@ -36,7 +36,7 @@ The following data sets are included:
 -   `ianaipv4spar` - IANA IPv4 Special-Purpose Address Registry
 -   `ianaipv4assignments` - IANA IPv4 Address Space Registry
 -   `ianarootzonetlds` - IANA Root Zone Database
--   `ianarootzonetlds` - IANA Protocol Numbers
+-   `ianaprotocolnumbers` - IANA Protocol Numbers
 
 ### Installation
 
@@ -51,7 +51,7 @@ devtools::install_git("https://gitlab.dds.ec/bob.rudis/iptools.git")
     sudo apt-get update
     sudo apt-get install boost1.55 # might need to use 1.54 on some systems
 
-> `homebrew` (OS X) users can do: `brew install boost` and it should work.
+> `homebrew` (OS X) users can do: `brew install boost` and it should `#justwork`.
 
 The first person(s) to get this working under Windows/mingw + boost/Rcpp gets a free copy of [our book](http://dds.ec/amzn)
 
@@ -71,12 +71,12 @@ packageVersion("iptools")
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:807::1005" "74.125.226.1"            
-    ##  [3] "74.125.226.14"            "74.125.226.6"            
-    ##  [5] "74.125.226.0"             "74.125.226.2"            
-    ##  [7] "74.125.226.3"             "74.125.226.9"            
-    ##  [9] "74.125.226.4"             "74.125.226.7"            
-    ## [11] "74.125.226.8"             "74.125.226.5"
+    ##  [1] "2607:f8b0:4006:807::1003" "74.125.226.167"          
+    ##  [3] "74.125.226.162"           "74.125.226.174"          
+    ##  [5] "74.125.226.163"           "74.125.226.169"          
+    ##  [7] "74.125.226.165"           "74.125.226.168"          
+    ##  [9] "74.125.226.161"           "74.125.226.164"          
+    ## [11] "74.125.226.166"           "74.125.226.160"
 
 ``` {.r}
 # lookup apple (in reverse)
@@ -103,13 +103,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:807::1005             74.125.226.1            74.125.226.14 
+    ## 2607:f8b0:4006:807::1003           74.125.226.167           74.125.226.162 
     ##                    FALSE                     TRUE                     TRUE 
-    ##             74.125.226.6             74.125.226.0             74.125.226.2 
+    ##           74.125.226.174           74.125.226.163           74.125.226.169 
     ##                     TRUE                     TRUE                     TRUE 
-    ##             74.125.226.3             74.125.226.9             74.125.226.4 
+    ##           74.125.226.165           74.125.226.168           74.125.226.161 
     ##                     TRUE                     TRUE                     TRUE 
-    ##             74.125.226.7             74.125.226.8             74.125.226.5 
+    ##           74.125.226.164           74.125.226.166           74.125.226.160 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}
@@ -236,7 +236,7 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Mon Aug 11 13:44:03 2014"
+    ## [1] "Mon Aug 11 14:14:23 2014"
 
 ``` {.r}
 test_dir("tests/")
