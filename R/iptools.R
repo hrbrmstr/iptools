@@ -74,6 +74,17 @@ validateCIDR <- Vectorize(.validateCIDR)
 
 }
 
+#' @title Converts an IPv4 CIDR (e.g. "192.168.1.0/24") to a vector of individual IPv4 addresses
+#' @description Returns a character vector of IPv4 addresses within the specified CIDR
+#' @param cidr (chr) IPv4 CIDR
+#' @return character vector or NULL if invalid CIDR
+#' @export
+cidr_ips <- function(cidr) {
+  cr <- cidr_range(cidr)
+  if (!any(is.na(cr))) {
+    sapply(cr[1]:cr[2], long2ip)
+  }
+}
 
 #' @title Generate random sequence of IPv4 addresses
 #' @description Returns a character vector of randomly generated (but valid) IPv4 addresses
@@ -85,5 +96,11 @@ validateCIDR <- Vectorize(.validateCIDR)
 #' randomIPs(10)
 #'
 randomIPs <- function(size) {
-  sprintf("%d.%d.%d.%d", sample(0:255, size, replace=TRUE), sample(0:255, size, replace=TRUE), sample(0:255, size, replace=TRUE), sample(0:255, size, replace=TRUE))
+
+  v1 <- c(16777216, 2130706431)
+  long2ip(c(runif(size, v1[1], v1[2])))
+
 }
+
+
+

@@ -65,6 +65,37 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
+// cidr_range
+NumericVector cidr_range(std::string cidr);
+RcppExport SEXP iptools_cidr_range(SEXP cidrSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< std::string >::type cidr(cidrSEXP );
+        NumericVector __result = cidr_range(cidr);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// ip_in_cidr
+LogicalVector ip_in_cidr(CharacterVector ip, std::string cidr);
+RcppExport SEXP iptools_ip_in_cidr(SEXP ipSEXP, SEXP cidrSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP );
+        Rcpp::traits::input_parameter< std::string >::type cidr(cidrSEXP );
+        LogicalVector __result = ip_in_cidr(ip, cidr);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
 // maxmindinit
 void maxmindinit(std::string citydata = "/usr/local/share/GeoIP/GeoLiteCity.dat", std::string asndata = "/usr/local/share/GeoIP/GeoIPASNum.dat");
 RcppExport SEXP iptools_maxmindinit(SEXP citydataSEXP, SEXP asndataSEXP) {

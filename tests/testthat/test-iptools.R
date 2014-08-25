@@ -54,6 +54,8 @@ test_that("we can perform IPv4/CIDR validation", {
   expect_that(as.logical(validateCIDR(c("127.0.0.256/32", "127.0.0.0", "127.0.0.1/33", "127.0.0.1/32"))),
               is_equivalent_to(c(FALSE, FALSE, FALSE, TRUE)))
 
+  # cidr
+  expect_that(sum(ip_in_cidr(cidr_ips("192.168.0.0/23"), "192.168.1.0/24")), equals(256))
 
 })
 
@@ -62,30 +64,31 @@ context("Geolocation")
 test_that("we can perform IPv4 geolocation", {
 
   set.seed(1000000000)
-  expect_that(geoip(randomIPs(1)), equals(structure(list(ip = structure(1L, .Label = "133.232.196.68", class = "factor"),
-                                                         country.code = structure(1L, .Label = "JP", class = "factor"),
-                                                         country.code3 = structure(1L, .Label = "JPN", class = "factor"),
-                                                         country.name = structure(1L, .Label = "Japan", class = "factor"),
-                                                         region = structure(1L, .Label = "NA", class = "factor"),
-                                                         region.name = structure(1L, .Label = "NA", class = "factor"),
-                                                         city = structure(1L, .Label = "NA", class = "factor"), postal.code = structure(1L, .Label = "NA", class = "factor"),
-                                                         latitude = 35.689998626709, longitude = 139.690002441406,
-                                                         time.zone = structure(1L, .Label = "Asia/Tokyo", class = "factor"),
-                                                         metro.code = 0L, area.code = 0L), .Names = c("ip", "country.code",
-                                                                                                      "country.code3", "country.name", "region", "region.name", "city",
-                                                                                                      "postal.code", "latitude", "longitude", "time.zone", "metro.code",
-                                                                                                      "area.code"), row.names = c(NA, -1L), class = "data.frame")))
+  expect_that(geoip(randomIPs(1)), equals(structure(list(ip = structure(1L, .Label = "66.170.120.163", class = "factor"),
+                                                         country.code = structure(1L, .Label = "US", class = "factor"),
+                                                         country.code3 = structure(1L, .Label = "USA", class = "factor"),
+                                                         country.name = structure(1L, .Label = "United States", class = "factor"),
+                                                         region = structure(1L, .Label = "CA", class = "factor"),
+                                                         region.name = structure(1L, .Label = "California", class = "factor"),
+                                                         city = structure(1L, .Label = "Campbell", class = "factor"),
+                                                         postal.code = structure(1L, .Label = "95008", class = "factor"),
+                                                         latitude = 37.2803001403809, longitude = -121.956703186035,
+                                                         time.zone = structure(1L, .Label = "America/Los_Angeles", class = "factor"),
+                                                         metro.code = 807L, area.code = 408L), .Names = c("ip", "country.code",
+                                                                                                          "country.code3", "country.name", "region", "region.name", "city",
+                                                                                                          "postal.code", "latitude", "longitude", "time.zone", "metro.code",
+                                                                                                          "area.code"), row.names = c(NA, -1L), class = "data.frame")))
 
   set.seed(1000000000)
-  expect_that(asnip(randomIPs(10)), equals(structure(list(ip = structure(c(1L, 5L, 3L, 8L, 7L, 2L, 9L, 6L,
-                                                                           4L, 10L), .Label = c("133.104.20.250", "136.113.177.174", "196.105.157.133",
-                                                                                                "213.243.203.112", "232.205.194.54", "242.150.122.127", "62.147.200.18",
-                                                                                                "68.190.32.214", "70.152.59.168", "71.107.246.210"), class = "factor"),
-                                                          asn = structure(c(3L, NA, NA, 2L, 1L, NA, 5L, NA, 4L, 6L), .Label = c("AS12322",
-                                                                                                                                "AS20115", "AS2503", "AS29050", "AS6389", "AS701"), class = "factor"),
-                                                          org = structure(c(6L, NA, NA, 2L, 3L, NA, 1L, NA, 5L, 4L), .Label = c("BellSouth.net Inc.",
-                                                                                                                                "Charter Communications", "Free SAS", "MCI Communications Services, Inc. d/b/a Verizon Business",
-                                                                                                                                "Terrecablate Reti e Servizi S.R.L.", "Tohoku Open Internet Community"
-                                                          ), class = "factor")), .Names = c("ip", "asn", "org"), row.names = c(NA,
-                                                                                                                               -10L), class = "data.frame")))
+  expect_that(asnip(randomIPs(10)), equals(structure(list(ip = structure(c(8L, 2L, 10L, 5L, 4L, 9L, 6L,
+                                                                           3L, 1L, 7L), .Label = c("105.249.128.103", "115.123.191.104",
+                                                                           "120.92.170.107", "31.200.58.110", "34.207.116.122", "35.212.185.89",
+                                                                          "36.109.13.27", "66.170.120.163", "68.54.134.127", "97.185.12.167"
+                                                                           ), class = "factor"), asn = structure(c(3L, NA, 4L, NA, 1L, 5L,
+                                                                           NA, NA, 2L, NA), .Label = c("AS12978", "AS29975", "AS30121",
+                                                                           "AS6167", "AS7922"), class = "factor"), org = structure(c(1L,
+                                                                           NA, 2L, NA, 4L, 3L, NA, NA, 5L, NA), .Label = c("24/7 Customer, Inc.",
+                                                                          "Cellco Partnership DBA Verizon Wireless", "Comcast Cable Communications, Inc.",
+                                                                          "DOGAN TV DIGITAL PLATFORM ISLETMECILIGI A.S.", "VODACOM-ZA"), class = "factor")), .Names = c("ip",
+                                                                           "asn", "org"), row.names = c(NA, -10L), class = "data.frame")))
 })

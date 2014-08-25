@@ -72,6 +72,51 @@ long2ip <- function(ip) {
     .Call('iptools_long2ip', PACKAGE = 'iptools', ip)
 }
 
+#' IPv4 CIDR to long integer range
+#'
+#' Converts IPv4 CIDR (e.g. "192.168.1.0/24") to vector containing the minimum and maximum range integer values
+#'
+#' @param cidr IPv4 CIDR (str) dotted-decimal-slash-integer
+#' @return vector containing the minimum and maximum range integer values or \code{c(NA,NA)}
+#' @examples
+#' \dontrun{
+#' long2ip(cidr_range("192.168.1.0/24"))
+#' ## [1] "192.168.1.0"   "192.168.1.255"
+#'
+#' long2ip(cidr_range("8.0.0.0/8"))
+#' ## [1] "8.0.0.0"       "8.255.255.255"
+#'
+#' cr <- cidr_range("172.18.0.0/28")
+#' sapply(cr[1]:cr[2], long2ip)
+#' ##  [1] "172.18.0.0"  "172.18.0.1"  "172.18.0.2"  "172.18.0.3"
+#' ##  [5] "172.18.0.4"  "172.18.0.5"  "172.18.0.6"  "172.18.0.7"
+#' ##  [9] "172.18.0.8"  "172.18.0.9"  "172.18.0.10" "172.18.0.11"
+#' ## [13] "172.18.0.12" "172.18.0.13" "172.18.0.14" "172.18.0.15"
+#' }
+cidr_range <- function(cidr) {
+    .Call('iptools_cidr_range', PACKAGE = 'iptools', cidr)
+}
+
+#' Test if IPv4 addresses are in a CIDR block
+#'
+#' Takes a vector of character IPv4 addresses and a character CIDR and
+#' returs a logical vector indicating whether an IP address falls within
+#' the specified CIDR
+#'
+#' @param ip character vector of IPv4 addresses
+#' @param cidr atomic character vector (IPv4 CIDR spec)
+#' @return logical vector of equivalent character (dotted-decimal) IP addresses
+#' @examples
+#' \dontrun{
+#' table(ip_in_cidr(cidr_ips("192.168.0.0/23"), "192.168.1.0/24"))
+#'
+#' ## FALSE  TRUE
+#' ##  256   256
+#' }
+ip_in_cidr <- function(ip, cidr) {
+    .Call('iptools_ip_in_cidr', PACKAGE = 'iptools', ip, cidr)
+}
+
 #' Initializes the MaxMind library and opens the \code{GeoLiteCity.dat} & \code{GeoLiteASNum.dat} file
 #'
 #' This function must be called before performing a lookup with \code{geoip()} or \code{asnip()}.

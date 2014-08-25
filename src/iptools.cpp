@@ -172,3 +172,134 @@ CharacterVector long2ip (NumericVector ip) {
   return(ipStr);
 
 }
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+//' IPv4 CIDR to long integer range
+//'
+//' Converts IPv4 CIDR (e.g. "192.168.1.0/24") to vector containing the minimum and maximum range integer values
+//'
+//' @param cidr IPv4 CIDR (str) dotted-decimal-slash-integer
+//' @return vector containing the minimum and maximum range integer values or \code{c(NA,NA)}
+//' @examples
+//' \dontrun{
+//' long2ip(cidr_range("192.168.1.0/24"))
+//' ## [1] "192.168.1.0"   "192.168.1.255"
+//'
+//' long2ip(cidr_range("8.0.0.0/8"))
+//' ## [1] "8.0.0.0"       "8.255.255.255"
+//'
+//' cr <- cidr_range("172.18.0.0/28")
+//' sapply(cr[1]:cr[2], long2ip)
+//' ##  [1] "172.18.0.0"  "172.18.0.1"  "172.18.0.2"  "172.18.0.3"
+//' ##  [5] "172.18.0.4"  "172.18.0.5"  "172.18.0.6"  "172.18.0.7"
+//' ##  [9] "172.18.0.8"  "172.18.0.9"  "172.18.0.10" "172.18.0.11"
+//' ## [13] "172.18.0.12" "172.18.0.13" "172.18.0.14" "172.18.0.15"
+//' }
+// [[Rcpp::export]]
+NumericVector cidr_range(std::string cidr) {
+
+  unsigned int first_ip, last_ip;
+  int slash_val;
+  char cidr_copy[24];
+  char *slash_pos;
+
+  // no asio functions to help us here, so might as well turn to
+  // raw C code for what we need
+
+  strncpy(cidr_copy, cidr.c_str(), 24); // safe copy
+
+  slash_pos = strchr(cidr_copy, '/'); // find the "/"
+
+  // no "/" == not a valid CIDR
+  if (NULL == slash_pos) { return NumericVector::create(NA_REAL, NA_REAL); }
+
+  // replace "/" with string termination and advance the pointer to
+  // the CIDR component
+
+  *slash_pos++ = '\0';
+
+  slash_val = atoi(slash_pos); // convert the CIDR mask to an integer
+
+  // convert presentation to network format
+  // if it fails, it's not a valid IPv4 address
+
+  if (1 != inet_pton(AF_INET, cidr_copy, &first_ip)) {
+    return NumericVector::create(NA_REAL, NA_REAL);
+  }
+
+  first_ip = ntohl(first_ip); // network byte order to host byte order
+
+  unsigned int mask = ~0;
+
+  if (slash_val < 32)  {
+    last_ip = first_ip | (mask >> slash_val);
+  } else { // special case where CIDR mask was 32 (a single IPv4)
+    last_ip = first_ip;
+  }
+
+  return NumericVector::create(first_ip, last_ip);
+
+}
+
+
+//' Test if IPv4 addresses are in a CIDR block
+//'
+//' Takes a vector of character IPv4 addresses and a character CIDR and
+//' returs a logical vector indicating whether an IP address falls within
+//' the specified CIDR
+//'
+//' @param ip character vector of IPv4 addresses
+//' @param cidr atomic character vector (IPv4 CIDR spec)
+//' @return logical vector of equivalent character (dotted-decimal) IP addresses
+//' @examples
+//' \dontrun{
+//' table(ip_in_cidr(cidr_ips("192.168.0.0/23"), "192.168.1.0/24"))
+//'
+//' ## FALSE  TRUE
+//' ##  256   256
+//' }
+// [[Rcpp::export]]
+LogicalVector ip_in_cidr(CharacterVector ip, std::string cidr) {
+
+  unsigned int first_ip;
+  int slash_val;
+  char cidr_copy[24];
+  char *slash_pos;
+
+  int ipCt = ip.size();
+
+  // no asio functions to help us here, so might as well turn to
+  // raw C code for what we need
+
+  strncpy(cidr_copy, cidr.c_str(), 24); // safe copy
+
+  slash_pos = strchr(cidr_copy, '/'); // find the "/"
+
+  // no "/" == not a valid CIDR
+  if (NULL == slash_pos) { message("NULL") ; return LogicalVector(ipCt, false); }
+
+  // replace "/" with string termination and advance the pointer to
+  // the CIDR component
+
+  *slash_pos++ = '\0';
+
+  slash_val = atoi(slash_pos); // convert the CIDR mask to an integer
+
+  first_ip = boost::asio::ip::address_v4::from_string(std::string(cidr_copy)).to_ulong();
+
+  unsigned int mask = ~(0xffffffff >> slash_val);
+  unsigned int cidr_int = first_ip & mask ;
+
+  LogicalVector bv = LogicalVector(ipCt) ;
+
+  for (int i=0; i<ipCt; i++) {
+    bv[i] = (boost::asio::ip::address_v4::from_string(ip[i]).to_ulong() & mask) == cidr_int;
+  }
+
+  return(bv) ;
+
+}

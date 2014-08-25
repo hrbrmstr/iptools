@@ -1,7 +1,7 @@
 ---
 title: "README"
 author: "Bob Rudis"
-date: "August 10, 2014"
+date: "August 25, 2014"
 output:
   md_document:
     variant: markdown_github
@@ -24,6 +24,12 @@ The following functions are implemented:
 
 - `ip2long` - Character (dotted-decimal) IPv4 Address Conversion to long integer
 - `long2ip` - Intger IPv4 Address Conversion to Character
+
+*CIDR*
+
+- `cidr_ips` - Converts an IPv4 CIDR (e.g. "192.168.1.0/24") to a vector of individual IPv4 addresses
+- `ip_in_cidr` - Test if IPv4 addresses are in a CIDR block
+- `cidr_range` - IPv4 CIDR to long integer range
 
 *Validation*
 
@@ -95,6 +101,9 @@ geoip(randomIPs(25))
 
 set.seed(100000)
 asnip(randomIPs(15))
+
+#cidr
+table(ip_in_cidr(cidr_ips("192.168.0.0/23"), "192.168.1.0/24"))
 ```
 
 ### Test Results

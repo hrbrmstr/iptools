@@ -16,6 +16,12 @@ The following functions are implemented:
 -   `ip2long` - Character (dotted-decimal) IPv4 Address Conversion to long integer
 -   `long2ip` - Intger IPv4 Address Conversion to Character
 
+*CIDR*
+
+-   `cidr_ips` - Converts an IPv4 CIDR (e.g. "192.168.1.0/24") to a vector of individual IPv4 addresses
+-   `ip_in_cidr` - Test if IPv4 addresses are in a CIDR block
+-   `cidr_range` - IPv4 CIDR to long integer range
+
 *Validation*
 
 -   `validateIP` - Validate IPv4 addresses in dotted-decimal notation
@@ -71,19 +77,19 @@ packageVersion("iptools")
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:807::1003" "74.125.226.167"          
-    ##  [3] "74.125.226.162"           "74.125.226.174"          
-    ##  [5] "74.125.226.163"           "74.125.226.169"          
-    ##  [7] "74.125.226.165"           "74.125.226.168"          
-    ##  [9] "74.125.226.161"           "74.125.226.164"          
-    ## [11] "74.125.226.166"           "74.125.226.160"
+    ##  [1] "2607:f8b0:4006:806::1008" "74.125.226.33"           
+    ##  [3] "74.125.226.34"            "74.125.226.41"           
+    ##  [5] "74.125.226.36"            "74.125.226.39"           
+    ##  [7] "74.125.226.38"            "74.125.226.37"           
+    ##  [9] "74.125.226.46"            "74.125.226.32"           
+    ## [11] "74.125.226.35"            "74.125.226.40"
 
 ``` {.r}
 # lookup apple (in reverse)
 gethostbyaddr("17.178.96.59")
 ```
 
-    ## [1] "ibookpartner.com"
+    ## [1] "imovietheater.com"
 
 ``` {.r}
 # decimal and back
@@ -103,13 +109,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:807::1003           74.125.226.167           74.125.226.162 
+    ## 2607:f8b0:4006:806::1008            74.125.226.33            74.125.226.34 
     ##                    FALSE                     TRUE                     TRUE 
-    ##           74.125.226.174           74.125.226.163           74.125.226.169 
+    ##            74.125.226.41            74.125.226.36            74.125.226.39 
     ##                     TRUE                     TRUE                     TRUE 
-    ##           74.125.226.165           74.125.226.168           74.125.226.161 
+    ##            74.125.226.38            74.125.226.37            74.125.226.46 
     ##                     TRUE                     TRUE                     TRUE 
-    ##           74.125.226.164           74.125.226.166           74.125.226.160 
+    ##            74.125.226.32            74.125.226.35            74.125.226.40 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}
@@ -126,106 +132,115 @@ set.seed(1492)
 geoip(randomIPs(25))
 ```
 
-    ##                 ip country.code country.code3       country.name region
-    ## 1   71.238.158.182           US           USA      United States     MI
-    ## 2     55.149.38.66           US           USA      United States     AZ
-    ## 3    47.143.81.134           CA           CAN             Canada     ON
-    ## 4    28.88.224.129           US           USA      United States     OH
-    ## 5   13.248.176.132           US           USA      United States     CT
-    ## 6     2.37.188.176           IT           ITA              Italy     NA
-    ## 7   218.253.179.74           HK           HKG          Hong Kong     NA
-    ## 8   130.216.63.230           NZ           NZL        New Zealand     NA
-    ## 9    99.55.243.154           US           USA      United States     MI
-    ## 10 196.251.208.148         <NA>          <NA>               <NA>   <NA>
-    ## 11  164.180.29.241           US           USA      United States     OH
-    ## 12 163.107.114.215           FR           FRA             France     NA
-    ## 13    49.28.94.174           KR           KOR Korea, Republic of     11
-    ## 14   133.6.136.160           JP           JPN              Japan     NA
-    ## 15   133.79.52.183           JP           JPN              Japan     NA
-    ## 16 202.191.124.165           BD           BGD         Bangladesh     81
-    ## 17   31.202.171.73           UA           UKR            Ukraine     07
-    ## 18   87.42.248.127           IE           IRL            Ireland     NA
-    ## 19  169.100.123.87           US           USA      United States     NY
-    ## 20   234.113.30.18         <NA>          <NA>               <NA>   <NA>
-    ## 21   163.61.123.85         <NA>          <NA>               <NA>   <NA>
-    ## 22   97.218.98.234           US           USA      United States     NA
-    ## 23   33.30.199.162           US           USA      United States     OH
-    ## 24   153.28.53.220           US           USA      United States     OH
-    ## 25   23.34.158.170           US           USA      United States     MA
-    ##            region.name          city postal.code latitude longitude
-    ## 1             Michigan   Grand Blanc       48439    42.92    -83.65
-    ## 2              Arizona Fort Huachuca       85613    31.53   -110.36
-    ## 3              Ontario        Ottawa         K2H    45.32    -75.84
-    ## 4                 Ohio      Columbus       43218    39.96    -83.00
-    ## 5          Connecticut       Norwalk       06850    41.13    -73.44
-    ## 6                   NA            NA          NA    42.83     12.83
-    ## 7                   NA            NA          NA    22.25    114.17
-    ## 8                   NA            NA          NA   -41.00    174.00
-    ## 9             Michigan       Portage       49024    42.20    -85.62
-    ## 10                <NA>          <NA>        <NA>       NA        NA
-    ## 11                Ohio      Columbus       43218    39.96    -83.00
-    ## 12                  NA            NA          NA    48.86      2.35
-    ## 13    Seoul-t'ukpyolsi         Seoul          NA    37.60    126.98
-    ## 14                  NA            NA          NA    35.69    139.69
-    ## 15                  NA            NA          NA    35.69    139.69
-    ## 16               Dhaka         Dhaka          NA    23.72     90.41
-    ## 17 Kharkivs'ka Oblast'       Kharkiv          NA    49.98     36.25
-    ## 18                  NA            NA          NA    53.00     -8.00
-    ## 19            New York      New York       10271    40.71    -74.01
-    ## 20                <NA>          <NA>        <NA>       NA        NA
-    ## 21                <NA>          <NA>        <NA>       NA        NA
-    ## 22                  NA            NA          NA    38.00    -97.00
-    ## 23                Ohio      Columbus       43218    39.96    -83.00
-    ## 24                Ohio      Columbus       43218    39.96    -83.00
-    ## 25       Massachusetts     Cambridge       02142    42.36    -71.08
-    ##            time.zone metro.code area.code
-    ## 1   America/New_York        513       810
-    ## 2    America/Phoenix        789       520
-    ## 3    America/Toronto          0         0
-    ## 4   America/New_York        535       614
-    ## 5   America/New_York        501       203
-    ## 6        Europe/Rome          0         0
-    ## 7     Asia/Hong_Kong          0         0
-    ## 8                 NA          0         0
-    ## 9   America/New_York        563       269
-    ## 10              <NA>         NA        NA
-    ## 11  America/New_York        535       614
-    ## 12      Europe/Paris          0         0
-    ## 13        Asia/Seoul          0         0
-    ## 14        Asia/Tokyo          0         0
-    ## 15        Asia/Tokyo          0         0
-    ## 16        Asia/Dhaka          0         0
-    ## 17 Europe/Zaporozhye          0         0
-    ## 18     Europe/Dublin          0         0
-    ## 19  America/New_York        501       212
-    ## 20              <NA>         NA        NA
-    ## 21              <NA>         NA        NA
-    ## 22                NA          0         0
-    ## 23  America/New_York        535       614
-    ## 24  America/New_York        535       614
-    ## 25  America/New_York        506       617
+    ##                ip country.code country.code3       country.name region
+    ## 1   35.251.195.57           US           USA      United States     NA
+    ## 2     28.57.78.42           US           USA      United States     OH
+    ## 3   24.60.146.202           US           USA      United States     CT
+    ## 4    14.236.36.53           VN           VNM            Vietnam     44
+    ## 5   7.146.253.182           US           USA      United States     OH
+    ## 6     2.9.228.172           FR           FRA             France     B5
+    ## 7  108.111.124.79           US           USA      United States     NA
+    ## 8    65.78.24.214           US           USA      United States     NA
+    ## 9   50.48.151.239           US           USA      United States     NA
+    ## 10  97.231.13.131           US           USA      United States     NA
+    ## 11 81.212.124.183           TR           TUR             Turkey     NA
+    ## 12 81.118.172.171           IT           ITA              Italy     NA
+    ## 13 25.143.188.239           GB           GBR     United Kingdom     NA
+    ## 14 66.200.137.181           US           USA      United States     CA
+    ## 15  66.185.80.107           CA           CAN             Canada     NA
+    ## 16  100.205.217.1           US           USA      United States     NA
+    ## 17  16.140.15.132           US           USA      United States     CA
+    ## 18   44.77.96.220           US           USA      United States     CA
+    ## 19   84.67.252.61           IN           IND              India     NA
+    ## 20 116.123.67.129           KR           KOR Korea, Republic of     11
+    ## 21   81.60.52.139           ES           ESP              Spain     NA
+    ## 22   49.6.198.156           CN           CHN              China     25
+    ## 23  17.181.158.29           US           USA      United States     CA
+    ## 24  76.124.28.185           US           USA      United States     PA
+    ## 25  12.98.125.231           US           USA      United States     NA
+    ##         region.name                 city postal.code latitude longitude
+    ## 1                NA                   NA          NA    38.00   -97.000
+    ## 2              Ohio             Columbus       43218    39.96   -82.999
+    ## 3       Connecticut         East Hampton       06424    41.56   -72.494
+    ## 4            Ha Noi                Hanoi          NA    21.03   105.850
+    ## 5              Ohio             Columbus       43218    39.96   -82.999
+    ## 6  Pays de la Loire Challain-la-potherie          NA    47.64    -1.047
+    ## 7                NA                   NA          NA    38.00   -97.000
+    ## 8                NA                   NA          NA    38.00   -97.000
+    ## 9                NA                   NA          NA    38.00   -97.000
+    ## 10               NA                   NA          NA    38.00   -97.000
+    ## 11               NA                   NA          NA    39.00    35.000
+    ## 12               NA                   NA          NA    42.83    12.833
+    ## 13               NA                   NA          NA    51.50    -0.130
+    ## 14       California           Pleasanton       94566    37.65  -121.855
+    ## 15               NA                   NA          NA    60.00   -95.000
+    ## 16               NA                   NA          NA    38.00   -97.000
+    ## 17       California            Palo Alto       94304    37.38  -122.183
+    ## 18       California            San Diego       92111    32.81  -117.165
+    ## 19               NA                   NA          NA    20.00    77.000
+    ## 20 Seoul-t'ukpyolsi                Seoul          NA    37.60   126.978
+    ## 21               NA                   NA          NA    40.00    -4.000
+    ## 22         Shandong                Jinan          NA    36.67   116.997
+    ## 23       California            Cupertino       95014    37.30  -122.095
+    ## 24     Pennsylvania         Phoenixville       19460    40.12   -75.538
+    ## 25               NA                   NA          NA    38.00   -97.000
+    ##              time.zone metro.code area.code
+    ## 1                   NA          0         0
+    ## 2     America/New_York        535       614
+    ## 3     America/New_York        533       860
+    ## 4      Asia/Phnom_Penh          0         0
+    ## 5     America/New_York        535       614
+    ## 6         Europe/Paris          0         0
+    ## 7                   NA          0         0
+    ## 8                   NA          0         0
+    ## 9                   NA          0         0
+    ## 10                  NA          0         0
+    ## 11       Asia/Istanbul          0         0
+    ## 12         Europe/Rome          0         0
+    ## 13       Europe/London          0         0
+    ## 14 America/Los_Angeles        807       925
+    ## 15                  NA          0         0
+    ## 16                  NA          0         0
+    ## 17 America/Los_Angeles        807       650
+    ## 18 America/Los_Angeles        825       858
+    ## 19        Asia/Kolkata          0         0
+    ## 20          Asia/Seoul          0         0
+    ## 21                  NA          0         0
+    ## 22       Asia/Shanghai          0         0
+    ## 23 America/Los_Angeles        807       408
+    ## 24    America/New_York        504       610
+    ## 25                  NA          0         0
 
 ``` {.r}
 set.seed(100000)
 asnip(randomIPs(15))
 ```
 
-    ##                 ip      asn                                     org
-    ## 1  172.218.158.139    AS852               TELUS Communications Inc.
-    ## 2    122.30.148.37   AS4713          NTT Communications Corporation
-    ## 3    166.78.178.16  AS33070                       Rackspace Hosting
-    ## 4    240.37.137.24     <NA>                                    <NA>
-    ## 5      27.30.25.28   AS4134                                Chinanet
-    ## 6  119.190.124.103   AS4837              CNCGROUP China169 Backbone
-    ## 7     44.167.43.28   AS7377   University of California at San Diego
-    ## 8  101.165.102.119   AS1221                         Telstra Pty Ltd
-    ## 9   245.189.210.92     <NA>                                    <NA>
-    ## 10   22.173.243.85     <NA>                                    <NA>
-    ## 11  186.219.208.57 AS262996  TELECOMUNICACOES E INFORMATICA LTDA ME
-    ## 12    66.162.92.26   AS4323               tw telecom holdings, inc.
-    ## 13   86.66.214.138  AS15557 Societe Francaise du Radiotelephone S.A
-    ## 14   3.220.143.125     <NA>                                    <NA>
-    ## 15    187.97.8.132  AS26615                        Tim Celular S.A.
+    ##                 ip     asn                                org
+    ## 1     85.220.9.200  AS6677                          Siminn hf
+    ## 2    61.38.131.106  AS3786               LG DACOM Corporation
+    ## 3    82.217.23.239  AS9143                         Ziggo B.V.
+    ## 4  119.116.206.247  AS4837         CNCGROUP China169 Backbone
+    ## 5    14.126.106.50  AS4134                           Chinanet
+    ## 6    59.254.86.207 AS62294                  CastCable Limited
+    ## 7     23.15.102.96 AS20940          Akamai International B.V.
+    ## 8     50.219.47.40  AS7922 Comcast Cable Communications, Inc.
+    ## 9    121.239.17.18  AS4134                           Chinanet
+    ## 10   12.48.178.180  AS7018                AT&T Services, Inc.
+    ## 11  92.141.170.178  AS3215                        Orange S.A.
+    ## 12  33.226.233.128    <NA>                               <NA>
+    ## 13  43.137.201.147    <NA>                               <NA>
+    ## 14    2.223.87.145  AS5607   British Sky Broadcasting Limited
+    ## 15   93.66.230.159 AS30722              Vodafone Omnitel B.V.
+
+``` {.r}
+#cidr
+table(ip_in_cidr(cidr_ips("192.168.0.0/23"), "192.168.1.0/24"))
+```
+
+    ## 
+    ## FALSE  TRUE 
+    ##   256   256
 
 ### Test Results
 
@@ -236,7 +251,7 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Mon Aug 11 14:14:23 2014"
+    ## [1] "Mon Aug 25 11:11:01 2014"
 
 ``` {.r}
 test_dir("tests/")
@@ -244,5 +259,5 @@ test_dir("tests/")
 
     ## Host/IPv4 resolution : ..
     ## IPv4 string/integer conversion : ....
-    ## IPv4/CIDR validation : ......
+    ## IPv4/CIDR validation : .......
     ## Geolocation : ..
