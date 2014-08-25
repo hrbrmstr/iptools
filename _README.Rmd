@@ -53,6 +53,13 @@ The following data sets are included:
 - `ianarootzonetlds` - IANA Root Zone Database
 - `ianaprotocolnumbers` - IANA Protocol Numbers
 
+### News
+
+- Version `0.1.4` - added CIDR functions
+- Version `0.1.3` - added IANA TLD dataset
+- Version `0.1.2` - added IANA datasets
+- Version `0.1.1` - validation routines
+- Version `0.1.0` - initial release of Rcpp-backed IPv4 functions
 
 ### Installation
 

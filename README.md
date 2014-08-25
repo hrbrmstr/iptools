@@ -44,6 +44,14 @@ The following data sets are included:
 -   `ianarootzonetlds` - IANA Root Zone Database
 -   `ianaprotocolnumbers` - IANA Protocol Numbers
 
+### News
+
+-   Version `0.1.4` - added CIDR functions
+-   Version `0.1.3` - added IANA TLD dataset
+-   Version `0.1.2` - added IANA datasets
+-   Version `0.1.1` - validation routines
+-   Version `0.1.0` - initial release of Rcpp-backed IPv4 functions
+
 ### Installation
 
 ``` {.r}
@@ -70,19 +78,19 @@ library(iptools)
 packageVersion("iptools")
 ```
 
-    ## [1] '0.1.4'
+    ## [1] '0.1.5'
 
 ``` {.r}
 # lookup google
 gethostbyname("google.com")
 ```
 
-    ##  [1] "2607:f8b0:4006:806::1008" "74.125.226.33"           
-    ##  [3] "74.125.226.34"            "74.125.226.41"           
-    ##  [5] "74.125.226.36"            "74.125.226.39"           
-    ##  [7] "74.125.226.38"            "74.125.226.37"           
-    ##  [9] "74.125.226.46"            "74.125.226.32"           
-    ## [11] "74.125.226.35"            "74.125.226.40"
+    ##  [1] "2607:f8b0:4006:802::1009" "74.125.226.68"           
+    ##  [3] "74.125.226.65"            "74.125.226.64"           
+    ##  [5] "74.125.226.69"            "74.125.226.71"           
+    ##  [7] "74.125.226.72"            "74.125.226.73"           
+    ##  [9] "74.125.226.66"            "74.125.226.70"           
+    ## [11] "74.125.226.78"            "74.125.226.67"
 
 ``` {.r}
 # lookup apple (in reverse)
@@ -109,13 +117,13 @@ long2ip(ip2long("17.178.96.59"))
 validateIP(gethostbyname("google.com"))
 ```
 
-    ## 2607:f8b0:4006:806::1008            74.125.226.33            74.125.226.34 
+    ## 2607:f8b0:4006:802::1009            74.125.226.68            74.125.226.65 
     ##                    FALSE                     TRUE                     TRUE 
-    ##            74.125.226.41            74.125.226.36            74.125.226.39 
+    ##            74.125.226.64            74.125.226.69            74.125.226.71 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.38            74.125.226.37            74.125.226.46 
+    ##            74.125.226.72            74.125.226.73            74.125.226.66 
     ##                     TRUE                     TRUE                     TRUE 
-    ##            74.125.226.32            74.125.226.35            74.125.226.40 
+    ##            74.125.226.70            74.125.226.78            74.125.226.67 
     ##                     TRUE                     TRUE                     TRUE
 
 ``` {.r}
@@ -251,7 +259,7 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Mon Aug 25 11:11:01 2014"
+    ## [1] "Mon Aug 25 11:18:28 2014"
 
 ``` {.r}
 test_dir("tests/")
