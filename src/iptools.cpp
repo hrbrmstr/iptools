@@ -124,11 +124,6 @@ std::vector < std::string > classify_ip (std::vector < std::string > ip_addresse
   return asio_inst.classify_ip_(ip_addresses);
 }
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-
 //' IPv4 CIDR to long integer range
 //'
 //' Converts IPv4 CIDR (e.g. "192.168.1.0/24") to vector containing the minimum and maximum range integer values
