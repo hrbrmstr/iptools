@@ -58,41 +58,43 @@ ip_to_hostname <- function(ip_addresses) {
     .Call('iptools_ip_to_hostname', PACKAGE = 'iptools', ip_addresses)
 }
 
-#' @title convert a dotted-decimal IPv4 address to its numeric form.
+#' @title convert between numeric and dotted-decimal IPv4 forms.
 #' @description \code{ip_to_numeric} takes IP addresses stored
 #' in their human-readable representation ("192.168.0.1")
-#' and converts it to a numeric representation (3232235521). Due to
-#' limitations in the underlying software, and R's support for colossally
+#' and converts it to a numeric representation (3232235521).
+#' \code{numeric_to_ip} performs the same operation, but in reverse.
+#' Due to limitations in R's support for colossally
 #' big numbers, this currently only works for IPv4 IP addresses.
 #'
-#' @param ip_addresses a vector of IP addresses.
+#' @param ip_addresses a vector of IP addresses, in their numeric or dotted-decimal
+#' form.
 #'
-#' @return a vector containing the numeric representation of \code{ip_addresses}.
+#' @return For \code{ip_to_numeric}: a vector containing the numeric representation of \code{ip_addresses}.
 #' If an IP is invalid (either because it's an Ipv6 address, or isn't an IP address
 #' at all) the returned value for that IP will be -1.
+#'
+#' For \code{numeric_to_ip}: a vector containing the dotted-decimal representation of \code{ip_addresses},
+#' as character strings. If a value cannot be resolved to an IPv4 address, it will appear as an empty
+#' string.
 #'
 #' @examples
 #' #Convert your local, internal IP to its numeric representation.
 #' ip_to_numeric("192.168.0.1")
 #' #[1] 3232235521
+#'
+#' #And back
+#' numeric_to_ip(3232235521)
+#' #[1] 192.168.0.1"
+#' @rdname ip_numeric
 #' @export
 ip_to_numeric <- function(ip_addresses) {
     .Call('iptools_ip_to_numeric', PACKAGE = 'iptools', ip_addresses)
 }
 
-#' Intger IPv4 Address Conversion to Character
-#'
-#' Converts IP addresses in long integer format to character (dotted-decimal) notation
-#'
-#' @param ip input numeric (long integer) vector
-#' @return vector of equivalent character (dotted-decimal) IP addresses
-#' @examples
-#' \dontrun{
-#' long2ip(402654475)
-#' long2ip(c(402654475, 3540208992))
-#' }
-long2ip <- function(ip) {
-    .Call('iptools_long2ip', PACKAGE = 'iptools', ip)
+#' @rdname ip_numeric
+#' @export
+numeric_to_ip <- function(ip_addresses) {
+    .Call('iptools_numeric_to_ip', PACKAGE = 'iptools', ip_addresses)
 }
 
 #' IPv4 CIDR to long integer range

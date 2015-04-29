@@ -65,23 +65,34 @@ std::list < std::vector < std::string > > ip_to_hostname(std::vector < std::stri
   return dns_inst.multi_ip_to_dns(ip_addresses);
 }
 
-//' @title convert a dotted-decimal IPv4 address to its numeric form.
+//' @title convert between numeric and dotted-decimal IPv4 forms.
 //' @description \code{ip_to_numeric} takes IP addresses stored
 //' in their human-readable representation ("192.168.0.1")
-//' and converts it to a numeric representation (3232235521). Due to
-//' limitations in the underlying software, and R's support for colossally
+//' and converts it to a numeric representation (3232235521).
+//' \code{numeric_to_ip} performs the same operation, but in reverse.
+//' Due to limitations in R's support for colossally
 //' big numbers, this currently only works for IPv4 IP addresses.
 //'
-//' @param ip_addresses a vector of IP addresses.
+//' @param ip_addresses a vector of IP addresses, in their numeric or dotted-decimal
+//' form.
 //'
-//' @return a vector containing the numeric representation of \code{ip_addresses}.
+//' @return For \code{ip_to_numeric}: a vector containing the numeric representation of \code{ip_addresses}.
 //' If an IP is invalid (either because it's an Ipv6 address, or isn't an IP address
 //' at all) the returned value for that IP will be -1.
+//'
+//' For \code{numeric_to_ip}: a vector containing the dotted-decimal representation of \code{ip_addresses},
+//' as character strings. If a value cannot be resolved to an IPv4 address, it will appear as an empty
+//' string.
 //'
 //' @examples
 //' #Convert your local, internal IP to its numeric representation.
 //' ip_to_numeric("192.168.0.1")
 //' #[1] 3232235521
+//'
+//' #And back
+//' numeric_to_ip(3232235521)
+//' #[1] 192.168.0.1"
+//' @rdname ip_numeric
 //' @export
 // [[Rcpp::export]]
 std::vector < unsigned int > ip_to_numeric(std::vector < std::string > ip_addresses){
@@ -96,34 +107,26 @@ std::vector < unsigned int > ip_to_numeric(std::vector < std::string > ip_addres
       output[i] = -1;
     }
   }
+
   return output;
 }
 
-//' Intger IPv4 Address Conversion to Character
-//'
-//' Converts IP addresses in long integer format to character (dotted-decimal) notation
-//'
-//' @param ip input numeric (long integer) vector
-//' @return vector of equivalent character (dotted-decimal) IP addresses
-//' @examples
-//' \dontrun{
-//' long2ip(402654475)
-//' long2ip(c(402654475, 3540208992))
-//' }
+//' @rdname ip_numeric
+//' @export
 // [[Rcpp::export]]
-CharacterVector long2ip (NumericVector ip) {
+std::vector < std::string > numeric_to_ip (std::vector < unsigned int > ip_addresses){
+  unsigned int input_size = ip_addresses.size();
+  std::vector < std::string > output(input_size);
 
-  int ipCt = ip.size();
-
-  CharacterVector ipStr(ipCt); // allocate new character vector
-
-  // CONVERT ALL THE THINGS!
-  for (int i=0; i<ipCt; i++) {
-    ipStr[i] = boost::asio::ip::address_v4(ip[i]).to_string();
+  for(unsigned int i = 0; i < input_size; i++){
+    try{
+      output[i] = boost::asio::ip::address_v4(ip_addresses[i]).to_string();
+    } catch (...) {
+      output[i] = "";
+    }
   }
 
-  return(ipStr);
-
+  return output;
 }
 
 #include <sys/types.h>
