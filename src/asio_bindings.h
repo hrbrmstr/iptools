@@ -2,8 +2,8 @@
 #include <boost/asio.hpp>
 using namespace Rcpp;
 
-#ifndef __DNS_RESOLVE__
-#define __DNS_RESOLVE__
+#ifndef __ASIO_BINDINGS__
+#define __ASIO_BINDINGS__
 
 class asio_bindings {
 
@@ -25,6 +25,9 @@ public:
       std::vector < std::string > ip_addresses
   );
 
+  std::vector < unsigned int > ip_to_numeric_(std::vector < std::string > ip_addresses);
+
+  std::vector < std::string > numeric_to_ip_ (std::vector < unsigned int > ip_addresses);
 };
 
 #endif

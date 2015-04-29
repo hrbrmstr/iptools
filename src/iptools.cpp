@@ -96,43 +96,16 @@ std::list < std::vector < std::string > > ip_to_hostname(std::vector < std::stri
 //' @export
 // [[Rcpp::export]]
 std::vector < unsigned int > ip_to_numeric(std::vector < std::string > ip_addresses){
-
-  unsigned int input_size = ip_addresses.size();
-  std::vector < unsigned int > output(input_size);
-
-  for(unsigned int i = 0; i < input_size; i++){
-    if((i % 10000) == 0){
-      Rcpp::checkUserInterrupt();
-    }
-    try{
-      output[i] = boost::asio::ip::address_v4::from_string(ip_addresses[i]).to_ulong();
-    } catch (...) {
-      output[i] = -1;
-    }
-  }
-
-  return output;
+  asio_bindings asio_inst;
+  return asio_inst.ip_to_numeric_(ip_addresses);
 }
 
 //' @rdname ip_numeric
 //' @export
 // [[Rcpp::export]]
 std::vector < std::string > numeric_to_ip (std::vector < unsigned int > ip_addresses){
-  unsigned int input_size = ip_addresses.size();
-  std::vector < std::string > output(input_size);
-
-  for(unsigned int i = 0; i < input_size; i++){
-    if((i % 10000) == 0){
-      Rcpp::checkUserInterrupt();
-    }
-    try{
-      output[i] = boost::asio::ip::address_v4(ip_addresses[i]).to_string();
-    } catch (...) {
-      output[i] = "";
-    }
-  }
-
-  return output;
+  asio_bindings asio_inst;
+  return asio_inst.numeric_to_ip_(ip_addresses);
 }
 
 #include <sys/types.h>

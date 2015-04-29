@@ -2,8 +2,8 @@
 #include "asio_bindings.h"
 using namespace Rcpp;
 
-std::vector < std::string > dns_resolve::single_hostname_to_dns(std::string hostname,
-                                                                boost::asio::ip::tcp::resolver& resolver_ptr){
+std::vector < std::string > asio_bindings::single_hostname_to_dns(std::string hostname,
+                                                                  boost::asio::ip::tcp::resolver& resolver_ptr){
   std::vector < std::string > output;
 
   try{
@@ -23,7 +23,7 @@ std::vector < std::string > dns_resolve::single_hostname_to_dns(std::string host
   return output;
 }
 
-std::list < std::vector < std::string > >dns_resolve::multi_hostname_to_dns(std::vector < std::string > hostnames){
+std::list < std::vector < std::string > > asio_bindings::multi_hostname_to_dns(std::vector < std::string > hostnames){
 
   unsigned int in_size = hostnames.size();
   std::list < std::vector < std::string > > output;
@@ -47,7 +47,7 @@ std::list < std::vector < std::string > >dns_resolve::multi_hostname_to_dns(std:
 }
 
 
-std::vector < std::string > dns_resolve::single_ip_to_dns(std::string ip_address,
+std::vector < std::string > asio_bindings::single_ip_to_dns(std::string ip_address,
                                                           boost::asio::ip::tcp::resolver& resolver_ptr){
   std::vector < std::string > output;
   boost::asio::ip::tcp::endpoint endpoint;
@@ -67,7 +67,7 @@ std::vector < std::string > dns_resolve::single_ip_to_dns(std::string ip_address
   return output;
 }
 
-std::list < std::vector < std::string > > dns_resolve::multi_ip_to_dns(std::vector < std::string > ip_addresses){
+std::list < std::vector < std::string > > asio_bindings::multi_ip_to_dns(std::vector < std::string > ip_addresses){
 
   std::list < std::vector < std::string > > output;
   std::vector < std::string > holding;
@@ -88,5 +88,42 @@ std::list < std::vector < std::string > > dns_resolve::multi_ip_to_dns(std::vect
   } catch(...){
     throw std::range_error("Service could not be created");
   }
+  return output;
+}
+
+std::vector < unsigned int > asio_bindings::ip_to_numeric_(std::vector < std::string > ip_addresses){
+
+  unsigned int input_size = ip_addresses.size();
+  std::vector < unsigned int > output(input_size);
+
+  for(unsigned int i = 0; i < input_size; i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
+    try{
+      output[i] = boost::asio::ip::address_v4::from_string(ip_addresses[i]).to_ulong();
+    } catch (...) {
+      output[i] = -1;
+    }
+  }
+
+  return output;
+}
+
+std::vector < std::string > asio_bindings::numeric_to_ip_ (std::vector < unsigned int > ip_addresses){
+  unsigned int input_size = ip_addresses.size();
+  std::vector < std::string > output(input_size);
+
+  for(unsigned int i = 0; i < input_size; i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
+    try{
+      output[i] = boost::asio::ip::address_v4(ip_addresses[i]).to_string();
+    } catch (...) {
+      output[i] = "";
+    }
+  }
+
   return output;
 }
