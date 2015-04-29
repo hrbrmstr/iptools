@@ -5,25 +5,25 @@
 
 using namespace Rcpp;
 
-// hostname_to_dns
-std::list < std::vector < std::string > > hostname_to_dns(std::vector < std::string > hostnames);
-RcppExport SEXP iptools_hostname_to_dns(SEXP hostnamesSEXP) {
+// hostname_to_ip
+std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::string > hostnames);
+RcppExport SEXP iptools_hostname_to_ip(SEXP hostnamesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< std::vector < std::string > >::type hostnames(hostnamesSEXP);
-    __result = Rcpp::wrap(hostname_to_dns(hostnames));
+    __result = Rcpp::wrap(hostname_to_ip(hostnames));
     return __result;
 END_RCPP
 }
-// gethostbyaddr
-std::vector< std::string > gethostbyaddr(std::string ipv4);
-RcppExport SEXP iptools_gethostbyaddr(SEXP ipv4SEXP) {
+// ip_to_hostname
+std::list < std::vector < std::string > > ip_to_hostname(std::vector < std::string > ip_addresses);
+RcppExport SEXP iptools_ip_to_hostname(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::string >::type ipv4(ipv4SEXP);
-    __result = Rcpp::wrap(gethostbyaddr(ipv4));
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
+    __result = Rcpp::wrap(ip_to_hostname(ip_addresses));
     return __result;
 END_RCPP
 }

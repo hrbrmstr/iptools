@@ -4,7 +4,7 @@ using namespace Rcpp;
 
 Function message("message"); // lets us use R's message() function
 
-//' @title Return DNS A records from hostnames
+//' @title Returns the IP addresses associated with a hostname.
 //' @description takes in a vector of hostnames and returns the IP addresses from
 //' each hostname's DNS entries.
 //' for each one.
@@ -21,11 +21,11 @@ Function message("message"); // lets us use R's message() function
 //'
 //' \dontrun{
 //' # One hostname
-//' hostname_to_dns("dds.ec")
+//' hostname_to_ip("dds.ec")
 //' ## [1] "162.243.111.4"
 //'
 //' # Multiple hostnames
-//' hostname_to_dns(c("dds.ec","ironholds.org"))
+//' hostname_to_ip(c("dds.ec","ironholds.org"))
 //' #[[1]]
 //' #[1] "162.243.111.4"
 //' #[[2]]
@@ -33,61 +33,36 @@ Function message("message"); // lets us use R's message() function
 //' }
 //' @export
 //[[Rcpp::export]]
-std::list < std::vector < std::string > > hostname_to_dns(std::vector < std::string > hostnames){
+std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::string > hostnames){
   dns_resolve dns_inst;
   return dns_inst.multi_hostname_to_dns(hostnames);
 }
 
-//' Returns all \code{PTR} records associated with an IPv4 address
+//' @title Return the hostname associated with particular IP addresses
+//' @description the opposite, in some ways, of \code{\link{hostname_to_ip}},
+//' \code{ip_to_hostname} consumes a vector of IP addresses and provides a list of
+//' the hostnames that those IPs resolve to.
 //'
-//' Takes in an IPv4 address and returns all IP reverse DNS entries for it. Not vectorized.
+//' @param ip_addresses a vector of IP addresses.
 //'
-//' @param ipv4 character string (dotted-decimal) IPv4 address
-//' @return vector of hostnames (will usually be just a single host)
+//' @return a list, each entry containing a vector of hostnames for the equivalent input
+//' IP address (mostly, this will only be one hostname but not always). If the IP cannot be
+//' resolved, the list element will be the string "Invalid IP address".
+//'
+//' @seealso \code{\link{hostname_to_ip}}, for the reverse operation.
+//'
 //' @examples
 //' \dontrun{
-//' # reverse
-//' gethostbyaddr(gethostbyname("dds.ec"))
-//' ## [1] "162.243.111.4"
+//' ip_to_hostname("162.243.111.4")
+//' [[1]]
+//' [1] "dds.ec"
 //' }
+//'
+//' @export
 //[[Rcpp::export]]
-std::vector< std::string > gethostbyaddr(std::string ipv4) {
-
-  // setup storage for our return value
-
-  std::vector<std::string> hostnames;
-
-  boost::asio::ip::tcp::endpoint endpoint;
-  boost::asio::io_service io_service;
-
-  // we're dealing with network/connectivity 'stuff' + you never know
-  // when DNS queries will fail, so we need to handle exceptional cases
-
-  try {
-
-    // setup the resolver query (for PTR record)
-
-    boost::asio::ip::address_v4 ip = boost::asio::ip::address_v4::from_string(ipv4);
-    endpoint.address(ip);
-    boost::asio::ip::tcp::resolver resolver(io_service);
-
-    // prepare response iterator
-
-    boost::asio::ip::tcp::resolver::iterator destination = resolver.resolve(endpoint);
-    boost::asio::ip::tcp::resolver::iterator end;
-
-    // example of using a for-loop to iterate through possible multiple resoponses
-
-    for (int i=1; destination != end; destination++, i++) {
-       hostnames.push_back(destination->host_name());
-    }
-
-  } catch(boost::system::system_error& error) {
-    message( "Address not found" );
-  }
-
-  return(hostnames);
-
+std::list < std::vector < std::string > > ip_to_hostname(std::vector < std::string > ip_addresses){
+  dns_resolve dns_inst;
+  return dns_inst.multi_ip_to_dns(ip_addresses);
 }
 
 //' Character (dotted-decimal) IPv4 Address Conversion to long integer

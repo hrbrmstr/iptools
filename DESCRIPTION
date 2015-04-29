@@ -4,12 +4,12 @@ Title: A package to help perform various tasks with/on IPv4 addresses, CIDR
     blocks, ports + geolocation/ASN lookup
 Version: 0.1.5
 Date: 2014-08-10
-Author: Bob Rudis <bob.rudis@verizon.com>
+Author: Bob Rudis <bob.rudis@verizon.com> [aut, cre], Oliver Keyes <ironholds@gmail.com> [aut]
 Maintainer: Bob Rudis <bob.rudis@verizon.com>
 Description: This package contains various IPv4 (will eventually support IPv6)
     functions/utilities - including geolocation & ASN lookup via maxmind
     GeoLiteCity & GeoLiteASNum datbases. One goal is eventually mimic
-    functionality of the Python iptools module. The package Also includes
+    functionality of the Python iptools module. The package also includes
     useful IANA data files.
 License: GPL-2
 Suggests:

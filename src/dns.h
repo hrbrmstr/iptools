@@ -13,7 +13,7 @@ private:
 
   std::vector < std::string > single_hostname_to_dns(std::string hostname, boost::asio::ip::tcp::resolver& resolver_ptr);
 
-  std::vector < std::string > single_ip_to_dns(std::string& ip_address);
+  std::vector < std::string > single_ip_to_dns(std::string ip_address, boost::asio::ip::tcp::resolver& resolver_ptr);
 
 public:
 
@@ -22,7 +22,7 @@ public:
   );
 
   std::list < std::vector < std::string > > multi_ip_to_dns(
-      std::vector < std::string >& ip_addresses
+      std::vector < std::string > ip_addresses
   );
 
 };
