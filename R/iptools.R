@@ -9,17 +9,6 @@
 #'
 gethostsbyaddr <- Vectorize(gethostbyaddr, SIMPLIFY=FALSE)
 
-#' @title Vectorized version of \code{gethostbyname}
-#' @description Returns a list (slots are named by the input host names) with lookup results per slot
-#' @param hostname vector of host names (character - FQDN)
-#' @return list
-#' @export
-#' @examples
-#' gethostsbyname(c("google.com", "stackoverflow.com", "twitter.com", "r-bloggers.com"))
-#'
-gethostsbyname <- Vectorize(gethostbyname, SIMPLIFY=FALSE)
-
-
 #
 # non-vectorized version of validateIP
 #
