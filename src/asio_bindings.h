@@ -15,6 +15,8 @@ private:
 
   std::vector < std::string > single_ip_to_dns(std::string ip_address, boost::asio::ip::tcp::resolver& resolver_ptr);
 
+  bool single_ip_in_range(std::string ip_address, std::string range);
+
 public:
 
   std::list < std::vector < std::string > > multi_hostname_to_dns(
@@ -30,6 +32,8 @@ public:
   std::vector < std::string > numeric_to_ip_ (std::vector < unsigned int > ip_addresses);
 
   std::vector < std::string > classify_ip_ (std::vector < std::string > ip_addresses);
+
+  std::vector < bool > ip_in_range_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
 };
 
 #endif
