@@ -65,32 +65,39 @@ std::list < std::vector < std::string > > ip_to_hostname(std::vector < std::stri
   return dns_inst.multi_ip_to_dns(ip_addresses);
 }
 
-//' Character (dotted-decimal) IPv4 Address Conversion to long integer
+//' @title convert a dotted-decimal IPv4 address to its numeric form.
+//' @description \code{ip_to_numeric} takes IP addresses stored
+//' in their human-readable representation ("192.168.0.1")
+//' and converts it to a numeric representation (3232235521). Due to
+//' limitations in the underlying software, and R's support for colossally
+//' big numbers, this currently only works for IPv4 IP addresses.
 //'
-//' Convert IP addresses in character (dotted-decimal) notation to long integers
+//' @param ip_addresses a vector of IP addresses.
 //'
-//' @param ip input character vector of IPv4 addresses (dotted-decimal)
-//' @return vector of equivalent long integer IP addresses
+//' @return a vector containing the numeric representation of \code{ip_addresses}.
+//' If an IP is invalid (either because it's an Ipv6 address, or isn't an IP address
+//' at all) the returned value for that IP will be -1.
+//'
 //' @examples
-//' \dontrun{
-//' ip2long("24.0.5.11")ghb
-//' ip2long(c("24.0.5.11", "211.3.77.96"))
-//' }
+//' #Convert your local, internal IP to its numeric representation.
+//' ip_to_numeric("192.168.0.1")
+//' #[1] 3232235521
+//' @export
 // [[Rcpp::export]]
-NumericVector ip2long (CharacterVector ip) {
+std::vector < unsigned int > ip_to_numeric(std::vector < std::string > ip_addresses){
 
-  int ipCt = ip.size(); // how many elements in vector
+  unsigned int input_size = ip_addresses.size();
+  std::vector < unsigned int > output(input_size);
 
-  NumericVector ipInt(ipCt); // allocate new numeric vector
-
-  // CONVERT ALL THE THINGS!
-  for (int i=0; i<ipCt; i++) {
-    ipInt[i] = boost::asio::ip::address_v4::from_string(ip[i]).to_ulong();
+  for(unsigned int i = 0; i < input_size; i++){
+    try{
+      output[i] = boost::asio::ip::address_v4::from_string(ip_addresses[i]).to_ulong();
+    } catch (...) {
+      output[i] = -1;
+    }
   }
-
-  return(ipInt);
+  return output;
 }
-
 
 //' Intger IPv4 Address Conversion to Character
 //'

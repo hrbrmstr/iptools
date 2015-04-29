@@ -27,14 +27,14 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// ip2long
-NumericVector ip2long(CharacterVector ip);
-RcppExport SEXP iptools_ip2long(SEXP ipSEXP) {
+// ip_to_numeric
+std::vector < unsigned int > ip_to_numeric(std::vector < std::string > ip_addresses);
+RcppExport SEXP iptools_ip_to_numeric(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP);
-    __result = Rcpp::wrap(ip2long(ip));
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
+    __result = Rcpp::wrap(ip_to_numeric(ip_addresses));
     return __result;
 END_RCPP
 }

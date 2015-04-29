@@ -58,19 +58,26 @@ ip_to_hostname <- function(ip_addresses) {
     .Call('iptools_ip_to_hostname', PACKAGE = 'iptools', ip_addresses)
 }
 
-#' Character (dotted-decimal) IPv4 Address Conversion to long integer
+#' @title convert a dotted-decimal IPv4 address to its numeric form.
+#' @description \code{ip_to_numeric} takes IP addresses stored
+#' in their human-readable representation ("192.168.0.1")
+#' and converts it to a numeric representation (3232235521). Due to
+#' limitations in the underlying software, and R's support for colossally
+#' big numbers, this currently only works for IPv4 IP addresses.
 #'
-#' Convert IP addresses in character (dotted-decimal) notation to long integers
+#' @param ip_addresses a vector of IP addresses.
 #'
-#' @param ip input character vector of IPv4 addresses (dotted-decimal)
-#' @return vector of equivalent long integer IP addresses
+#' @return a vector containing the numeric representation of \code{ip_addresses}.
+#' If an IP is invalid (either because it's an Ipv6 address, or isn't an IP address
+#' at all) the returned value for that IP will be -1.
+#'
 #' @examples
-#' \dontrun{
-#' ip2long("24.0.5.11")ghb
-#' ip2long(c("24.0.5.11", "211.3.77.96"))
-#' }
-ip2long <- function(ip) {
-    .Call('iptools_ip2long', PACKAGE = 'iptools', ip)
+#' #Convert your local, internal IP to its numeric representation.
+#' ip_to_numeric("192.168.0.1")
+#' #[1] 3232235521
+#' @export
+ip_to_numeric <- function(ip_addresses) {
+    .Call('iptools_ip_to_numeric', PACKAGE = 'iptools', ip_addresses)
 }
 
 #' Intger IPv4 Address Conversion to Character
