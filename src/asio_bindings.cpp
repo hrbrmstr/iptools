@@ -152,3 +152,31 @@ std::vector < std::string > asio_bindings::classify_ip_ (std::vector < std::stri
   }
   return ip_addresses;
 }
+
+std::vector < bool > asio_bindings::ip_in_range_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges){
+
+  if(ip_addresses.size() != ranges.size() || ranges.size() != 1){
+    throw std::range_error("You must provide either one range, or a vector of ranges the same size as the IP addresses");
+  }
+
+  unsigned int input_size = ip_addresses.size();
+  std::vector < bool > output(input_size);
+
+  if(ranges.size() == 1){
+    for(unsigned int i = 0; i < input_size; i++){
+      if((i % 10000) == 0){
+        Rcpp::checkUserInterrupt();
+      }
+      output[i] = single_ip_in_range(ip_addresses[i], ranges[0]);
+    }
+  } else {
+    for(unsigned int i = 0; i < input_size; i++){
+      if((i % 10000) == 0){
+        Rcpp::checkUserInterrupt();
+      }
+      output[i] = single_ip_in_range(ip_addresses[i], ranges[i]);
+    }
+  }
+
+  return output;
+}
