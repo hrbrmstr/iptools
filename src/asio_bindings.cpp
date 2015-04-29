@@ -67,11 +67,28 @@ std::vector < std::string > asio_bindings::single_ip_to_dns(std::string ip_addre
   return output;
 }
 
+bool single_ip_in_range(std::string ip_address, std::string range){
+
+  bool output;
+  unsigned int first_ip, second_ip;
+  std::string range_hold;
+  size_t range_find;
+
+  range_find = range.find("/");
+  if(range_find == std::string::npos){
+    return output;
+  } else {
+    range_hold = range.substr(range_find);
+    range = range.substr(0, (range.size() - range_find));
+  }
+
+  return output;
+}
+
 std::list < std::vector < std::string > > asio_bindings::multi_ip_to_dns(std::vector < std::string > ip_addresses){
 
   std::list < std::vector < std::string > > output;
   std::vector < std::string > holding;
-
   try{
 
     boost::asio::ip::tcp::resolver dns_resolver(io_service);
