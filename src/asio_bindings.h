@@ -28,6 +28,8 @@ public:
   std::vector < unsigned int > ip_to_numeric_(std::vector < std::string > ip_addresses);
 
   std::vector < std::string > numeric_to_ip_ (std::vector < unsigned int > ip_addresses);
+
+  std::vector < std::string > classify_ip_ (std::vector < std::string > ip_addresses);
 };
 
 #endif

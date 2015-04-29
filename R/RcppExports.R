@@ -97,6 +97,20 @@ numeric_to_ip <- function(ip_addresses) {
     .Call('iptools_numeric_to_ip', PACKAGE = 'iptools', ip_addresses)
 }
 
+#'@title Identify whether an IP address is IPv4 or IPv6
+#'@description Identify the form (IPv4 or IPv6) of a vector
+#'of IP addresses. This can also be used to validate IPs.
+#'
+#'@param ip_addresses a vector of IPv4 or IPv6 IP addresses.
+#'
+#'@return a vector containing the class of each input IP address; either
+#'"IPv4", "IPv6" or, for IP addresses that were not valid, "Invalid".
+#'
+#'@export
+classify_ip <- function(ip_addresses) {
+    .Call('iptools_classify_ip', PACKAGE = 'iptools', ip_addresses)
+}
+
 #' IPv4 CIDR to long integer range
 #'
 #' Converts IPv4 CIDR (e.g. "192.168.1.0/24") to vector containing the minimum and maximum range integer values

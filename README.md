@@ -1,7 +1,13 @@
-`iptools` is a set of tools for a working with IPv4 addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
+Tools for working with IP addresses
+=============
 
-The package also uses the v1 [GeoLite](http://dev.maxmind.com/geoip/legacy/geolite/) MaxMind library to perform basic geolocation of a given IPv4 address. You must manually install both the maxmind library (`brew install geoip` on OS X, `sudo apt-get install libgeoip-dev` on Ubuntu) and the `GeoLiteCity.dat` <http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz> & `GeoLiteASNum.dat` <http://geolite.maxmind.com/download/geoip/database/GeoLiteASNum.dat.gz> files for the geolocation/ASN functions to work. If there's interest in porting to the newer library/GeoLite2 format, I'll consider updating the package.
+`iptools` is a set of tools for a working with IPv4 addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries, which can be achieved by installing the `BH` R package from CRAN. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
+Installation
+=============
+
+Features
+=============
 The following functions are implemented:
 
 *Revolver-ish*

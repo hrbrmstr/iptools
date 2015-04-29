@@ -108,6 +108,22 @@ std::vector < std::string > numeric_to_ip (std::vector < unsigned int > ip_addre
   return asio_inst.numeric_to_ip_(ip_addresses);
 }
 
+//'@title Identify whether an IP address is IPv4 or IPv6
+//'@description Identify the form (IPv4 or IPv6) of a vector
+//'of IP addresses. This can also be used to validate IPs.
+//'
+//'@param ip_addresses a vector of IPv4 or IPv6 IP addresses.
+//'
+//'@return a vector containing the class of each input IP address; either
+//'"IPv4", "IPv6" or, for IP addresses that were not valid, "Invalid".
+//'
+//'@export
+//[[Rcpp::export]]
+std::vector < std::string > classify_ip (std::vector < std::string > ip_addresses){
+  asio_bindings asio_inst;
+  return asio_inst.classify_ip_(ip_addresses);
+}
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>

@@ -1,27 +1,5 @@
 
 #
-# non-vectorized version of validateIP
-#
-.validateIP <- function(ip) {
-
-  res <- regexpr('^(((2(5[0-5]|[0-4][0-9])|[01]?[0-9][0-9]?)\\.){3}(2(5[0-5]|[0-4][0-9])|[01]?[0-9][0-9]?))$', ip)
-  return(min(res) > 0)
-
-}
-
-#' @title Validate IPv4 addresses in dotted-decimal notation
-#' @description Input addresses are considered valid if they consist of 1-4 octets separated by periods
-#' @param ip vector of IPv4 address (character - dotted-decimal)
-#' @return named logical vector
-#' @export
-#' @examples
-#' validateIP("127.0.0.1")
-#' validateIP("127.0")
-#' validateIP(c("127.0.0.1", "255.255.255.255", "500.1.1.1", "30.2.2"))
-#'
-validateIP <- Vectorize(.validateIP)
-
-#
 # non-vectorized version of validateCIDR
 #
 .validateCIDR <- function(cidr) {

@@ -127,3 +127,28 @@ std::vector < std::string > asio_bindings::numeric_to_ip_ (std::vector < unsigne
 
   return output;
 }
+
+std::vector < std::string > asio_bindings::classify_ip_ (std::vector < std::string > ip_addresses){
+  unsigned int input_size = ip_addresses.size();
+  boost::asio::ip::address holding;
+
+  for(unsigned int i = 0; i < input_size; i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
+    try{
+      holding = boost::asio::ip::address::from_string(ip_addresses[i]);
+      if(holding.is_v4()){
+        ip_addresses[i] = "IPv4";
+      } else if(holding.is_v6()){
+        ip_addresses[i] = "IPv6";
+      } else {
+        ip_addresses[i] = "Invalid";
+      }
+    } catch(...){
+      ip_addresses[i] = "Invalid";
+    }
+
+  }
+  return ip_addresses;
+}
