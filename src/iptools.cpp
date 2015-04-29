@@ -1,5 +1,5 @@
 #include <Rcpp.h>
-#include "dns.h"
+#include "asio_bindings.h"
 using namespace Rcpp;
 
 Function message("message"); // lets us use R's message() function
@@ -34,8 +34,8 @@ Function message("message"); // lets us use R's message() function
 //' @export
 //[[Rcpp::export]]
 std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::string > hostnames){
-  dns_resolve dns_inst;
-  return dns_inst.multi_hostname_to_dns(hostnames);
+  asio_bindings asio_inst;
+  return asio_inst.multi_hostname_to_dns(hostnames);
 }
 
 //' @title Return the hostname associated with particular IP addresses
@@ -61,8 +61,8 @@ std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::stri
 //' @export
 //[[Rcpp::export]]
 std::list < std::vector < std::string > > ip_to_hostname(std::vector < std::string > ip_addresses){
-  dns_resolve dns_inst;
-  return dns_inst.multi_ip_to_dns(ip_addresses);
+  asio_bindings asio_inst;
+  return asio_inst.multi_ip_to_dns(ip_addresses);
 }
 
 //' @title convert between numeric and dotted-decimal IPv4 forms.

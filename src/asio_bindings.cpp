@@ -1,5 +1,5 @@
 #include <Rcpp.h>
-#include "dns.h"
+#include "asio_bindings.h"
 using namespace Rcpp;
 
 std::vector < std::string > dns_resolve::single_hostname_to_dns(std::string hostname,

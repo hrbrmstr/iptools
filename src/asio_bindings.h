@@ -5,7 +5,7 @@ using namespace Rcpp;
 #ifndef __DNS_RESOLVE__
 #define __DNS_RESOLVE__
 
-class dns_resolve {
+class asio_bindings {
 
 private:
 
