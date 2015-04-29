@@ -5,151 +5,70 @@
 
 using namespace Rcpp;
 
-// gethostbyname
-std::vector< std::string > gethostbyname(std::string hostname);
-RcppExport SEXP iptools_gethostbyname(SEXP hostnameSEXP) {
+// hostname_to_dns
+std::list < std::vector < std::string > > hostname_to_dns(std::vector < std::string > hostnames);
+RcppExport SEXP iptools_hostname_to_dns(SEXP hostnamesSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::string >::type hostname(hostnameSEXP );
-        std::vector< std::string > __result = gethostbyname(hostname);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type hostnames(hostnamesSEXP);
+    __result = Rcpp::wrap(hostname_to_dns(hostnames));
+    return __result;
 END_RCPP
 }
 // gethostbyaddr
 std::vector< std::string > gethostbyaddr(std::string ipv4);
 RcppExport SEXP iptools_gethostbyaddr(SEXP ipv4SEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::string >::type ipv4(ipv4SEXP );
-        std::vector< std::string > __result = gethostbyaddr(ipv4);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::string >::type ipv4(ipv4SEXP);
+    __result = Rcpp::wrap(gethostbyaddr(ipv4));
+    return __result;
 END_RCPP
 }
 // ip2long
 NumericVector ip2long(CharacterVector ip);
 RcppExport SEXP iptools_ip2long(SEXP ipSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP );
-        NumericVector __result = ip2long(ip);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP);
+    __result = Rcpp::wrap(ip2long(ip));
+    return __result;
 END_RCPP
 }
 // long2ip
 CharacterVector long2ip(NumericVector ip);
 RcppExport SEXP iptools_long2ip(SEXP ipSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< NumericVector >::type ip(ipSEXP );
-        CharacterVector __result = long2ip(ip);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type ip(ipSEXP);
+    __result = Rcpp::wrap(long2ip(ip));
+    return __result;
 END_RCPP
 }
 // cidr_range
 NumericVector cidr_range(std::string cidr);
 RcppExport SEXP iptools_cidr_range(SEXP cidrSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::string >::type cidr(cidrSEXP );
-        NumericVector __result = cidr_range(cidr);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::string >::type cidr(cidrSEXP);
+    __result = Rcpp::wrap(cidr_range(cidr));
+    return __result;
 END_RCPP
 }
 // ip_in_cidr
 LogicalVector ip_in_cidr(CharacterVector ip, std::string cidr);
 RcppExport SEXP iptools_ip_in_cidr(SEXP ipSEXP, SEXP cidrSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP );
-        Rcpp::traits::input_parameter< std::string >::type cidr(cidrSEXP );
-        LogicalVector __result = ip_in_cidr(ip, cidr);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
-// maxmindinit
-void maxmindinit(std::string citydata = "/usr/local/share/GeoIP/GeoLiteCity.dat", std::string asndata = "/usr/local/share/GeoIP/GeoIPASNum.dat");
-RcppExport SEXP iptools_maxmindinit(SEXP citydataSEXP, SEXP asndataSEXP) {
-BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::string >::type citydata(citydataSEXP );
-        Rcpp::traits::input_parameter< std::string >::type asndata(asndataSEXP );
-        maxmindinit(citydata, asndata);
-    }
-    return R_NilValue;
-END_RCPP
-}
-// geoip
-DataFrame geoip(CharacterVector ip, bool showMessages = false);
-RcppExport SEXP iptools_geoip(SEXP ipSEXP, SEXP showMessagesSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP );
-        Rcpp::traits::input_parameter< bool >::type showMessages(showMessagesSEXP );
-        DataFrame __result = geoip(ip, showMessages);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
-// asnip
-DataFrame asnip(CharacterVector ip, bool includeAS = true, bool showMessages = false);
-RcppExport SEXP iptools_asnip(SEXP ipSEXP, SEXP includeASSEXP, SEXP showMessagesSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP );
-        Rcpp::traits::input_parameter< bool >::type includeAS(includeASSEXP );
-        Rcpp::traits::input_parameter< bool >::type showMessages(showMessagesSEXP );
-        DataFrame __result = asnip(ip, includeAS, showMessages);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
-// geoCleanup
-void geoCleanup();
-RcppExport SEXP iptools_geoCleanup() {
-BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        geoCleanup();
-    }
-    return R_NilValue;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP);
+    Rcpp::traits::input_parameter< std::string >::type cidr(cidrSEXP);
+    __result = Rcpp::wrap(ip_in_cidr(ip, cidr));
+    return __result;
 END_RCPP
 }

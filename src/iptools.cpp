@@ -1,70 +1,41 @@
 #include <Rcpp.h>
-#include <boost/asio.hpp>
-
+#include "dns.h"
 using namespace Rcpp;
 
 Function message("message"); // lets us use R's message() function
 
-//' Returns all \code{A} records associated with a hostname
+//' @title Return DNS A records from hostnames
+//' @description takes in a vector of hostnames and returns the IP addresses from
+//' each hostname's DNS entries.
+//' for each one.
 //'
+//' @param hostnames a vector of hostnames.
+//'
+//' @return a list the length of \code{hostnames}, containing the IP addresses from
+//' each hostname's DNS entries. In the event that a hostname cannot be resolved,
+//' the list element will consist of a length-1 character vector containing
+//' "Not resolved".
+//'
+//' @examples
 //' Takes in a hostname and returns all IP DNS entries for it. Not vectorized.
 //'
-//' @param hostname character string of host to lookup
-//' @return vector IP addresses
-//' @examples
 //' \dontrun{
-//' # forward
-//' gethostbyname("dds.ec")
+//' # One hostname
+//' hostname_to_dns("dds.ec")
 //' ## [1] "162.243.111.4"
 //'
-//' # multiple return values
-//' gethostbyname("google.com")
-//' ##  [1] "2607:f8b0:4006:806::100e" "74.125.226.14"
-//' ##  [3] "74.125.226.8"             "74.125.226.3"
-//' ##  [5] "74.125.226.6"             "74.125.226.4"
-//' ##  [7] "74.125.226.9"             "74.125.226.0"
-//' ##  [9] "74.125.226.2"             "74.125.226.1"
-//' ## [11] "74.125.226.5"             "74.125.226.7"
+//' # Multiple hostnames
+//' hostname_to_dns(c("dds.ec","ironholds.org"))
+//' #[[1]]
+//' #[1] "162.243.111.4"
+//' #[[2]]
+//' #[1] "104.131.2.226"
 //' }
+//' @export
 //[[Rcpp::export]]
-std::vector< std::string > gethostbyname(std::string hostname) {
-
-  // setup storage for our return value
-
-  std::vector<std::string> addresses;
-
-  boost::asio::io_service io_service;
-
-  // we're dealing with network/connectivity 'stuff' + you never know
-  // when DNS queries will fail, so we need to handle exceptional cases
-
-  try {
-
-    // setup the resolver query
-
-    boost::asio::ip::tcp::resolver resolver(io_service);
-    boost::asio::ip::tcp::resolver::query query(hostname, "");
-
-    // prepare response iterator
-
-    boost::asio::ip::tcp::resolver::iterator destination = resolver.resolve(query);
-    boost::asio::ip::tcp::resolver::iterator end;
-    boost::asio::ip::tcp::endpoint endpoint;
-
-    // example of using a c-ish while loop to iterate through possible multiple resoponses
-
-    while (destination != end) {
-      endpoint = *destination++;
-      addresses.push_back(endpoint.address().to_string());
-
-    }
-
-  } catch(boost::system::system_error& error) {
-    message( "Hostname not found" );
-  }
-
-  return(addresses);
-
+std::list < std::vector < std::string > > hostname_to_dns(std::vector < std::string > hostnames){
+  dns_resolve dns_inst;
+  return dns_inst.multi_hostname_to_dns(hostnames);
 }
 
 //' Returns all \code{PTR} records associated with an IPv4 address

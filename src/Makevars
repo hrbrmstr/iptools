@@ -1,1 +1,1 @@
-PKG_LIBS = -lboost_system -lboost_regex -lgeoip
+PKG_LIBS = -lboost_system -lboost_regex
