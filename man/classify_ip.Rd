@@ -17,4 +17,22 @@ a vector containing the class of each input IP address; either
 Identify the form (IPv4 or IPv6) of a vector
 of IP addresses. This can also be used to validate IPs.
 }
+\examples{
+#IPv4
+classify_ip("173.194.123.100")
+[1] "IPv4"
+
+#IPv6
+classify_ip("2607:f8b0:4006:80b::1004")
+[1] "IPv6"
+
+#Invalid
+classify_ip("East Coast Twitter is Best Twitter")
+[1] "Invalid"
+}
+\seealso{
+\code{\link{ip_to_hostname}} for resolving IP addresses to their
+hostnames, and \code{\link{ip_to_numeric}} for converting (IPv4) IP addresses
+to their numeric representation.
+}
 

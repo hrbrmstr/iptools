@@ -76,7 +76,7 @@ std::list < std::vector < std::string > > ip_to_hostname(std::vector < std::stri
 //' big numbers, this currently only works for IPv4 IP addresses.
 //'
 //' @param ip_addresses a vector of IP addresses, in their numeric or dotted-decimal
-//' form.
+//' form depending on the function.
 //'
 //' @return For \code{ip_to_numeric}: a vector containing the numeric representation of \code{ip_addresses}.
 //' If an IP is invalid (either because it's an Ipv6 address, or isn't an IP address
@@ -119,9 +119,27 @@ std::vector < std::string > numeric_to_ip (std::vector < unsigned int > ip_addre
 //'@return a vector containing the class of each input IP address; either
 //'"IPv4", "IPv6" or, for IP addresses that were not valid, "Invalid".
 //'
+//'@seealso \code{\link{ip_to_hostname}} for resolving IP addresses to their
+//'hostnames, and \code{\link{ip_to_numeric}} for converting (IPv4) IP addresses
+//'to their numeric representation.
+//'
+//'@examples
+//'
+//'#IPv4
+//'classify_ip("173.194.123.100")
+//'[1] "IPv4"
+//'
+//'#IPv6
+//'classify_ip("2607:f8b0:4006:80b::1004")
+//'[1] "IPv6"
+//'
+//'#Invalid
+//'classify_ip("East Coast Twitter is Best Twitter")
+//'[1] "Invalid"
+//'
 //'@export
 //[[Rcpp::export]]
-std::vector < std::string > classify_ip (std::vector < std::string > ip_addresses){
+std::vector < std::string > classify_ip(std::vector < std::string > ip_addresses){
   asio_bindings asio_inst;
   return asio_inst.classify_ip_(ip_addresses);
 }

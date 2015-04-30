@@ -11,7 +11,7 @@ numeric_to_ip(ip_addresses)
 }
 \arguments{
 \item{ip_addresses}{a vector of IP addresses, in their numeric or dotted-decimal
-form.}
+form depending on the function.}
 }
 \value{
 For \code{ip_to_numeric}: a vector containing the numeric representation of \code{ip_addresses}.
