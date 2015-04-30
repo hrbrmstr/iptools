@@ -52,4 +52,9 @@ test_that("range_boundaries error handlers function",{
   expect_that(is.list(result), equals(TRUE))
   expect_that(length(result), equals(1))
   expect_that(unlist(result), equals(c("Invalid","Invalid")))
+
+  result <- range_boundaries("fdsdfdsfsdfsfd/12")
+  expect_that(is.list(result), equals(TRUE))
+  expect_that(length(result), equals(1))
+  expect_that(unlist(result), equals(c("Invalid","Invalid")))
 })
