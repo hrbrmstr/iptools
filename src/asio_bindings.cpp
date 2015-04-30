@@ -247,6 +247,9 @@ std::list < std::vector < std::string > > asio_bindings::calculate_range_(std::v
   std::list < std::vector < std::string > > output;
 
   for(unsigned int i = 0; i < ranges.size(); i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
     output.push_back(calculate_ip_range(ranges[i]));
   }
   return output;
