@@ -17,7 +17,8 @@ resolved, the list element will be the string "Invalid IP address".
 \description{
 the opposite, in some ways, of \code{\link{hostname_to_ip}},
 \code{ip_to_hostname} consumes a vector of IP addresses and provides a list of
-the hostnames that those IPs resolve to.
+the hostnames that those IPs resolve to. Compatible with both IPv4 and
+IPv6 addresses.
 }
 \examples{
 \dontrun{

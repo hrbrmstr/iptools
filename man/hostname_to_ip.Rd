@@ -17,12 +17,9 @@ the list element will consist of a length-1 character vector containing
 }
 \description{
 takes in a vector of hostnames and returns the IP addresses from
-each hostname's DNS entries.
-for each one.
+each hostname's DNS entries. Compatible with both IPv4 and IPv6 addresses.
 }
 \examples{
-Takes in a hostname and returns all IP DNS entries for it. Not vectorized.
-
 \dontrun{
 # One hostname
 hostname_to_ip("dds.ec")
@@ -35,5 +32,11 @@ hostname_to_ip(c("dds.ec","ironholds.org"))
 #[[2]]
 #[1] "104.131.2.226"
 }
+}
+\seealso{
+\code{ip_to_hostname} for the opposite functionality - resolving
+IP addresses to their associated hostname(s) - and \code{\link{ip_to_numeric}}
+for converting IP addresses retrieved from \code{hostname_to_ip} into their
+numeric representation.
 }
 

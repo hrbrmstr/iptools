@@ -2,12 +2,9 @@
 #include "asio_bindings.h"
 using namespace Rcpp;
 
-Function message("message"); // lets us use R's message() function
-
 //' @title Returns the IP addresses associated with a hostname.
 //' @description takes in a vector of hostnames and returns the IP addresses from
-//' each hostname's DNS entries.
-//' for each one.
+//' each hostname's DNS entries. Compatible with both IPv4 and IPv6 addresses.
 //'
 //' @param hostnames a vector of hostnames.
 //'
@@ -16,8 +13,12 @@ Function message("message"); // lets us use R's message() function
 //' the list element will consist of a length-1 character vector containing
 //' "Not resolved".
 //'
+//' @seealso \code{ip_to_hostname} for the opposite functionality - resolving
+//' IP addresses to their associated hostname(s) - and \code{\link{ip_to_numeric}}
+//' for converting IP addresses retrieved from \code{hostname_to_ip} into their
+//' numeric representation.
+//'
 //' @examples
-//' Takes in a hostname and returns all IP DNS entries for it. Not vectorized.
 //'
 //' \dontrun{
 //' # One hostname
@@ -41,7 +42,8 @@ std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::stri
 //' @title Return the hostname associated with particular IP addresses
 //' @description the opposite, in some ways, of \code{\link{hostname_to_ip}},
 //' \code{ip_to_hostname} consumes a vector of IP addresses and provides a list of
-//' the hostnames that those IPs resolve to.
+//' the hostnames that those IPs resolve to. Compatible with both IPv4 and
+//' IPv6 addresses.
 //'
 //' @param ip_addresses a vector of IP addresses.
 //'
