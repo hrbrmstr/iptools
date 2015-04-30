@@ -1,15 +1,5 @@
 context("Host/IPv4 resolution")
 
-test_that("we can resolve IPv4 addresses from hostnames", {
-
-  # success
-  expect_that(gethostbyname("dds.ec"), equals("162.243.111.4"))
-
-  # not found
-  expect_that(gethostbyname("f0011"), equals(character(0)))
-
-})
-
 context("IPv4/CIDR validation")
 
 test_that("we can perform IPv4/CIDR validation", {
