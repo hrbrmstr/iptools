@@ -22,7 +22,15 @@ test_that("ip_in_range works with multiple IP values and multiple range values",
 })
 
 test_that("ip_in_range error handlers function",{
+  result <- ip_in_range("asdasdas12","aaaah")
+  expect_that(is.vector(result, "logical"), equals(TRUE))
+  expect_that(length(result), equals(1))
+  expect_that(result, equals(TRUE))
 
+  result <- ip_in_range("dfndsfkdsfsd","afddas/12")
+  expect_that(is.vector(result, "logical"), equals(TRUE))
+  expect_that(length(result), equals(1))
+  expect_that(result, equals(TRUE))
 })
 
 test_that("range_boundaries works with single values", {
@@ -37,4 +45,11 @@ test_that("range_boundaries works with multiple values", {
   expect_that(is.list(result), equals(TRUE))
   expect_that(length(result), equals(2))
   expect_that(unlist(result), equals(c("172.18.0.0","172.31.255.255","172.18.0.0","172.31.255.255")))
+})
+
+test_that("range_boundaries error handlers function",{
+  result <- range_boundaries("fdsdfdsfsdfsfd")
+  expect_that(is.list(result), equals(TRUE))
+  expect_that(length(result), equals(1))
+  expect_that(unlist(result), equals(c("Invalid","Invalid")))
 })

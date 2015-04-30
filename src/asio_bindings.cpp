@@ -83,12 +83,19 @@ bool asio_bindings::single_ip_in_range(std::string ip_address, std::string range
   }
 
   *slash_pos++ = '\0';
-  slash_val = atoi(slash_pos);
-  first_ip = boost::asio::ip::address_v4::from_string(std::string(range_copy)).to_ulong();
-  unsigned int mask = ~(0xffffffff >> slash_val);
-  unsigned int cidr_int = first_ip & mask ;
 
-  output = ((boost::asio::ip::address_v4::from_string(ip_address).to_ulong() & mask) == cidr_int);
+  try{
+
+    slash_val = atoi(slash_pos);
+    first_ip = boost::asio::ip::address_v4::from_string(std::string(range_copy)).to_ulong();
+    unsigned int mask = ~(0xffffffff >> slash_val);
+    unsigned int cidr_int = first_ip & mask ;
+
+    output = ((boost::asio::ip::address_v4::from_string(ip_address).to_ulong() & mask) == cidr_int);
+
+  } catch(...){
+    output = false;
+  }
 
   return output;
 }
