@@ -25,12 +25,12 @@ test_that("ip_in_range error handlers function",{
   result <- ip_in_range("asdasdas12","aaaah")
   expect_that(is.vector(result, "logical"), equals(TRUE))
   expect_that(length(result), equals(1))
-  expect_that(result, equals(TRUE))
+  expect_that(result, equals(FALSE))
 
   result <- ip_in_range("dfndsfkdsfsd","afddas/12")
   expect_that(is.vector(result, "logical"), equals(TRUE))
   expect_that(length(result), equals(1))
-  expect_that(result, equals(TRUE))
+  expect_that(result, equals(FALSE))
 })
 
 test_that("range_boundaries works with single values", {

@@ -172,7 +172,7 @@ std::vector < unsigned int > asio_bindings::ip_to_numeric_(std::vector < std::st
     try{
       output[i] = boost::asio::ip::address_v4::from_string(ip_addresses[i]).to_ulong();
     } catch (...) {
-      output[i] = -1;
+      output[i] = 0;
     }
   }
 

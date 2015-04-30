@@ -75,11 +75,11 @@ ip_to_hostname <- function(ip_addresses) {
 #'
 #' @return For \code{ip_to_numeric}: a vector containing the numeric representation of \code{ip_addresses}.
 #' If an IP is invalid (either because it's an Ipv6 address, or isn't an IP address
-#' at all) the returned value for that IP will be -1.
+#' at all) the returned value for that IP will be 0.
 #'
 #' For \code{numeric_to_ip}: a vector containing the dotted-decimal representation of \code{ip_addresses},
-#' as character strings. If a value cannot be resolved to an IPv4 address, it will appear as an empty
-#' string.
+#' as character strings. If a value cannot be resolved to an IPv4 address, it will appear as "0.0.0.0" or
+#' an empty string.
 #'
 #' @examples
 #' #Convert your local, internal IP to its numeric representation.
