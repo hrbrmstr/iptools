@@ -124,71 +124,32 @@ std::vector < std::string > classify_ip (std::vector < std::string > ip_addresse
   return asio_inst.classify_ip_(ip_addresses);
 }
 
-//' IPv4 CIDR to long integer range
+//' @title calculate the maximum and minimum IPs in an IP range
+//' @description when provided with a vector of IP ranges
+//' ("172.18.0.0/28"), \code{range_boundaries} calculates the
+//' maximum and minimum IP addresses in that range.
 //'
-//' Converts IPv4 CIDR (e.g. "192.168.1.0/24") to vector containing the minimum and maximum range integer values
+//' @param ranges a vector of IP ranges. Currently only IPv4 ranges
+//' work.
 //'
-//' @param cidr IPv4 CIDR (str) dotted-decimal-slash-integer
-//' @return vector containing the minimum and maximum range integer values or \code{c(NA,NA)}
+//' @return a list of character vectors, each one consisting of the maximum
+//' and minimum IPs within the equivalent range.
+//'
 //' @examples
-//' \dontrun{
-//' long2ip(cidr_range("192.168.1.0/24"))
-//' ## [1] "192.168.1.0"   "192.168.1.255"
+//' range_boundaries("172.18.0.0/28")
+//' # [[1]]
+//' # [1] "172.18.0.0"  "172.18.0.15"
 //'
-//' long2ip(cidr_range("8.0.0.0/8"))
-//' ## [1] "8.0.0.0"       "8.255.255.255"
+//' @seealso \code{\link{ip_in_range}} to calculate if an IP address
+//' falls within a particular range, or \code{\link{ip_to_numeric}} to
+//' convert the dotted-decimal notation of returned IP addresses to their
+//' numeric representation.
 //'
-//' cr <- cidr_range("172.18.0.0/28")
-//' sapply(cr[1]:cr[2], long2ip)
-//' ##  [1] "172.18.0.0"  "172.18.0.1"  "172.18.0.2"  "172.18.0.3"
-//' ##  [5] "172.18.0.4"  "172.18.0.5"  "172.18.0.6"  "172.18.0.7"
-//' ##  [9] "172.18.0.8"  "172.18.0.9"  "172.18.0.10" "172.18.0.11"
-//' ## [13] "172.18.0.12" "172.18.0.13" "172.18.0.14" "172.18.0.15"
-//' }
+//' @export
 // [[Rcpp::export]]
-NumericVector cidr_range(std::string cidr) {
-
-  unsigned int first_ip, last_ip;
-  int slash_val;
-  char cidr_copy[24];
-  char *slash_pos;
-
-  // no asio functions to help us here, so might as well turn to
-  // raw C code for what we need
-
-  strncpy(cidr_copy, cidr.c_str(), 24); // safe copy
-
-  slash_pos = strchr(cidr_copy, '/'); // find the "/"
-
-  // no "/" == not a valid CIDR
-  if (NULL == slash_pos) { return NumericVector::create(NA_REAL, NA_REAL); }
-
-  // replace "/" with string termination and advance the pointer to
-  // the CIDR component
-
-  *slash_pos++ = '\0';
-
-  slash_val = atoi(slash_pos); // convert the CIDR mask to an integer
-
-  // convert presentation to network format
-  // if it fails, it's not a valid IPv4 address
-
-  if (1 != inet_pton(AF_INET, cidr_copy, &first_ip)) {
-    return NumericVector::create(NA_REAL, NA_REAL);
-  }
-
-  first_ip = ntohl(first_ip); // network byte order to host byte order
-
-  unsigned int mask = ~0;
-
-  if (slash_val < 32)  {
-    last_ip = first_ip | (mask >> slash_val);
-  } else { // special case where CIDR mask was 32 (a single IPv4)
-    last_ip = first_ip;
-  }
-
-  return NumericVector::create(first_ip, last_ip);
-
+std::list < std::vector < std::string > > range_boundaries(std::vector < std::string > ranges){
+  asio_bindings asio_inst;
+  return asio_inst.calculate_range_(ranges);
 }
 
 //'@title check if IP addresses fall within particular IP ranges

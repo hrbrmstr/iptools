@@ -60,14 +60,14 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// cidr_range
-NumericVector cidr_range(std::string cidr);
-RcppExport SEXP iptools_cidr_range(SEXP cidrSEXP) {
+// range_boundaries
+std::list < std::vector < std::string > > range_boundaries(std::vector < std::string > ranges);
+RcppExport SEXP iptools_range_boundaries(SEXP rangesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::string >::type cidr(cidrSEXP);
-    __result = Rcpp::wrap(cidr_range(cidr));
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ranges(rangesSEXP);
+    __result = Rcpp::wrap(range_boundaries(ranges));
     return __result;
 END_RCPP
 }

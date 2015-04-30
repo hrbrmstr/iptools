@@ -67,6 +67,20 @@ private:
    */
   bool single_ip_in_range(std::string ip_address, std::string range);
 
+  /**
+   * A function for identifying the minimum and maximum values
+   * of a given IP range
+   *
+   * @param range an IP range.
+   *
+   * @see ip_in_range_ for the vectorised version
+   *
+   * @return a string vector of length 2 containing the
+   * maxima and minima for that IP range, or c("Invalid",
+   * "Invalid") if the range is, well, invalid.
+   */
+  std::vector < std::string > calculate_ip_range(std::string range);
+
 public:
 
   /**
@@ -159,6 +173,8 @@ public:
    * in range) for each IP.
    */
   std::vector < bool > ip_in_range_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
+
+  std::list < std::vector < std::string > > calculate_range_(std::vector < std::string > ranges);
 };
 
 #endif

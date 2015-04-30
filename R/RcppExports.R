@@ -111,29 +111,30 @@ classify_ip <- function(ip_addresses) {
     .Call('iptools_classify_ip', PACKAGE = 'iptools', ip_addresses)
 }
 
-#' IPv4 CIDR to long integer range
+#' @title calculate the maximum and minimum IPs in an IP range
+#' @description when provided with a vector of IP ranges
+#' ("172.18.0.0/28"), \code{range_boundaries} calculates the
+#' maximum and minimum IP addresses in that range.
 #'
-#' Converts IPv4 CIDR (e.g. "192.168.1.0/24") to vector containing the minimum and maximum range integer values
+#' @param ranges a vector of IP ranges. Currently only IPv4 ranges
+#' work.
 #'
-#' @param cidr IPv4 CIDR (str) dotted-decimal-slash-integer
-#' @return vector containing the minimum and maximum range integer values or \code{c(NA,NA)}
+#' @return a list of character vectors, each one consisting of the maximum
+#' and minimum IPs within the equivalent range.
+#'
 #' @examples
-#' \dontrun{
-#' long2ip(cidr_range("192.168.1.0/24"))
-#' ## [1] "192.168.1.0"   "192.168.1.255"
+#' range_boundaries("172.18.0.0/28")
+#' # [[1]]
+#' # [1] "172.18.0.0"  "172.18.0.15"
 #'
-#' long2ip(cidr_range("8.0.0.0/8"))
-#' ## [1] "8.0.0.0"       "8.255.255.255"
+#' @seealso \code{\link{ip_in_range}} to calculate if an IP address
+#' falls within a particular range, or \code{\link{ip_to_numeric}} to
+#' convert the dotted-decimal notation of returned IP addresses to their
+#' numeric representation.
 #'
-#' cr <- cidr_range("172.18.0.0/28")
-#' sapply(cr[1]:cr[2], long2ip)
-#' ##  [1] "172.18.0.0"  "172.18.0.1"  "172.18.0.2"  "172.18.0.3"
-#' ##  [5] "172.18.0.4"  "172.18.0.5"  "172.18.0.6"  "172.18.0.7"
-#' ##  [9] "172.18.0.8"  "172.18.0.9"  "172.18.0.10" "172.18.0.11"
-#' ## [13] "172.18.0.12" "172.18.0.13" "172.18.0.14" "172.18.0.15"
-#' }
-cidr_range <- function(cidr) {
-    .Call('iptools_cidr_range', PACKAGE = 'iptools', cidr)
+#' @export
+range_boundaries <- function(ranges) {
+    .Call('iptools_range_boundaries', PACKAGE = 'iptools', ranges)
 }
 
 #'@title check if IP addresses fall within particular IP ranges

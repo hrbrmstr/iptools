@@ -93,6 +93,43 @@ bool asio_bindings::single_ip_in_range(std::string ip_address, std::string range
   return output;
 }
 
+std::vector < std::string > asio_bindings::calculate_ip_range(std::string range){
+
+  unsigned int first_ip, last_ip;
+  int slash_val;
+  char cidr_copy[24];
+  char *slash_pos;
+  std::vector < std::string > output;
+
+  strncpy(cidr_copy, range.c_str(), 24);
+  slash_pos = strchr(cidr_copy, '/');
+  if (slash_pos == NULL){
+    output.push_back("Invalid");
+    output.push_back("Invalid");
+  } else {
+    *slash_pos++ = '\0';
+    slash_val = atoi(slash_pos);
+
+    if (1 != inet_pton(AF_INET, cidr_copy, &first_ip)) {
+      output.push_back("Invalid");
+      output.push_back("Invalid");
+    } else {
+      first_ip = ntohl(first_ip);
+      unsigned int mask = ~0;
+
+      if (slash_val < 32)  {
+        last_ip = first_ip | (mask >> slash_val);
+      } else { // special case where CIDR mask was 32 (a single IPv4)
+        last_ip = first_ip;
+      }
+      output.push_back(boost::asio::ip::address_v4(first_ip).to_string());
+      output.push_back(boost::asio::ip::address_v4(last_ip).to_string());
+    }
+  }
+
+  return output;
+}
+
 std::list < std::vector < std::string > > asio_bindings::multi_ip_to_dns(std::vector < std::string > ip_addresses){
 
   std::list < std::vector < std::string > > output;
@@ -203,5 +240,14 @@ std::vector < bool > asio_bindings::ip_in_range_(std::vector < std::string > ip_
     }
   }
 
+  return output;
+}
+
+std::list < std::vector < std::string > > asio_bindings::calculate_range_(std::vector < std::string > ranges){
+  std::list < std::vector < std::string > > output;
+
+  for(unsigned int i = 0; i < ranges.size(); i++){
+    output.push_back(calculate_ip_range(ranges[i]));
+  }
   return output;
 }
