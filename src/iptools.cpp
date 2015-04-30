@@ -191,61 +191,25 @@ NumericVector cidr_range(std::string cidr) {
 
 }
 
-
-//' Test if IPv4 addresses are in a CIDR block
+//'@title check if IP addresses fall within particular IP ranges
+//'@description \code{ip_in_range} checks whether a vector of IP
+//'addresses fall within particular IP range(s).
 //'
-//' Takes a vector of character IPv4 addresses and a character CIDR and
-//' returs a logical vector indicating whether an IP address falls within
-//' the specified CIDR
+//'@param ip_addresses a vector of IP addresses
 //'
-//' @param ip character vector of IPv4 addresses
-//' @param cidr atomic character vector (IPv4 CIDR spec)
-//' @return logical vector of equivalent character (dotted-decimal) IP addresses
-//' @examples
-//' \dontrun{
-//' table(ip_in_cidr(cidr_ips("192.168.0.0/23"), "192.168.1.0/24"))
+//'@param ranges either a vector of ranges equal in length
+//'to \code{ip_addresses}, or a single range. If the former,
+//'\code{ip_in_range} will compare each IP to the
+//'equivalent range. If the latter, each IP will be
+//'compared to the single range provided.
 //'
-//' ## FALSE  TRUE
-//' ##  256   256
-//' }
-// [[Rcpp::export]]
-LogicalVector ip_in_cidr(CharacterVector ip, std::string cidr) {
-
-  unsigned int first_ip;
-  int slash_val;
-  char cidr_copy[24];
-  char *slash_pos;
-
-  int ipCt = ip.size();
-
-  // no asio functions to help us here, so might as well turn to
-  // raw C code for what we need
-
-  strncpy(cidr_copy, cidr.c_str(), 24); // safe copy
-
-  slash_pos = strchr(cidr_copy, '/'); // find the "/"
-
-  // no "/" == not a valid CIDR
-  if (NULL == slash_pos) { message("NULL") ; return LogicalVector(ipCt, false); }
-
-  // replace "/" with string termination and advance the pointer to
-  // the CIDR component
-
-  *slash_pos++ = '\0';
-
-  slash_val = atoi(slash_pos); // convert the CIDR mask to an integer
-
-  first_ip = boost::asio::ip::address_v4::from_string(std::string(cidr_copy)).to_ulong();
-
-  unsigned int mask = ~(0xffffffff >> slash_val);
-  unsigned int cidr_int = first_ip & mask ;
-
-  LogicalVector bv = LogicalVector(ipCt) ;
-
-  for (int i=0; i<ipCt; i++) {
-    bv[i] = (boost::asio::ip::address_v4::from_string(ip[i]).to_ulong() & mask) == cidr_int;
-  }
-
-  return(bv) ;
-
+//'@return a logical vector, where TRUE indicates the relevant
+//'IP is in the range, and FALSE indicates that the IP
+//'is not in the range, or is an invalid IP address.
+//'
+//'@export
+//[[Rcpp::export]]
+std::vector < bool > ip_in_range(std::vector < std::string > ip_addresses, std::vector < std::string > ranges){
+  asio_bindings asio_inst;
+  return asio_inst.ip_in_range_(ip_addresses, ranges);
 }

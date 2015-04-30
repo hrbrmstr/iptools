@@ -67,20 +67,28 @@ std::vector < std::string > asio_bindings::single_ip_to_dns(std::string ip_addre
   return output;
 }
 
-bool single_ip_in_range(std::string ip_address, std::string range){
+bool asio_bindings::single_ip_in_range(std::string ip_address, std::string range){
 
+  unsigned int first_ip;
+  int slash_val;
+  char range_copy[24];
+  char *slash_pos;
   bool output;
-  unsigned int first_ip, second_ip;
-  std::string range_hold;
-  size_t range_find;
 
-  range_find = range.find("/");
-  if(range_find == std::string::npos){
+  strncpy(range_copy, range.c_str(), 24); // safe copy
+  slash_pos = strchr(range_copy, '/'); // find the "/"
+
+  if(slash_pos == NULL){
     return output;
-  } else {
-    range_hold = range.substr(range_find);
-    range = range.substr(0, (range.size() - range_find));
   }
+
+  *slash_pos++ = '\0';
+  slash_val = atoi(slash_pos);
+  first_ip = boost::asio::ip::address_v4::from_string(std::string(range_copy)).to_ulong();
+  unsigned int mask = ~(0xffffffff >> slash_val);
+  unsigned int cidr_int = first_ip & mask ;
+
+  output = ((boost::asio::ip::address_v4::from_string(ip_address).to_ulong() & mask) == cidr_int);
 
   return output;
 }

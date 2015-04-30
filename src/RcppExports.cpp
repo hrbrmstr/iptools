@@ -71,15 +71,15 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// ip_in_cidr
-LogicalVector ip_in_cidr(CharacterVector ip, std::string cidr);
-RcppExport SEXP iptools_ip_in_cidr(SEXP ipSEXP, SEXP cidrSEXP) {
+// ip_in_range
+std::vector < bool > ip_in_range(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
+RcppExport SEXP iptools_ip_in_range(SEXP ip_addressesSEXP, SEXP rangesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP);
-    Rcpp::traits::input_parameter< std::string >::type cidr(cidrSEXP);
-    __result = Rcpp::wrap(ip_in_cidr(ip, cidr));
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ranges(rangesSEXP);
+    __result = Rcpp::wrap(ip_in_range(ip_addresses, ranges));
     return __result;
 END_RCPP
 }

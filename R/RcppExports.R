@@ -136,23 +136,24 @@ cidr_range <- function(cidr) {
     .Call('iptools_cidr_range', PACKAGE = 'iptools', cidr)
 }
 
-#' Test if IPv4 addresses are in a CIDR block
+#'@title check if IP addresses fall within particular IP ranges
+#'@description \code{ip_in_range} checks whether a vector of IP
+#'addresses fall within particular IP range(s).
 #'
-#' Takes a vector of character IPv4 addresses and a character CIDR and
-#' returs a logical vector indicating whether an IP address falls within
-#' the specified CIDR
+#'@param ip_addresses a vector of IP addresses
 #'
-#' @param ip character vector of IPv4 addresses
-#' @param cidr atomic character vector (IPv4 CIDR spec)
-#' @return logical vector of equivalent character (dotted-decimal) IP addresses
-#' @examples
-#' \dontrun{
-#' table(ip_in_cidr(cidr_ips("192.168.0.0/23"), "192.168.1.0/24"))
+#'@param ranges either a vector of ranges equal in length
+#'to \code{ip_addresses}, or a single range. If the former,
+#'\code{ip_in_range} will compare each IP to the
+#'equivalent range. If the latter, each IP will be
+#'compared to the single range provided.
 #'
-#' ## FALSE  TRUE
-#' ##  256   256
-#' }
-ip_in_cidr <- function(ip, cidr) {
-    .Call('iptools_ip_in_cidr', PACKAGE = 'iptools', ip, cidr)
+#'@return a logical vector, where TRUE indicates the relevant
+#'IP is in the range, and FALSE indicates that the IP
+#'is not in the range, or is an invalid IP address.
+#'
+#'@export
+ip_in_range <- function(ip_addresses, ranges) {
+    .Call('iptools_ip_in_range', PACKAGE = 'iptools', ip_addresses, ranges)
 }
 
