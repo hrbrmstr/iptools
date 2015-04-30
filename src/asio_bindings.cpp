@@ -217,7 +217,7 @@ std::vector < std::string > asio_bindings::classify_ip_ (std::vector < std::stri
 
 std::vector < bool > asio_bindings::ip_in_range_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges){
 
-  if(ip_addresses.size() != ranges.size() || ranges.size() != 1){
+  if(ip_addresses.size() != ranges.size() && ranges.size() != 1){
     throw std::range_error("You must provide either one range, or a vector of ranges the same size as the IP addresses");
   }
 
