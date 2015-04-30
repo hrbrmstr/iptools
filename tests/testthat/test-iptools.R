@@ -10,25 +10,6 @@ test_that("we can resolve IPv4 addresses from hostnames", {
 
 })
 
-context("IPv4 string/integer conversion")
-
-test_that("we can perform IPv4 address string/integer conversions", {
-
-  # success
-  expect_that(long2ip(402654475), equals("24.0.5.11"))
-
-  # multiple
-  expect_that(long2ip(c(402654475, 3540208992)), equals(c("24.0.5.11", "211.3.77.96")))
-
-  # success
-  expect_that(ip2long("24.0.5.11"), equals(402654475))
-
-  # multiple
-  expect_that(ip2long(c("24.0.5.11", "211.3.77.96")), equals(c(402654475, 3540208992)))
-
-})
-
-
 context("IPv4/CIDR validation")
 
 test_that("we can perform IPv4/CIDR validation", {
