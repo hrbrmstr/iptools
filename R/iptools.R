@@ -21,16 +21,6 @@
 #'
 validateCIDR <- Vectorize(.validateCIDR)
 
-#
-# non-vectorized version of validateIP
-#
-.validateIP <- function(ip) {
-
-  res <- regexpr('^(((2(5[0-5]|[0-4][0-9])|[01]?[0-9][0-9]?)\\.){3}(2(5[0-5]|[0-4][0-9])|[01]?[0-9][0-9]?))$', ip)
-  return(min(res) > 0)
-
-}
-
 #' @title Converts an IPv4 CIDR (e.g. "192.168.1.0/24") to a vector of individual IPv4 addresses
 #' @description Returns a character vector of IPv4 addresses within the specified CIDR
 #' @param cidr (chr) IPv4 CIDR
