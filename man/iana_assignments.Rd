@@ -9,7 +9,7 @@
 data(iana_assignments)
 }
 \description{
-This datasets contains the registry of address space assignments
+This dataset contains the registry of address space assignments
 for IPv4 IP addresses, as set by IANA. It consists of a data.frame containing the columns:
 
 \itemize{

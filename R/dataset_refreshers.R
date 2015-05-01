@@ -10,10 +10,20 @@
 #'
 #'@examples
 #'\dontrun{
+#'
 #'#update iana_assignments
+#'
 #'iana_assignments_refresh()
 #'#[1] TRUE
+#'
+#'#update iana_special_assignments
+#'
+#'iana_special_assignments_refresh()
+#'#[1] TRUE
 #'}
+#'
+#'@rdname iptools_refresh
+#'@export
 iana_assignments_refresh <- function(){
 
   #Read in and basic-clean
@@ -34,8 +44,29 @@ iana_assignments_refresh <- function(){
   return(TRUE)
 }
 
+#'@rdname iptools_refresh
+#'@export
 iana_special_assignments_refresh <- function(){
-  connection <- url("http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.csv")
+  special_gsub <- function(x){
+    gsub(x = x, pattern = "\\[.*\\]", replacement = "")
+  }
+
+  #Read in
+  connection <- url("http://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry-1.csv")
   data <- read.csv(connection, as.is = TRUE)
+  names(data) <- c("address_block","name","rfc","allocation_date","termination_date","source",
+                   "destination","forwardable","global","reserved_by_protocol")
+  data <- data[,!names(data) == c("termination_date")]
+
+  #Reformat
+  data$address_block <- special_gsub(data$address_block)
+  data$source <- as.logical(special_gsub(data$source))
+  data$destination <- as.logical(special_gsub(data$destination))
+  data$forwardable <- as.logical(special_gsub(data$forwardable))
+  data$global <- as.logical(special_gsub(data$global))
+  data$reserved_by_protocol <- as.logical(special_gsub(data$reserved_by_protocol))
+  iana_special_assignments <- data
+  save(iana_special_assignments, file = system.file("data/iana_special_assignments.rda", package = "iptools"))
+  return(TRUE)
 }
 

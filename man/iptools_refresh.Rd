@@ -2,9 +2,12 @@
 % Please edit documentation in R/dataset_refreshers.R
 \name{iana_assignments_refresh}
 \alias{iana_assignments_refresh}
+\alias{iana_special_assignments_refresh}
 \title{Refresh iptools Internal Datasets}
 \usage{
 iana_assignments_refresh()
+
+iana_special_assignments_refresh()
 }
 \description{
 \code{iptools} contains a variety of internal datasets.
@@ -15,8 +18,15 @@ which dataset is updated by which function.
 }
 \examples{
 \dontrun{
+
 #update iana_assignments
+
 iana_assignments_refresh()
+#[1] TRUE
+
+#update iana_special_assignments
+
+iana_special_assignments_refresh()
 #[1] TRUE
 }
 }

@@ -1,5 +1,5 @@
 #' @title IANA IPv4 Address Space Registry
-#' @description This datasets contains the registry of address space assignments
+#' @description This dataset contains the registry of address space assignments
 #' for IPv4 IP addresses, as set by IANA. It consists of a data.frame containing the columns:
 #'
 #' \itemize{
@@ -32,26 +32,39 @@
 NULL
 
 #' @title IANA IPv4 Special-Purpose Address Registry
-#' @description IANA IPv4 Special-Purpose Address Registry
+#' @description This dataset contains the registry of special address space assignments
+#' for IPv4 IP addresses, as set by IANA. It consists of a data.frame containing the columns:
 #' \itemize{
-#'   \item \code{Address.Block}. full IPv4 CIDR prefix representation (chr) (e.g. "11.0.0.0/8")
-#'   \item \code{Name}. descriptive name for the special-purpose address block (chr)
-#'   \item \code{RFC}. RFC through which the special-purpose address block was requested (chr)
-#'   \item \code{Allocation.Date}. date upon which the special-purpose address block was allocated (chr)
-#'   \item \code{Source}. whether an address from the allocated special-purpose address block is valid when used as the source address of an IP datagram that transits two devices (logi)
-#'   \item \code{Destination}. whether an address from the allocated special-purpose address block is valid when used as the destination address of an IP datagram that transits two devices (logi)
-#'   \item \code{Forwardable}. whether a router may forward an IP datagram whose destination address is drawn from the allocated special-purpose address block between external interfaces (logi)
-#'   \item \code{Global}. whether an IP datagram whose destination address is drawn from the allocated special-purpose address block is forwardable beyond a specified administrative domain (logi)
-#'   \item \code{Reserved.by.Protocol}. whether the special-purpose address block is reserved by IP, itself.  This value is \code{TRUE} if the RFC that created the special-purpose address block requires all compliant IP implementations to behave in a special way when processing packets either to or from addresses contained by the address block (logi)
+#'   \item \code{address_block}: the full IPv4 range (chr) (e.g. "11.0.0.0/8")
+#'   \item \code{name}: the descriptive name for the special-purpose address block
+#'   \item \code{rfc}: the Request for Comment (RfC) through which the special-purpose address block was requested
+#'   \item \code{allocation_date}: the allocation date of the block, stored as YYYY-MM.
+#'   \item \code{source}: whether an address from the allocated special-purpose address block is valid
+#'   when used as the source address of an IP datagram that transits two devices (\code{TRUE}) or not (\code{FALSE}).
+#'   \item \code{destination}: whether an address from the allocated special-purpose address block is valid when
+#'   used as the destination address of an IP datagram that transits two devices (\code{TRUE}) or not (\code{FALSE}).
+#'   \item \code{forwardable}: whether a router may forward an IP datagram whose destination address is drawn from the
+#'   allocated special-purpose address block between external interfaces (\code{TRUE}) or not (\code{FALSE}).
+#'   \item \code{global}: whether an IP datagram whose destination address is drawn from the allocated special-purpose
+#'   address block is forwardable beyond a specified administrative domain (\code{TRUE}) or not (\code{FALSE}).
+#'   \item \code{reserved_by_protocol}. whether the special-purpose address block is reserved by IP, itself.
+#'   This value is \code{TRUE} if the RFC that created the special-purpose address block requires all compliant IP
+#'   implementations to behave in a special way when processing packets either to or from addresses contained by
+#'   the address block, and \code{FALSE} otherwise.
 #' }
 #'
 #' @docType data
 #' @keywords datasets
-#' @name ianaipv4spar
-#' @seealso \itemize{
-#'   \item IANA - \url{http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}
-#'   \item RFC5376 - \url{http://tools.ietf.org/html/rfc5376},
-#'   \item RFC6890 - \url{http://tools.ietf.org/html/rfc6890},
+#' @name iana_special_assignments
+#'
+#' @seealso \code{\link{iana_special_assignments_refresh}} to refresh this dataset,
+#' and \code{\link{iana_assignments}} for a dataset covering general (non-special) IPv4 assignments.
+#'
+#' @references \itemize{
+#'   \item The \href{http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{
+#'   IANA page} on specially assigned blocks.
+#'   \item \href{http://tools.ietf.org/html/rfc5376}{RFC5376}
+#'   \item \href{http://tools.ietf.org/html/rfc6890}{RFC6890}
 #' }
 #' @usage data(ianaipv4spar)
 #' @note Last updated 2014-08-07
