@@ -73,13 +73,27 @@ private:
    *
    * @param range an IP range.
    *
-   * @see ip_in_range_ for the vectorised version
+   * @see calculate_range_ for the vectorised version
    *
    * @return a string vector of length 2 containing the
    * maxima and minima for that IP range, or c("Invalid",
    * "Invalid") if the range is, well, invalid.
    */
   std::vector < std::string > calculate_ip_range(std::string range);
+
+  /**
+   * A function for identifying whether a given string is
+   * a valid IPv4 CIDR range
+   *
+   * @param range an IP range.
+   *
+   * @see validate_range_ for the vectorised version
+   *
+   * @return a boolean true or false, where true is
+   * "this is a CIDR range" and false is "this isn't,
+   * or isn't a valid IP at all"
+   */
+  bool validate_single_range(std::string range);
 
 public:
 
@@ -174,7 +188,32 @@ public:
    */
   std::vector < bool > ip_in_range_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
 
+  /**
+   * A vectorised version of calculate_ip_range
+   *
+   * @param ranges a vector of CIDR ranges
+   *
+   * @see calculate_ip_range for the non-vectorised
+   * version.
+   *
+   * @return a list of vectors, each vector containing
+   * the minimum and maximum IPs in a given range, in
+   * dotted-decimal notation.
+   */
   std::list < std::vector < std::string > > calculate_range_(std::vector < std::string > ranges);
+
+  /**
+   * A vectorised version of validate_single_range
+   *
+   * @param ranges a vector of IP ranges.
+   *
+   * @see validate_range_ for the vectorised version
+   *
+   * @return a vector of boolean true or falses, where true is
+   * "this is a CIDR range" and false is "this isn't,
+   * or isn't a valid IP at all"
+   */
+  std::vector < bool > validate_range_(std::vector < std::string > ranges);
 };
 
 #endif

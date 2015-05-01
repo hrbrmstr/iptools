@@ -180,3 +180,27 @@ ip_in_range <- function(ip_addresses, ranges) {
     .Call('iptools_ip_in_range', PACKAGE = 'iptools', ip_addresses, ranges)
 }
 
+#'@title check whether IPv4 ranges are valid
+#'@description \code{validate_range} checks whether
+#'a vector of IPv4 CIDR ranges ("127.0.0.1/32") are valid or not.
+#'
+#'@param ranges a vector of IPv4 ranges
+#'
+#'@return a logical vector, where TRUE indicates that the
+#'provided entry is valid, and FALSE that it is not (or
+#'isn't an IP range at all)
+#'
+#'@seealso \code{\link{classify_ip}} for classifying
+#'(and, incidentally, validating) IPv4 and IPv6 addresses.
+#'
+#'@examples
+#'validate_range("127.0.0.1/32")
+#'#[1] TRUE
+#'validate_range("127.0.0.1/33")
+#'#[1] FALSE
+#'
+#' @export
+validate_range <- function(ranges) {
+    .Call('iptools_validate_range', PACKAGE = 'iptools', ranges)
+}
+

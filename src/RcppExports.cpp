@@ -83,3 +83,14 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// validate_range
+std::vector < bool > validate_range(std::vector < std::string > ranges);
+RcppExport SEXP iptools_validate_range(SEXP rangesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ranges(rangesSEXP);
+    __result = Rcpp::wrap(validate_range(ranges));
+    return __result;
+END_RCPP
+}

@@ -137,6 +137,35 @@ std::vector < std::string > asio_bindings::calculate_ip_range(std::string range)
   return output;
 }
 
+bool asio_bindings::validate_single_range(std::string range){
+  bool output = false;
+  size_t slash_loc = range.find("/");
+  std::string holding;
+  long int range_val;
+  boost::asio::ip::address converted_ip;
+
+  if(slash_loc == std::string::npos){
+    return output;
+  }
+  holding = range.substr(slash_loc+1);
+  range = range.substr(0,slash_loc);
+
+  try{
+
+    converted_ip = boost::asio::ip::address::from_string(range);
+    if(!converted_ip.is_v4()){
+      return output;
+    }
+    range_val = atoi(holding.c_str());
+    if(range_val >= 1 && range_val <= 32){
+      output = true;
+    }
+  } catch(...){
+    return output;
+  }
+
+  return output;
+}
 std::list < std::vector < std::string > > asio_bindings::multi_ip_to_dns(std::vector < std::string > ip_addresses){
 
   std::list < std::vector < std::string > > output;
@@ -258,6 +287,20 @@ std::list < std::vector < std::string > > asio_bindings::calculate_range_(std::v
       Rcpp::checkUserInterrupt();
     }
     output.push_back(calculate_ip_range(ranges[i]));
+  }
+  return output;
+}
+
+std::vector < bool > asio_bindings::validate_range_(std::vector < std::string > ranges){
+
+  unsigned int input_size = ranges.size();
+  std::vector < bool > output(input_size);
+
+  for(unsigned int i = 0; i < ranges.size(); i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
+    output[i] = validate_single_range(ranges[i]);
   }
   return output;
 }
