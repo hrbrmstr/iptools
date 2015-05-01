@@ -1,22 +1,33 @@
 #' @title IANA IPv4 Address Space Registry
-#' @description IANA IPv4 Address Space Registry
+#' @description This datasets contains the registry of address space assignments
+#' for IPv4 IP addresses, as set by IANA. It consists of a data.frame containing the columns:
+#'
 #' \itemize{
-#'   \item \code{Prefix}. A block of IPv4 (CIDR notation) addresses that has been registered for a special purpose. (chr) (e.g. "100.64.0.0/10")
-#'   \item \code{Designation}. entity the block is assigned to (chr)
-#'   \item \code{Date}. assignment date (chr)
-#'   \item \code{Whois}. whois registry (chr) [\code{whois.afrinic.net}|\code{whois.apnic.net}|\code{whois.arin.net}|\code{whois.lacnic.net}|\code{whois.ripe.net}]
-#'   \item \code{Status}. status of the assignment (chr) [\code{ALLOCATED}|\code{LEGACY}|\code{RESERVED}]
+#'   \item \code{prefix}: A block of IPv4 (CIDR notation) addresses that has been registered
+#'   for a particular purpose (e.g. "100.64.0.0/10")
+#'   \item \code{designation}: The entity the block is assigned to.
+#'   \item \code{date}: the assignment date of the block, stored as YYYY-MM.
+#'   \item \code{whois}: whois registry [\code{whois.afrinic.net}|\code{whois.apnic.net}|\code{whois.arin.net}|\code{whois.lacnic.net}|\code{whois.ripe.net}]
+#'   \item \code{status}: status of the assignment [\code{ALLOCATED}|\code{LEGACY}|\code{RESERVED}]
 #' }
 #'
 #' @docType data
 #' @keywords datasets
-#' @name ianaipv4assignments
-#' @seealso \itemize{
-#'   \item IANA - \url{http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}
-#'   \item RFC1466 - \url{http://tools.ietf.org/html/rfc1466},
+#' @name iana_assignments
+#'
+#' @seealso \code{\link{iana_assignment_refresh}} for updating the dataset, and
+#' \code{\link{iana_special_assignments}} for particular, special IPv4 assignments.
+#'
+#' @references
+#'
+#' \itemize{
+#'   \item The \href{http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{
+#'   IANA page} on the IPv4 assignments.
+#'   \item \href{http://tools.ietf.org/html/rfc1466}{RFC1466}.
+#'
 #' }
-#' @usage data(ianaipv4assignments)
-#' @note Last updated 2014-08-07
+#' @usage data(iana_assignments)
+#' @note Last updated 2015-05-01.
 #' @format A data frame with 256 rows and 5 variables
 NULL
 
