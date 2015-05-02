@@ -3,6 +3,7 @@
 export(classify_ip)
 export(hostname_to_ip)
 export(iana_assignments_refresh)
+export(iana_ports_refresh)
 export(iana_special_assignments_refresh)
 export(ip_in_range)
 export(ip_to_hostname)

@@ -2,12 +2,15 @@
 % Please edit documentation in R/dataset_refreshers.R
 \name{iana_assignments_refresh}
 \alias{iana_assignments_refresh}
+\alias{iana_ports_refresh}
 \alias{iana_special_assignments_refresh}
 \title{Refresh iptools Internal Datasets}
 \usage{
 iana_assignments_refresh()
 
 iana_special_assignments_refresh()
+
+iana_ports_refresh()
 }
 \description{
 \code{iptools} contains a variety of internal datasets.

@@ -70,3 +70,19 @@ iana_special_assignments_refresh <- function(){
   return(TRUE)
 }
 
+#'@rdname iptools_refresh
+#'@export
+iana_ports_refresh <- function(){
+  connection <- url("http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv")
+  data <- read.csv(connection, as.is = TRUE)
+  names(data) <- c("service_name","port_number","transport_protocol", "description", "assignee", "contact",
+                   "registration_date","modification_date","reference","service_code","known_unauthorised_uses",
+                   "assignment_notes")
+  data$assignee <- gsub(x = data$assignee, pattern = "(\\[|\\]|)", replacement = "")
+  data$assignee <- gsub(x = data$assignee, pattern = "_", replacement = " ")
+  data$contact <- gsub(x = data$contact, pattern = "(\\[|\\]|)", replacement = "")
+  data$contact <- gsub(x = data$contact, pattern = "_", replacement = " ")
+  iana_ports <- data
+  save(iana_ports, file = system.file("data/iana_ports.rda", package = "iptools"))
+  return(TRUE)
+}
