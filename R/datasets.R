@@ -96,7 +96,7 @@ NULL
 #'
 #' @docType data
 #' @keywords datasets
-#' @name ianaports
+#' @name iana_ports
 #'
 #' @references
 #' \itemize{
