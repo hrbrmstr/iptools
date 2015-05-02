@@ -13,7 +13,16 @@ The `iptools` package contains various datasets to aid users in handling IP addr
 
 ### Available datasets
 
-Three primary datasets are available, all sourced from the [IANA](http://www.iana.org/). These...
+Three primary datasets are available, all sourced from the [IANA](http://www.iana.org/). These, cover, respectively, the IPv4 address
+space assignments, the IPv4 special-purpose address assignments, and the assignments for port numbers and services.
+
+The IPv4 address space assignments (`iana_assignments`) is the registry of what chunks of the IPv4 space have been reserved,
+who by, and for what purpose. The IPv4 special-purpose assignments (`iana\_special\_assignments`) are those sub-units of the IPv4
+space that have been reserved for specific, special purposes - an example is `192.0.2.0/24`, a range for documentation purposes. The port registry (`iana_ports`) contains the ports that are reserved, and what services they are reserved for - a canonical example is port 80,
+which is registered for something called "World Wide Web HTTP" by a "Tim Berners Lee".
+
+Each dataset can be accessed with `data(dataset_name)`, which makes it available to the user, and consists of a data.frame. See
+the documentation on individual datasets (e.g. `?iana_assignments`) for more details.
 
 ### Refreshing datasets
 
