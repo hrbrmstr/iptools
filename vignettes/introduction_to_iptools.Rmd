@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Introduction to iptools"
+author: "Oliver Keyes"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,50 +9,45 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+## IP handling, conversion and validation
+`iptools` is a package to make IP addresses convenient to deal with, parse and validate. It is heavily influenced by the Python [iptools](https://python-iptools.readthedocs.org/en/latest/) module, and will hopefully make users' lives a heck of a lot easier
+if they have to deal with IP data. Much of it is currently IPv4-specific, out of necessity, but as R's support for bigger numbers
+increases, we'll hopefully make as much of it support IPv6 as possible!
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
+### Validating, converting and classifying IP addresses
 
-## Vignette Info
+How do you know an IP address is an IP address? How do you know what *type* of IP address it is? Most of the time the answer is
+a complicated regular expression, made more complicated by the need to check for things that are syntactically valid IP addresses,
+but aren't actually possible. `iptools` contains `ip_classify`, which accepts a vector of IP addresses (or things that might be
+IP addresses) and identifies whether they're valid - and if they are valid, what type they are.
+
+```{r eval=FALSE}
+ips <- c("192.168.0.1","2607:f8b0:4006:80b::aaa","the next IP is also invalid","256.256.190.900")
+ip_classify(ips)
+[1] "IPv4"    "IPv6"    "Invalid" "Invalid"
+```
+
+Once you've validated and classified the IPs, you might want to look at them in their numeric form, rather than the
+"dotted-decimal" form - or you might have numeric forms, and need dotted-decimal. Either way, there's a function for it.
+
+```{r eval=FALSE}
+#Dotted-decimal to numeric
+ips <- c("192.168.0.1","172.18.0.0","172.18.0.15")
+numeric_ips <- ip_to_numeric(ips)
+numeric_ips
+[1] 3232235521 2886860800 2886860815
+
+#And back again
+numeric_to_ip(numeric_ips)
+[1] "192.168.0.1" "172.18.0.0"  "172.18.0.15"
+```
+
+These functions only currently work for IPv4 IPs - we'll have IPv6 support as soon as R can support numbers that big!
+
+### Resolving hostnames
+
+### Handling IP ranges
 
 Note the various macros within the `vignette` setion of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
 
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+### Generating elements
