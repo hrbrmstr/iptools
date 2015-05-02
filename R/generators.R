@@ -10,13 +10,14 @@
 #'in their dotted-decimal form.
 #'
 #'@seealso \code{\link{ip_to_numeric}} for converting \code{random_ips}'
-#'output to its numeric form.
+#'output to its numeric form, and \code{\link{range_generate}} for
+#'generating all IP addresses within a specific range.
 #'
 #'@examples
-#'random_ips(1)
+#'ip_random(1)
 #'#[1] "49.20.57.31"
 #'@export
-random_ips <- function(n){
+ip_random <- function(n){
   numeric_to_ip(runif(n, 16777216, 2130706431))
 }
 
@@ -35,10 +36,10 @@ random_ips <- function(n){
 #'output to its numeric form.
 #'
 #'@examples
-#'generate_range("172.18.0.0/28")
+#'range_generate("172.18.0.0/28")
 #'#[1]  "172.18.0.0"  "172.18.0.1"  "172.18.0.2"  "172.18.0.3"  "172.18.0.4"  "172.18.0.5"  "172.18.0.6"  "172.18.0.7"  "172.18.0.8"
 #'#[10] "172.18.0.9"  "172.18.0.10" "172.18.0.11" "172.18.0.12" "172.18.0.13" "172.18.0.14" "172.18.0.15"
-generate_range <- function(range){
+range_generate <- function(range){
   boundaries <- unlist(range_boundaries(range))
   if(!boundaries[1] == "Invalid"){
     ips <- numeric_to_ip(seq(from = ip_to_numeric(boundaries[1]),
