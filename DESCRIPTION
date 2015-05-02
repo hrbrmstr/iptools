@@ -15,6 +15,5 @@ License: GPL-2
 Suggests:
     testthat
 Imports:
-    Rcpp (>= 0.11.2),
-    tldextract
+    Rcpp (>= 0.11.2)
 LinkingTo: BH, Rcpp

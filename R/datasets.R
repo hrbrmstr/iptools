@@ -72,31 +72,40 @@ NULL
 NULL
 
 #' @title IANA Service Name and Transport Protocol Port Number Registry
-#' @description IANA Service Name and Transport Protocol Port Number Registry
+#' @description This is the dataset of IANA service names and their assigned
+#' ports and transport protocols - along with related metadata.
+#'
 #' \itemize{
-#'   \item \code{Service.Name}. service name for the port assignment (chr)
-#'   \item \code{Port.Number}. port(s) assigned (chr) - can be a range (e.g. 6629-6630)
-#'   \item \code{Transport.Protocol}. transport protocol(s) of the port assignment (chr) - [\code{dccp}|\code{sctp}|\code{tcp}|\code{udp}]
-#'   \item \code{Description}. explanation of the port assignment (chr)
-#'   \item \code{Assignee}. Name and email address of the party to whom the assignment is made (chr)
-#'   \item \code{Contact}. Name and email address of the Contact person for the assignment (chr)
-#'   \item \code{Registration.Date}. date the port was registered (chr)
-#'   \item \code{Modification.Date}. date of any modification to record (chr)
-#'   \item \code{Reference}. A description of (or a reference to a document describing) the protocol or application using this port (chr)
-#'   \item \code{Known.Unauthorized.Uses}. A list of uses by applications or organizations who are not the Assignee (chr)
-#'   \item \code{Assignment.Notes}. Indications of owner/name change, or any other assignment process issue. (chr)
+#'   \item \code{service_name}: The service name for the port assignment
+#'   \item \code{port_number}: The ports assigned to that service. This can be individual ports, or a range.
+#'   \item \code{transport_protocol}: The transport protocol(s) of the port assignment -
+#'   [\code{dccp}|\code{sctp}|\code{tcp}|\code{udp}]
+#'   \item \code{description}: An explanation of the port assignment
+#'   \item \code{assignee}: the name of the individual or organisation to whom the assignment is made
+#'   \item \code{contact}: the name of the individual or organisation who serves as the contact person for
+#'   the assignment.
+#'   \item \code{registration_date}. The date the assignment was registered on. This may be empty, in the
+#'   case of early assignments; otherwise, it is stored in the form "YYYY-MM".
+#'   \item \code{modification_date}: The date of any modification to the assignment. Same format as
+#'   \code{registration_date}
+#'   \item \code{reference}: A description of (or a reference to a document describing)
+#'   the protocol or application using this port
+#'   \item \code{known_unauthorised_uses}: A list of uses by applications or organizations who are not the assignee
+#'   \item \code{assignment_notes}. Indications of owner/name change, or any other assignment process issue
 #' }
 #'
 #' @docType data
 #' @keywords datasets
 #' @name ianaports
-#' @seealso \itemize{
-#'   \item IANA - \url{http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml}
-#'   \item RFC6335 - \url{http://tools.ietf.org/html/rfc6335},
+#'
+#' @references
+#' \itemize{
+#'   \href{http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml}{IANA}
+#'   \href{http://tools.ietf.org/html/rfc6335}{RFC6335}
 #' }
-#' @usage data(ianaports)
-#' @note Last updated 2014-08-07
-#' @format A data frame with 13,527 rows and 12 variables
+#' @usage data(iana_ports)
+#' @note Last updated 2015-05-02
+#' @format A data frame with 13,659 rows and 12 variables
 NULL
 
 #' @title IANA Protocol Numbers
