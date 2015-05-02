@@ -25,7 +25,7 @@ validate_range("127.0.0.1/33")
 #[1] FALSE
 }
 \seealso{
-\code{\link{classify_ip}} for classifying
+\code{\link{ip_classify}} for classifying
 (and, incidentally, validating) IPv4 and IPv6 addresses.
 }
 

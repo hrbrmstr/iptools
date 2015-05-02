@@ -49,14 +49,14 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// classify_ip
-std::vector < std::string > classify_ip(std::vector < std::string > ip_addresses);
-RcppExport SEXP iptools_classify_ip(SEXP ip_addressesSEXP) {
+// ip_classify
+std::vector < std::string > ip_classify(std::vector < std::string > ip_addresses);
+RcppExport SEXP iptools_ip_classify(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
-    __result = Rcpp::wrap(classify_ip(ip_addresses));
+    __result = Rcpp::wrap(ip_classify(ip_addresses));
     return __result;
 END_RCPP
 }

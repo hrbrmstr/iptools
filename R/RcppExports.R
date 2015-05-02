@@ -117,20 +117,20 @@ numeric_to_ip <- function(ip_addresses) {
 #'@examples
 #'
 #'#IPv4
-#'classify_ip("173.194.123.100")
+#'ip_classify("173.194.123.100")
 #'[1] "IPv4"
 #'
 #'#IPv6
-#'classify_ip("2607:f8b0:4006:80b::1004")
+#'ip_classify("2607:f8b0:4006:80b::1004")
 #'[1] "IPv6"
 #'
 #'#Invalid
-#'classify_ip("East Coast Twitter is Best Twitter")
+#'ip_classify("East Coast Twitter is Best Twitter")
 #'[1] "Invalid"
 #'
 #'@export
-classify_ip <- function(ip_addresses) {
-    .Call('iptools_classify_ip', PACKAGE = 'iptools', ip_addresses)
+ip_classify <- function(ip_addresses) {
+    .Call('iptools_ip_classify', PACKAGE = 'iptools', ip_addresses)
 }
 
 #' @title calculate the maximum and minimum IPs in an IP range
@@ -190,7 +190,7 @@ ip_in_range <- function(ip_addresses, ranges) {
 #'provided entry is valid, and FALSE that it is not (or
 #'isn't an IP range at all)
 #'
-#'@seealso \code{\link{classify_ip}} for classifying
+#'@seealso \code{\link{ip_classify}} for classifying
 #'(and, incidentally, validating) IPv4 and IPv6 addresses.
 #'
 #'@examples

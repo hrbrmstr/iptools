@@ -126,20 +126,20 @@ std::vector < std::string > numeric_to_ip (std::vector < unsigned int > ip_addre
 //'@examples
 //'
 //'#IPv4
-//'classify_ip("173.194.123.100")
+//'ip_classify("173.194.123.100")
 //'[1] "IPv4"
 //'
 //'#IPv6
-//'classify_ip("2607:f8b0:4006:80b::1004")
+//'ip_classify("2607:f8b0:4006:80b::1004")
 //'[1] "IPv6"
 //'
 //'#Invalid
-//'classify_ip("East Coast Twitter is Best Twitter")
+//'ip_classify("East Coast Twitter is Best Twitter")
 //'[1] "Invalid"
 //'
 //'@export
 //[[Rcpp::export]]
-std::vector < std::string > classify_ip(std::vector < std::string > ip_addresses){
+std::vector < std::string > ip_classify(std::vector < std::string > ip_addresses){
   asio_bindings asio_inst;
   return asio_inst.classify_ip_(ip_addresses);
 }
@@ -205,7 +205,7 @@ std::vector < bool > ip_in_range(std::vector < std::string > ip_addresses, std::
 //'provided entry is valid, and FALSE that it is not (or
 //'isn't an IP range at all)
 //'
-//'@seealso \code{\link{classify_ip}} for classifying
+//'@seealso \code{\link{ip_classify}} for classifying
 //'(and, incidentally, validating) IPv4 and IPv6 addresses.
 //'
 //'@examples
