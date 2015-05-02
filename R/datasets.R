@@ -66,7 +66,7 @@ NULL
 #'   \item \href{http://tools.ietf.org/html/rfc5376}{RFC5376}
 #'   \item \href{http://tools.ietf.org/html/rfc6890}{RFC6890}
 #' }
-#' @usage data(ianaipv4spar)
+#' @usage data(iana_special_assignments)
 #' @note Last updated 2014-08-07
 #' @format A data frame with 256 rows and 5 variables
 NULL

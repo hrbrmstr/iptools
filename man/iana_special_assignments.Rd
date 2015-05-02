@@ -6,7 +6,7 @@
 \title{IANA IPv4 Special-Purpose Address Registry}
 \format{A data frame with 256 rows and 5 variables}
 \usage{
-data(ianaipv4spar)
+data(iana_special_assignments)
 }
 \description{
 This dataset contains the registry of special address space assignments
