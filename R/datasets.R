@@ -100,7 +100,7 @@ NULL
 #'
 #' @references
 #' \itemize{
-#'   \href{http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml}{IANA}
+#'   The \href{http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml}{IANA list}.
 #'   \href{http://tools.ietf.org/html/rfc6335}{RFC6335}
 #' }
 #' @usage data(iana_ports)
