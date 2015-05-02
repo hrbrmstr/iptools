@@ -12,8 +12,10 @@ Description: This package contains various IPv4 (will eventually support IPv6)
     functionality of the Python iptools module. The package also includes
     useful IANA data files.
 License: GPL-2
-Suggests:
-    testthat
-Imports:
+Suggests: 
+    testthat,
+    knitr
+Imports: 
     Rcpp (>= 0.11.2)
 LinkingTo: BH, Rcpp
+VignetteBuilder: knitr
