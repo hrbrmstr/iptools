@@ -26,7 +26,7 @@
 #'@export
 iana_assignments_refresh <- function(){
 
-  #Read in and basic-clean
+  #Read in and clean
   connection <- url("http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.csv")
   data <- read.csv(connection, as.is = TRUE)
   names(data) <- c("prefix","designation","date","whois","rdap","status", "note")
