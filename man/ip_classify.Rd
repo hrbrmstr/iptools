@@ -20,15 +20,15 @@ of IP addresses. This can also be used to validate IPs.
 \examples{
 #IPv4
 ip_classify("173.194.123.100")
-[1] "IPv4"
+#[1] "IPv4"
 
 #IPv6
 ip_classify("2607:f8b0:4006:80b::1004")
-[1] "IPv6"
+#[1] "IPv6"
 
 #Invalid
 ip_classify("East Coast Twitter is Best Twitter")
-[1] "Invalid"
+#[1] "Invalid"
 }
 \seealso{
 \code{\link{ip_to_hostname}} for resolving IP addresses to their

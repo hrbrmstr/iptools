@@ -1,5 +1,5 @@
 #'@title generate random IPv4 IP addresses
-#'@description \code{random_ips} generates random IP addresses.
+#'@description \code{ip_random} generates random IP addresses.
 #'These currently only follow IPv4 standards, since IPv6 addresses
 #'are too large to be stored in R in their numeric form. All
 #'IPs generated this way are valid.
@@ -31,14 +31,15 @@ ip_random <- function(n){
 #'@return a character vector containing each IPv4 IP address
 #'within the provided range.
 #'
-#'@seealso \code{\link{random_ips}} for randomly-generated IPs, or
+#'@seealso \code{\link{ip_random}} for randomly-generated IPs, or
 #'\code{\link{ip_to_numeric}} for converting \code{generate_range}'s
 #'output to its numeric form.
 #'
 #'@examples
 #'range_generate("172.18.0.0/28")
-#'#[1]  "172.18.0.0"  "172.18.0.1"  "172.18.0.2"  "172.18.0.3"  "172.18.0.4"  "172.18.0.5"  "172.18.0.6"  "172.18.0.7"  "172.18.0.8"
-#'#[10] "172.18.0.9"  "172.18.0.10" "172.18.0.11" "172.18.0.12" "172.18.0.13" "172.18.0.14" "172.18.0.15"
+#'#[1]  "172.18.0.0"  "172.18.0.1"  "172.18.0.2"  "172.18.0.3"  "172.18.0.4"
+#'#[6]  "172.18.0.5"  "172.18.0.6"  "172.18.0.7"  "172.18.0.8"  "172.18.0.9"
+#'#[11] "172.18.0.10" "172.18.0.11" "172.18.0.12" "172.18.0.13" "172.18.0.14" "172.18.0.15"
 #'
 #'@export
 range_generate <- function(range){

@@ -14,7 +14,7 @@ a character vector of randomly-generated IPv4 addresses,
 in their dotted-decimal form.
 }
 \description{
-\code{random_ips} generates random IP addresses.
+\code{ip_random} generates random IP addresses.
 These currently only follow IPv4 standards, since IPv6 addresses
 are too large to be stored in R in their numeric form. All
 IPs generated this way are valid.

@@ -33,7 +33,7 @@ Last updated 2015-05-01.
 }
 }
 \seealso{
-\code{\link{iana_assignment_refresh}} for updating the dataset, and
+\code{\link{iana_assignments_refresh}} for updating the dataset, and
 \code{\link{iana_special_assignments}} for particular, special IPv4 assignments.
 }
 \keyword{datasets}

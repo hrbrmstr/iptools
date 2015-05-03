@@ -20,11 +20,12 @@ within a provided range. Currently IPv4 only due to R's support
 }
 \examples{
 range_generate("172.18.0.0/28")
-#[1]  "172.18.0.0"  "172.18.0.1"  "172.18.0.2"  "172.18.0.3"  "172.18.0.4"  "172.18.0.5"  "172.18.0.6"  "172.18.0.7"  "172.18.0.8"
-#[10] "172.18.0.9"  "172.18.0.10" "172.18.0.11" "172.18.0.12" "172.18.0.13" "172.18.0.14" "172.18.0.15"
+#[1]  "172.18.0.0"  "172.18.0.1"  "172.18.0.2"  "172.18.0.3"  "172.18.0.4"
+#[6]  "172.18.0.5"  "172.18.0.6"  "172.18.0.7"  "172.18.0.8"  "172.18.0.9"
+#[11] "172.18.0.10" "172.18.0.11" "172.18.0.12" "172.18.0.13" "172.18.0.14" "172.18.0.15"
 }
 \seealso{
-\code{\link{random_ips}} for randomly-generated IPs, or
+\code{\link{ip_random}} for randomly-generated IPs, or
 \code{\link{ip_to_numeric}} for converting \code{generate_range}'s
 output to its numeric form.
 }
