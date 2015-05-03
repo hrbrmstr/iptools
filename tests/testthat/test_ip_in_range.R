@@ -35,26 +35,26 @@ test_that("ip_in_range error handlers function",{
 
 test_that("range_boundaries works with single values", {
   result <- range_boundaries("172.18.0.0/12")
-  expect_that(is.list(result), equals(TRUE))
-  expect_that(length(result), equals(1))
-  expect_that(unlist(result), equals(c("172.18.0.0","172.31.255.255")))
+  expect_that(is.data.frame(result), equals(TRUE))
+  expect_that(nrow(result), equals(1))
+  expect_that(unname(unlist(result)), equals(c("172.18.0.0","172.31.255.255")))
 })
 
 test_that("range_boundaries works with multiple values", {
   result <- range_boundaries(c("172.18.0.0/12","172.18.0.0/12"))
-  expect_that(is.list(result), equals(TRUE))
-  expect_that(length(result), equals(2))
-  expect_that(unlist(result), equals(c("172.18.0.0","172.31.255.255","172.18.0.0","172.31.255.255")))
+  expect_that(is.data.frame(result), equals(TRUE))
+  expect_that(nrow(result), equals(2))
+  expect_that(unname(unlist(result)), equals(c("172.18.0.0","172.18.0.0","172.31.255.255","172.31.255.255")))
 })
 
 test_that("range_boundaries error handlers function",{
   result <- range_boundaries("fdsdfdsfsdfsfd")
-  expect_that(is.list(result), equals(TRUE))
-  expect_that(length(result), equals(1))
-  expect_that(unlist(result), equals(c("Invalid","Invalid")))
+  expect_that(is.data.frame(result), equals(TRUE))
+  expect_that(nrow(result), equals(1))
+  expect_that(unname(unlist(result)), equals(c("Invalid","Invalid")))
 
   result <- range_boundaries("fdsdfdsfsdfsfd/12")
-  expect_that(is.list(result), equals(TRUE))
-  expect_that(length(result), equals(1))
-  expect_that(unlist(result), equals(c("Invalid","Invalid")))
+  expect_that(is.data.frame(result), equals(TRUE))
+  expect_that(nrow(result), equals(1))
+  expect_that(unname(unlist(result)), equals(c("Invalid","Invalid")))
 })

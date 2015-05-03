@@ -200,7 +200,7 @@ public:
    * the minimum and maximum IPs in a given range, in
    * dotted-decimal notation.
    */
-  std::list < std::vector < std::string > > calculate_range_(std::vector < std::string > ranges);
+  DataFrame calculate_range_(std::vector < std::string > ranges);
 
   /**
    * A vectorised version of validate_single_range

@@ -61,7 +61,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // range_boundaries
-std::list < std::vector < std::string > > range_boundaries(std::vector < std::string > ranges);
+DataFrame range_boundaries(std::vector < std::string > ranges);
 RcppExport SEXP iptools_range_boundaries(SEXP rangesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;

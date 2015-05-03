@@ -152,13 +152,15 @@ std::vector < std::string > ip_classify(std::vector < std::string > ip_addresses
 //' @param ranges a vector of IP ranges. Currently only IPv4 ranges
 //' work.
 //'
-//' @return a list of character vectors, each one consisting of the maximum
-//' and minimum IPs within the equivalent range.
+//' @return a data.frame of two columns, "minimum_ip" (containing the
+//' smallest IP in the provided range) and "maximum_ip" (containing the
+//' largest). If the range was invalid, both columns will contain
+//' "Invalid" as the value.
 //'
 //' @examples
 //' range_boundaries("172.18.0.0/28")
-//' # [[1]]
-//' # [1] "172.18.0.0"  "172.18.0.15"
+//' #  minimum_ip  maximum_ip
+//' #1 172.18.0.0 172.18.0.15
 //'
 //' @seealso \code{\link{ip_in_range}} to calculate if an IP address
 //' falls within a particular range, or \code{\link{ip_to_numeric}} to
@@ -167,7 +169,7 @@ std::vector < std::string > ip_classify(std::vector < std::string > ip_addresses
 //'
 //' @export
 // [[Rcpp::export]]
-std::list < std::vector < std::string > > range_boundaries(std::vector < std::string > ranges){
+DataFrame range_boundaries(std::vector < std::string > ranges){
   asio_bindings asio_inst;
   return asio_inst.calculate_range_(ranges);
 }

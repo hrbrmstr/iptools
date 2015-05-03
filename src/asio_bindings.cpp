@@ -279,16 +279,24 @@ std::vector < bool > asio_bindings::ip_in_range_(std::vector < std::string > ip_
   return output;
 }
 
-std::list < std::vector < std::string > > asio_bindings::calculate_range_(std::vector < std::string > ranges){
-  std::list < std::vector < std::string > > output;
+DataFrame asio_bindings::calculate_range_(std::vector < std::string > ranges){
+  int input_size = ranges.size();
+  std::vector < std::string > min_holding(input_size);
+  std::vector < std::string > max_holding(input_size);
+  std::vector < std::string > holding;
 
   for(unsigned int i = 0; i < ranges.size(); i++){
     if((i % 10000) == 0){
       Rcpp::checkUserInterrupt();
     }
-    output.push_back(calculate_ip_range(ranges[i]));
+    holding = calculate_ip_range(ranges[i]);
+    min_holding[i] = holding[0];
+    max_holding[i] = holding[1];
+    holding.clear();
   }
-  return output;
+  return DataFrame::create(_["minimum_ip"] = min_holding,
+                           _["maximum_ip"] = max_holding,
+                           _["stringsAsFactors"] = false);
 }
 
 std::vector < bool > asio_bindings::validate_range_(std::vector < std::string > ranges){

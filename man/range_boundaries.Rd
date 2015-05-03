@@ -11,8 +11,10 @@ range_boundaries(ranges)
 work.}
 }
 \value{
-a list of character vectors, each one consisting of the maximum
-and minimum IPs within the equivalent range.
+a data.frame of two columns, "minimum_ip" (containing the
+smallest IP in the provided range) and "maximum_ip" (containing the
+largest). If the range was invalid, both columns will contain
+"Invalid" as the value.
 }
 \description{
 when provided with a vector of IP ranges
@@ -21,8 +23,8 @@ maximum and minimum IP addresses in that range.
 }
 \examples{
 range_boundaries("172.18.0.0/28")
-# [[1]]
-# [1] "172.18.0.0"  "172.18.0.15"
+#  minimum_ip  maximum_ip
+#1 172.18.0.0 172.18.0.15
 }
 \seealso{
 \code{\link{ip_in_range}} to calculate if an IP address
