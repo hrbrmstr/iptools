@@ -26,6 +26,8 @@ validate_range("127.0.0.1/33")
 }
 \seealso{
 \code{\link{ip_classify}} for classifying
-(and, incidentally, validating) IPv4 and IPv6 addresses.
+(and, incidentally, validating) IPv4 and IPv6 addresses, or
+\code{\link{range_boundaries}} for identifying the minimum
+and maximum IPs within a range.
 }
 

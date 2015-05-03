@@ -24,4 +24,14 @@ is not in the range, or is an invalid IP address.
 \code{ip_in_range} checks whether a vector of IP
 addresses fall within particular IP range(s).
 }
+\examples{
+#Is this in the range? Yes!
+ip_in_range("172.18.0.1","172.18.0.0/28")
+#[1] TRUE
+}
+\seealso{
+\code{\link{range_boundaries}} for identifying the minimum
+and maximum IPs within a range, and \code{\link{validate_range}} for
+validating that a range exists.
+}
 

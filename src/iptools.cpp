@@ -190,6 +190,15 @@ DataFrame range_boundaries(std::vector < std::string > ranges){
 //'IP is in the range, and FALSE indicates that the IP
 //'is not in the range, or is an invalid IP address.
 //'
+//'@seealso \code{\link{range_boundaries}} for identifying the minimum
+//'and maximum IPs within a range, and \code{\link{validate_range}} for
+//'validating that a range exists.
+//'
+//'@examples
+//'#Is this in the range? Yes!
+//'ip_in_range("172.18.0.1","172.18.0.0/28")
+//'#[1] TRUE
+//'
 //'@export
 //[[Rcpp::export]]
 std::vector < bool > ip_in_range(std::vector < std::string > ip_addresses, std::vector < std::string > ranges){
@@ -208,7 +217,9 @@ std::vector < bool > ip_in_range(std::vector < std::string > ip_addresses, std::
 //'isn't an IP range at all)
 //'
 //'@seealso \code{\link{ip_classify}} for classifying
-//'(and, incidentally, validating) IPv4 and IPv6 addresses.
+//'(and, incidentally, validating) IPv4 and IPv6 addresses, or
+//'\code{\link{range_boundaries}} for identifying the minimum
+//'and maximum IPs within a range.
 //'
 //'@examples
 //'validate_range("127.0.0.1/32")
