@@ -10,16 +10,11 @@ vignette: >
 ---
 
 ## IP handling, conversion and validation
-`iptools` is a package to make IP addresses convenient to deal with, parse and validate. It is heavily influenced by the Python [iptools](https://python-iptools.readthedocs.org/en/latest/) module, and will hopefully make users' lives a heck of a lot easier
-if they have to deal with IP data. Much of it is currently IPv4-specific, out of necessity, but as R's support for bigger numbers
-increases, we'll hopefully make as much of it support IPv6 as possible!
+`iptools` is a package to make IP addresses convenient to deal with, parse and validate. It is heavily influenced by the Python [iptools](https://python-iptools.readthedocs.org/en/latest/) module, and will hopefully make users' lives a heck of a lot easier if they have to deal with IP data. Much of it is currently IPv4-specific, out of necessity, but as R's support for bigger numbers increases, we'll hopefully make as much of it support IPv6 as possible!
 
 ### Validating, converting and classifying IP addresses
 
-How do you know an IP address is an IP address? How do you know what *type* of IP address it is? Most of the time the answer is
-a complicated regular expression, made more complicated by the need to check for things that are syntactically valid IP addresses,
-but aren't actually possible. `iptools` contains `ip_classify`, which accepts a vector of IP addresses (or things that might be
-IP addresses) and identifies whether they're valid - and if they are valid, what type they are.
+How do you know an IP address is an IP address? How do you know what *type* of IP address it is? Most of the time the answer is a complicated regular expression, made more complicated by the need to check for things that are syntactically valid IP addresses, but aren't actually possible. `iptools` contains `ip_classify`, which accepts a vector of IP addresses (or things that might be IP addresses) and identifies whether they're valid - and if they are valid, what type they are.
 
 ```{r eval=FALSE}
 ips <- c("192.168.0.1","2607:f8b0:4006:80b::aaa","the next IP is also invalid","256.256.190.900")
@@ -42,12 +37,32 @@ numeric_to_ip(numeric_ips)
 [1] "192.168.0.1" "172.18.0.0"  "172.18.0.15"
 ```
 
-These functions only currently work for IPv4 IPs - we'll have IPv6 support as soon as R can support numbers that big!
+These functions only currently work for IPv4 IPs - we'll have IPv6 support as soon as R can handle numbers that big!
 
 ### Resolving hostnames
 
+Thanks to Boost's [asio networking library](http://www.boost.org/doc/libs/1_58_0/doc/html/boost_asio.html), which is
+integrated with `iptools`, we can take an IP address and work out what hostname (or hostnames) that IP is associated with:
+
+```{r eval=FALSE}
+
+```
+
+This works in reverse, too:
+
+```{r eval=FALSE}
+
+```
+
+Both operations are fully recognised, but aren't particularly fast - in fact, they're incredibly slow compared to the rest of the package - since they need to call out of the system to work. For the same reason, they require a net connection to work, and may slow down said connection while running. You've been warned.
+
 ### Handling IP ranges
 
-Note the various macros within the `vignette` setion of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
 
 ### Generating elements
+
+Sometimes you need spoof data - IPs that are valid, but aren't sourced from anywhere in particular. `iptools` contains `ip_random`, which lets you generate a set of pseudo-random and totally valid IPv4 addresses:
+
+```{r eval=FALSE}
+ip_random(n = 5)
+```
