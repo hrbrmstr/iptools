@@ -77,17 +77,38 @@ numeric_ips
 <span class="co">#And back again</span>
 <span class="kw">numeric_to_ip</span>(numeric_ips)
 [<span class="dv">1</span>] <span class="st">&quot;192.168.0.1&quot;</span> <span class="st">&quot;172.18.0.0&quot;</span>  <span class="st">&quot;172.18.0.15&quot;</span></code></pre>
-<p>These functions only currently work for IPv4 IPs - we’ll have IPv6 support as soon as R can support numbers that big!</p>
+<p>These functions only currently work for IPv4 IPs - we’ll have IPv6 support as soon as R can handle numbers that big!</p>
 </div>
 <div id="resolving-hostnames" class="section level3">
 <h3>Resolving hostnames</h3>
+<p>Thanks to Boost’s <a href="http://www.boost.org/doc/libs/1_58_0/doc/html/boost_asio.html">asio networking library</a>, which is integrated with <code>iptools</code>, we can take a hostname and work out what IP address(es) are associated with it:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hostname_to_ip</span>(<span class="st">&quot;lga15s49-in-f6.1e100.net&quot;</span>)
+[[<span class="dv">1</span>]]
+[<span class="dv">1</span>] <span class="st">&quot;173.194.123.102&quot;</span></code></pre>
+<p>This works in reverse, too:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ip_to_hostname</span>(<span class="st">&quot;173.194.123.10&quot;</span>)
+[[<span class="dv">1</span>]]
+[<span class="dv">1</span>] <span class="st">&quot;lga15s46-in-f10.1e100.net&quot;</span></code></pre>
+<p>Both operations are fully recognised, but aren’t particularly fast - in fact, they’re incredibly slow compared to the rest of the package - since they need to call out of the system to work. For the same reason, they require a net connection to work, and may slow down said connection while running. You’ve been warned.</p>
 </div>
 <div id="handling-ip-ranges" class="section level3">
 <h3>Handling IP ranges</h3>
-<p>Note the various macros within the <code>vignette</code> setion of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the <code>title</code> field and the <code>\VignetteIndexEntry</code> to match the title of your vignette.</p>
+<p>As well as specific, unique IP addresses, you may also encounter IP ranges - subsets of the IP address space, looking something like “172.18.0.0/28”. <code>iptools</code> provides a variety of functions to manipulate and expand on these.</p>
+<p><code>range_boundaries</code> takes an IP range (or as many IP ranges as you want!) and produces a data.frame containing the smallest-valued and largest-valued IP addresses in that range:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range_boundaries</span>(<span class="kw">c</span>(<span class="st">&quot;172.18.0.0/28&quot;</span>,<span class="st">&quot;148.20.57.0/28&quot;</span>,<span class="st">&quot;148.20.57.0/24&quot;</span>)
+   minimum_ip    maximum_ip
+<span class="dv">1</span>  <span class="fl">172.18.0.0</span>   <span class="fl">172.18.0.15</span>
+<span class="dv">2</span> <span class="fl">148.20.57.0</span>  <span class="fl">148.20.57.15</span>
+<span class="dv">3</span> <span class="fl">148.20.57.0</span> <span class="fl">148.20.57.255</span></code></pre>
+<p>If you want all the values within a certain range, rather than just the smallest and largest, you can use On the other hand, if you simply want to check if an IP address is <em>within</em> a certain range, you can use <code>ip_in_range</code>, which accepts a vector of IP addresses and either one range, or an equally-sized vector of ranges, to check them against. It then tells you which entries are within the range (TRUE) or not (FALSE):</p>
+<pre class="sourceCode r"><code class="sourceCode r">ips &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;148.20.57.15&quot;</span>, <span class="st">&quot;148.20.57.255&quot;</span>)
+<span class="kw">ip_in_range</span>(ips, <span class="st">&quot;148.20.57.0/28&quot;</span>)
+[<span class="dv">1</span>]  <span class="ot">TRUE</span> <span class="ot">FALSE</span></code></pre>
 </div>
 <div id="generating-elements" class="section level3">
 <h3>Generating elements</h3>
+<p>Sometimes you need spoof data - IPs that are valid, but aren’t sourced from anywhere in particular. <code>iptools</code> contains <code>ip_random</code>, which lets you generate a set of pseudo-random and totally valid IPv4 addresses:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ip_random</span>(<span class="dt">n =</span> <span class="dv">5</span>)</code></pre>
 </div>
 </div>
 
