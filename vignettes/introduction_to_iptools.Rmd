@@ -90,7 +90,8 @@ ips <- c("148.20.57.15", "148.20.57.255")
 ip_in_range(ips, "148.20.57.0/28")
 [1]  TRUE FALSE
 ```
-### Generating elements
+
+### Generating IP addresses
 
 Sometimes you need spoof data - IPs that are valid, but aren't sourced from anywhere in particular. `iptools` contains `ip_random`, which lets you generate a set of pseudo-random and totally valid IPv4 addresses:
 
