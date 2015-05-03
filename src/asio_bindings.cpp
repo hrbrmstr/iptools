@@ -73,7 +73,7 @@ bool asio_bindings::single_ip_in_range(std::string ip_address, std::string range
   int slash_val;
   char range_copy[24];
   char *slash_pos;
-  bool output;
+  bool output = false;
 
   strncpy(range_copy, range.c_str(), 24); // safe copy
   slash_pos = strchr(range_copy, '/'); // find the "/"
