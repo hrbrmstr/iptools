@@ -13,6 +13,9 @@ The package primarily supports IPv4 addresses due to deficiencies in R's support
 
 For more information, see the vignettes on [the functionality](https://github.com/hrbrmstr/iptools/blob/master/vignettes/introduction_to_iptools.Rmd) and [the datasets](https://github.com/hrbrmstr/iptools/blob/master/vignettes/iptools_datasets.Rmd) within `iptools`.
 
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this
+project you agree to abide by its terms.
+
 ### Installation
 
 To install the development version:
