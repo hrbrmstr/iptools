@@ -2,6 +2,7 @@ iptools 0.2.0 [WIP]
 =============
 NEW FEATURES
 * Total internal rewrite. Check out the vignettes!
+* IP DNS resolution now handles IPv6 IPs
 
 BUG FIXES
 

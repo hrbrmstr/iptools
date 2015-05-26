@@ -53,14 +53,16 @@ std::vector < std::string > asio_bindings::single_ip_to_dns(std::string ip_addre
   boost::asio::ip::tcp::endpoint endpoint;
 
   try{
-    boost::asio::ip::address_v4 ip = boost::asio::ip::address_v4::from_string(ip_address);
+
+    boost::asio::ip::address ip = boost::asio::ip::address::from_string(ip_address);
     endpoint.address(ip);
     boost::asio::ip::tcp::resolver::iterator destination = resolver_ptr.resolve(endpoint);
     boost::asio::ip::tcp::resolver::iterator end;
     for (int i=1; destination != end; destination++, i++) {
       output.push_back(destination->host_name());
     }
-  } catch (...){
+
+  } catch(...){
     output.push_back("Invalid IP address");
   }
 
