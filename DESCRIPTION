@@ -5,12 +5,12 @@ Version: 0.2.0
 Date: 2015-05-03
 Author: Bob Rudis <bob.rudis@verizon.com> [aut, cre], Oliver Keyes <ironholds@gmail.com> [aut]
 Maintainer: Bob Rudis <bob.rudis@verizon.com>
-Description: This package contains various functions for manipulating,
+Description: A toolkit for manipulating,
              validating and testing IP addresses and ranges, along with
              datasets relating to IP addresses. While it primarily has
              support for the IPv4 address space, more extensive IPv6 support
              is intended.
-License: GPL-2
+License: MIT + file LICENSE
 Suggests:
     testthat,
     knitr
