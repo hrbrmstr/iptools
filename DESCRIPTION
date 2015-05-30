@@ -1,6 +1,6 @@
 Package: iptools
 Type: Package
-Title: Manipulate, Validate and Resolve IP addresses
+Title: Manipulate, Validate and Resolve IP Addresses
 Version: 0.2.0
 Date: 2015-05-03
 Author: Bob Rudis <bob.rudis@verizon.com> [aut, cre], Oliver Keyes <ironholds@gmail.com> [aut]
