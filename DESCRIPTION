@@ -3,7 +3,7 @@ Type: Package
 Title: Manipulate, Validate and Resolve IP Addresses
 Version: 0.2.0
 Date: 2015-05-03
-Author: Bob Rudis <bob.rudis@verizon.com> [aut, cre], Oliver Keyes <ironholds@gmail.com> [aut]
+Author: Bob Rudis <bob@rudis.net> [aut, cre], Oliver Keyes <ironholds@gmail.com> [aut]
 Maintainer: Bob Rudis <bob.rudis@verizon.com>
 Description: A toolkit for manipulating,
              validating and testing IP addresses and ranges, along with
