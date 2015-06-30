@@ -4,14 +4,14 @@ test_that("A single hostname can be turned into its equivalent IP(s)",{
   result <- hostname_to_ip("dds.ec")
   expect_that(is.list(result), equals(TRUE))
   expect_that(length(result), equals(1))
-  expect_that(unlist(result), equals("162.243.111.4"))
+  expect_that(unlist(result)[1], equals("162.243.111.4"))
 })
 
 test_that("Multiple hostnames can be turned into their equivalent IP(s)",{
   result <- hostname_to_ip(c("dds.ec","dds.ec"))
   expect_that(is.list(result), equals(TRUE))
   expect_that(length(result), equals(2))
-  expect_that(unlist(result), equals(c("162.243.111.4","162.243.111.4")))
+  expect_that(unique(unlist(result)), equals(c("162.243.111.4")))
 })
 
 test_that("hostname-to-ip error handlers work",{

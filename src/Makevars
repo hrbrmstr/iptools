@@ -1,2 +1,0 @@
-PKG_LIBS = -lboost_system -lboost_regex
-PKG_CPPFLAGS = -UNDEBUG -g
