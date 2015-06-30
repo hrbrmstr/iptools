@@ -545,9 +545,19 @@ AC_DEFUN([AX_BOOST_REGEX],
     fi
 ])
 
-AX_BOOST_BASE([1.54],, [AC_MSG_ERROR([iptools needs Boost, but it was not found in your system])])
+AX_BOOST_BASE([1.54],,[exit 1]])
 AX_BOOST_REGEX
 AX_BOOST_ASIO
+
+if test "x${BOOST_REGEX_LIB}" == "x"; then
+     AC_MSG_ERROR([Please install the Boost REGEX library.])
+     exit 1
+fi
+
+if test "x${BOOST_ASIO_LIB}" == "x"; then
+     AC_MSG_ERROR([Please install the Boost ASIO library.])
+     exit 1
+fi
 
 AC_SUBST([CXXFLAGS],["${BOOST_CPPFLAGS} ${CXXFLAGS}"])
 AC_SUBST([LDFLAGS],["${BOOST_LDFLAGS} ${RCPP_LDFLAGS} ${LDFLAGS}"])

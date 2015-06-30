@@ -3331,7 +3331,7 @@ fi
 
 
 if test "x$want_boost" = "xyes"; then
-    boost_lib_version_req=1.20.0
+    boost_lib_version_req=1.54
     boost_lib_version_req_shorten=`expr $boost_lib_version_req : '\([0-9]*\.[0-9]*\)'`
     boost_lib_version_req_major=`expr $boost_lib_version_req : '\([0-9]*\)'`
     boost_lib_version_req_minor=`expr $boost_lib_version_req : '[0-9]*\.\([0-9]*\)'`
@@ -3553,7 +3553,7 @@ $as_echo "$as_me: We could not detect the boost libraries (version $boost_lib_ve
 $as_echo "$as_me: Your boost libraries seems to old (version $_version)." >&6;}
         fi
         # execute ACTION-IF-NOT-FOUND (if present):
-        :
+        exit 1]
     else
 
 
@@ -3977,6 +3977,16 @@ fi
     LDFLAGS="$LDFLAGS_SAVED"
     fi
 
+
+if test "x${BOOST_REGEX_LIB}" == "x"; then
+     as_fn_error $? "Please install the Boost REGEX library." "$LINENO" 5
+     exit 1
+fi
+
+if test "x${BOOST_ASIO_LIB}" == "x"; then
+     as_fn_error $? "Please install the Boost ASIO library." "$LINENO" 5
+     exit 1
+fi
 
 CXXFLAGS="${BOOST_CPPFLAGS} ${CXXFLAGS}"
 
