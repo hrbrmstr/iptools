@@ -29,7 +29,7 @@ devtools::install_github("hrbrmstr/iptools")
 install.packages("iptools")
 ```
 
-`iptools` depends on the Boost library, which can be obtained on most linux distributions with:
+`iptools` depends on the [Boost](http://boost.org) library, which can be obtained on most linux distributions with:
 
     sudo apt-get install libboost-all-dev
 
@@ -41,7 +41,7 @@ and on `homebrew` (Mac OSX) with:
 
     brew install boost
 
-`iptools` does not currently work on Windows; the first person(s) to get this working there gets a free copy of [Bob's book](http://dds.ec/amzn).
+`iptools` does not currently work easily on Windows; It *may* be possible to get it working with a solid, separate build of Boost for Windows under cygwin and setting environment variables properly. The first person(s) to get this working under Windows gets a free copy of [Bob's book](http://dds.ec/amzn).
 
 ### Test Results
 
@@ -50,7 +50,7 @@ library(iptools)
 library(testthat)
 
 date()
-#> [1] "Wed Jul  1 19:23:39 2015"
+#> [1] "Wed Jul  1 19:31:26 2015"
 
 test_dir("tests/")
 #> Test IP generators : ......
