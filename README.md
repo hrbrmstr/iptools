@@ -1,8 +1,12 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/iptools)](http://cran.r-project.org/web/packages/iptools) ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/iptools)
+
 Easy IP address handling with iptools
 -------------------------------------
 
 `iptools` is a set of tools for a working with IP addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
+
+Available [on CRAN](http://cran.r-project.org/web/packages/iptools/)
 
 ### Functionality
 
@@ -21,6 +25,8 @@ To install the development version:
 
 ``` r
 devtools::install_github("hrbrmstr/iptools")
+# or
+install.packages("iptools")
 ```
 
 `iptools` depends on the Boost library, which can be obtained on most linux distributions with:
@@ -44,7 +50,7 @@ library(iptools)
 library(testthat)
 
 date()
-#> [1] "Wed Jul  1 08:43:56 2015"
+#> [1] "Wed Jul  1 19:19:07 2015"
 
 test_dir("tests/")
 #> Test IP generators : ......
