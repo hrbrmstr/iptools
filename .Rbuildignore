@@ -8,3 +8,4 @@
 ^README-.*\.png$
 ^\.Rhistory$
 ^cran-comments\.md$
+^\.travis\.yml$

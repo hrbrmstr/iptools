@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/iptools)](http://cran.r-project.org/web/packages/iptools) ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/iptools)
+[![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/iptools.svg?branch=master)](https://travis-ci.org/hrbrmstr/iptools) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/iptools)](http://cran.r-project.org/web/packages/iptools) ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/iptools)
 
 Easy IP address handling with iptools
 -------------------------------------
@@ -50,7 +50,7 @@ library(iptools)
 library(testthat)
 
 date()
-#> [1] "Wed Jul  1 19:19:07 2015"
+#> [1] "Wed Jul  1 19:23:39 2015"
 
 test_dir("tests/")
 #> Test IP generators : ......
