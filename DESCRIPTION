@@ -17,7 +17,9 @@ Suggests:
     testthat,
     knitr
 Imports:
-    Rcpp (>= 0.11.2)
+    Rcpp (>= 0.11.2),
+    utils,
+    stats
 LinkingTo: BH, Rcpp
 VignetteBuilder: knitr
 OS_type: unix
