@@ -6,3 +6,5 @@
 *.so
 *.dll
 inst/doc
+config.log
+config.sub

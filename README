@@ -1,0 +1,16 @@
+iptools relies on Boost.Asio for IP address conversions and Boost.Regex for
+working with IP addresses. This requires more than just Boost headers (i.e.
+you can't just install the BH R package and have iptools work).
+
+The easiest way to satisfy the requirements is to use the comprehensive Boost
+package available on most Unix-like systems:
+
+       Debian/Ubuntu: apt-get install libboost-all-dev
+Fedora/CentOS/RedHat: yum install boost-devel
+         OS X/Darwin: brew install boost
+
+You may be able to get it working on some systems with the BH R package and just
+installing the Regex and System packages (if available separately on your system):
+
+       Debian/Ubuntu: apt-get install libboost-regex-dev libboost-system-dev
+Fedora/CentOS/RedHat: yum install boost-regex boost-system
