@@ -1,6 +1,7 @@
+#!/bin/sh
 
 rm -f src/*.o src/*.so \
       *~ \
-      config.log config.status \
+      config.*  \
       src/Makevars src/symbols.rds
 rm -rf autom4te.cache

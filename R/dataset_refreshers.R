@@ -40,7 +40,8 @@ iana_assignments_refresh <- function(){
 
   #Write out and report
   iana_assignments <- data
-  save(iana_assignments, file = system.file("data/iana_assignments.rda", package = "iptools"))
+  save(iana_assignments, file = system.file("data/iana_assignments.rda", package = "iptools"),
+       compress = 'xz')
   return(TRUE)
 }
 
@@ -66,7 +67,8 @@ iana_special_assignments_refresh <- function(){
   data$global <- as.logical(special_gsub(data$global))
   data$reserved_by_protocol <- as.logical(special_gsub(data$reserved_by_protocol))
   iana_special_assignments <- data
-  save(iana_special_assignments, file = system.file("data/iana_special_assignments.rda", package = "iptools"))
+  save(iana_special_assignments, file = system.file("data/iana_special_assignments.rda", package = "iptools"),
+       compress = 'xz')
   return(TRUE)
 }
 
@@ -83,6 +85,7 @@ iana_ports_refresh <- function(){
   data$contact <- gsub(x = data$contact, pattern = "(\\[|\\]|)", replacement = "")
   data$contact <- gsub(x = data$contact, pattern = "_", replacement = " ")
   iana_ports <- data
-  save(iana_ports, file = system.file("data/iana_ports.rda", package = "iptools"))
+  save(iana_ports, file = system.file("data/iana_ports.rda", package = "iptools"),
+       compress = 'xz')
   return(TRUE)
 }

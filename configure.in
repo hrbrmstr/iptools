@@ -545,7 +545,7 @@ AC_DEFUN([AX_BOOST_REGEX],
     fi
 ])
 
-AX_BOOST_BASE([1.53],,[exit 1]])
+AX_BOOST_BASE([1.4],,[exit 1]])
 AX_BOOST_REGEX
 AX_BOOST_ASIO
 
