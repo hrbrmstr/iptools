@@ -7,8 +7,10 @@
 #'   for a particular purpose (e.g. "100.64.0.0/10")
 #'   \item \code{designation}: The entity the block is assigned to.
 #'   \item \code{date}: the assignment date of the block, stored as YYYY-MM.
-#'   \item \code{whois}: whois registry [\code{whois.afrinic.net}|\code{whois.apnic.net}|\code{whois.arin.net}|\code{whois.lacnic.net}|\code{whois.ripe.net}]
-#'   \item \code{status}: status of the assignment [\code{ALLOCATED}|\code{LEGACY}|\code{RESERVED}]
+#'   \item \code{whois}: whois registry [\code{whois.afrinic.net}|\code{whois.apnic.net}|
+#'         \code{whois.arin.net}|\code{whois.lacnic.net}|\code{whois.ripe.net}]
+#'   \item \code{status}: status of the assignment [\code{ALLOCATED}|\code{LEGACY}|
+#'         \code{RESERVED}]
 #' }
 #'
 #' @docType data
