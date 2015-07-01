@@ -6,4 +6,5 @@
 *.so
 *.dll
 inst/doc
-config.*
+config.log
+config.staus
