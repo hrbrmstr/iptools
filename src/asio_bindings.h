@@ -1,11 +1,6 @@
 #include <Rcpp.h>
 #include <boost/asio.hpp>
 
-#ifdef _WIN32
-# include <windows.h>
-# include "windows/inet_v6defs.h"
-#endif
-
 using namespace Rcpp;
 
 #ifndef __ASIO_BINDINGS__
