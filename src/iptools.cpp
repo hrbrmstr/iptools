@@ -242,7 +242,7 @@ std::vector < bool > validate_range(std::vector < std::string > ranges){
 //'
 //'@param ip_addresses a vector of IP addresses
 //'
-//'@param x_forwarded_fors an equally-sized vector of X-Forwarded-For header
+//'@param x_forwarded_for an equally-sized vector of X-Forwarded-For header
 //'contents.
 //'
 //'@return a vector of IP addresses, incorporating the XFF header value

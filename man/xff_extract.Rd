@@ -10,7 +10,7 @@ xff_extract(ip_addresses, x_forwarded_for)
 \arguments{
 \item{ip_addresses}{a vector of IP addresses}
 
-\item{x_forwarded_fors}{an equally-sized vector of X-Forwarded-For header
+\item{x_forwarded_for}{an equally-sized vector of X-Forwarded-For header
 contents.}
 }
 \value{
