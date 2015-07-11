@@ -3,11 +3,12 @@ iptools 0.2.0 [WIP]
 NEW FEATURES
 * Total internal rewrite. Check out the vignettes!
 * IP DNS resolution now handles IPv6 IPs
+* XFF origin extractor included as xff_extract
 
 BUG FIXES
 
 DEVELOPMENT
-*geolocation functionality deprecated; rely on devtools::install_github("ironholds/rgeoip") for geolocation.
+*geolocation functionality deprecated; rely on devtools::install_github("ironholds/rgeolocate") for geolocation.
 *Large changeover to relying on C++ rather than R
 
 iptools 0.1.4

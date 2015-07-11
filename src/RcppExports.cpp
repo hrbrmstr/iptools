@@ -94,3 +94,15 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// xff_extract
+std::vector < std::string > xff_extract(std::vector < std::string > ip_addresses, std::vector < std::string > x_forwarded_for);
+RcppExport SEXP iptools_xff_extract(SEXP ip_addressesSEXP, SEXP x_forwarded_forSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type x_forwarded_for(x_forwarded_forSEXP);
+    __result = Rcpp::wrap(xff_extract(ip_addresses, x_forwarded_for));
+    return __result;
+END_RCPP
+}

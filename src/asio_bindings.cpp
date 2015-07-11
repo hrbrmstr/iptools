@@ -314,3 +314,48 @@ std::vector < bool > asio_bindings::validate_range_(std::vector < std::string > 
   }
   return output;
 }
+
+
+std::vector < std::string > asio_bindings::tokenise_xff(std::string x_forwarded_for){
+  std::vector < std::string > output;
+  std::string holding;
+  std::stringstream strm(x_forwarded_for);
+  while(strm.good()){
+    getline(strm, holding, ',');
+    output.push_back(holding);
+  }
+  return output;
+}
+
+std::vector < std::string > asio_bindings::xff_normalise(std::vector < std::string > ip_addresses,
+                                          std::vector < std::string > x_forwarded_for){
+
+  unsigned int input_size = ip_addresses.size();
+  if(input_size != x_forwarded_for.size()){
+    throw std::range_error("the ip_addresses and x_forwarded_for vectors must be the same size");
+  }
+
+  boost::asio::ip::address ip_check;
+  std::vector < std::string > holding;
+  for(unsigned int i = 0; i < input_size; i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
+    if(x_forwarded_for[i] != "-"){
+      holding = tokenise_xff(x_forwarded_for[i]);
+      for(unsigned int x = 0; x < holding.size(); x++){
+        try{
+          ip_check = boost::asio::ip::address::from_string(holding[x]);
+          if(ip_check.is_v4() || ip_check.is_v6()){
+            ip_addresses[i] = holding[x];
+            break;
+          }
+        } catch(...){
+
+        }
+      }
+    }
+  }
+
+  return ip_addresses;
+}

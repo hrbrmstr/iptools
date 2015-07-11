@@ -1,5 +1,7 @@
 #include <Rcpp.h>
 #include <boost/asio.hpp>
+#include <iostream>
+#include <sstream>
 
 using namespace Rcpp;
 
@@ -95,6 +97,18 @@ private:
    * or isn't a valid IP at all"
    */
   bool validate_single_range(std::string range);
+
+  /**
+   * A function for tokenising XFF fields
+   *
+   * @param x_forwarded_for an x_forwarded_for field
+   *
+   * @see xff_normalise which uses this
+   *
+   * @return a vector containing the chain of IP addresses
+   * split out from the XFF field.
+   */
+  std::vector < std::string > tokenise_xff(std::string x_forwarded_for);
 
 public:
 
@@ -215,6 +229,21 @@ public:
    * or isn't a valid IP at all"
    */
   std::vector < bool > validate_range_(std::vector < std::string > ranges);
+
+  /**
+   * A normaliser for the x_forwarded_for HTTP field. Takes a vector of IPs and the
+   * corresponding XFF headers and grabs the earliest valid XFF.
+   *
+   * @param ip_addresses a vector of IP addresses.
+   *
+   * @param x_forwarded_for a vector of x_forwarded_for fields
+   *
+   * @return a vector of normalised XFF fields - specifically, the earliest valid
+   * IP address in the chain.
+   *
+   */
+  std::vector < std::string > xff_normalise(std::vector < std::string > ip_addresses,
+                                            std::vector < std::string > x_forwarded_for);
 };
 
 #endif

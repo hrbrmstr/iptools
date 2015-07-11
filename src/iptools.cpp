@@ -233,3 +233,28 @@ std::vector < bool > validate_range(std::vector < std::string > ranges){
   asio_bindings asio_inst;
   return asio_inst.validate_range_(ranges);
 }
+
+//'@title Take vectors of IPs and X-Forwarded-For headers and produce single, normalised
+//'IP addresses.
+//'@description \code{xff_extract} takes IP addresses and x_forwarded_for
+//'values and, in the event that x_forwarded_for is non-null, attempts to
+//'extract the "real" IP closest to the client.
+//'
+//'@param ip_addresses a vector of IP addresses
+//'
+//'@param x_forwarded_fors an equally-sized vector of X-Forwarded-For header
+//'contents.
+//'
+//'@return a vector of IP addresses, incorporating the XFF header value
+//'where appropriate.
+//'
+//'@examples
+//'xff_extract("192.168.0.1", "193.168.0.1, 230.98.107.1")
+//'
+//'@export
+// [[Rcpp::export]]
+std::vector < std::string > xff_extract(std::vector < std::string > ip_addresses,
+                                          std::vector < std::string > x_forwarded_for){
+  asio_bindings asio_inst;
+  return asio_inst.xff_normalise(ip_addresses, x_forwarded_for);
+}

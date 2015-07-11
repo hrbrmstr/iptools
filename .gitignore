@@ -8,3 +8,5 @@
 inst/doc
 config.log
 config.staus
+/src/Makevars
+config.status
