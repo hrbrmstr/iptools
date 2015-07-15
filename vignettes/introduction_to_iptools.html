@@ -10,7 +10,7 @@
 
 <meta name="author" content="Oliver Keyes" />
 
-<meta name="date" content="2015-05-02" />
+<meta name="date" content="2015-07-15" />
 
 <title>Introduction to iptools</title>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Introduction to iptools</h1>
 <h4 class="author"><em>Oliver Keyes</em></h4>
-<h4 class="date"><em>2015-05-02</em></h4>
+<h4 class="date"><em>2015-07-15</em></h4>
 </div>
 
 
@@ -64,7 +64,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="validating-converting-and-classifying-ip-addresses" class="section level3">
 <h3>Validating, converting and classifying IP addresses</h3>
 <p>How do you know an IP address is an IP address? How do you know what <em>type</em> of IP address it is? Most of the time the answer is a complicated regular expression, made more complicated by the need to check for things that are syntactically valid IP addresses, but aren’t actually possible. <code>iptools</code> contains <code>ip_classify</code>, which accepts a vector of IP addresses (or things that might be IP addresses) and identifies whether they’re valid - and if they are valid, what type they are.</p>
-<pre class="sourceCode r"><code class="sourceCode r">ips &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;192.168.0.1&quot;</span>,<span class="st">&quot;2607:f8b0:4006:80b::aaa&quot;</span>,<span class="st">&quot;the next IP is also invalid&quot;</span>,<span class="st">&quot;256.256.190.900&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">ips &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;192.168.0.1&quot;</span>, <span class="st">&quot;2607:f8b0:4006:80b::aaa&quot;</span>,
+         <span class="st">&quot;the next IP is also invalid&quot;</span>, <span class="st">&quot;256.256.190.900&quot;</span>)
 <span class="kw">ip_classify</span>(ips)
 [<span class="dv">1</span>] <span class="st">&quot;IPv4&quot;</span>    <span class="st">&quot;IPv6&quot;</span>    <span class="st">&quot;Invalid&quot;</span> <span class="st">&quot;Invalid&quot;</span></code></pre>
 <p>Once you’ve validated and classified the IPs, you might want to look at them in their numeric form, rather than the “dotted-decimal” form - or you might have numeric forms, and need dotted-decimal. Either way, there’s a function for it.</p>
@@ -100,13 +101,18 @@ numeric_ips
 <span class="dv">1</span>  <span class="fl">172.18.0.0</span>   <span class="fl">172.18.0.15</span>
 <span class="dv">2</span> <span class="fl">148.20.57.0</span>  <span class="fl">148.20.57.15</span>
 <span class="dv">3</span> <span class="fl">148.20.57.0</span> <span class="fl">148.20.57.255</span></code></pre>
-<p>If you want all the values within a certain range, rather than just the smallest and largest, you can use On the other hand, if you simply want to check if an IP address is <em>within</em> a certain range, you can use <code>ip_in_range</code>, which accepts a vector of IP addresses and either one range, or an equally-sized vector of ranges, to check them against. It then tells you which entries are within the range (TRUE) or not (FALSE):</p>
+<p>If you want all the values within a certain range, rather than just the smallest and largest, you can use <code>range_generate</code>, which provides you with all of the valid addresses within a specific IP range:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range_generate</span>(<span class="dt">range =</span> <span class="st">&quot;148.20.57.0/28&quot;</span>)
+[<span class="dv">1</span>]  <span class="st">&quot;148.20.57.0&quot;</span>  <span class="st">&quot;148.20.57.1&quot;</span>  <span class="st">&quot;148.20.57.2&quot;</span>  <span class="st">&quot;148.20.57.3&quot;</span>  <span class="st">&quot;148.20.57.4&quot;</span>
+[<span class="dv">6</span>]  <span class="st">&quot;148.20.57.5&quot;</span>  <span class="st">&quot;148.20.57.6&quot;</span>  <span class="st">&quot;148.20.57.7&quot;</span>  <span class="st">&quot;148.20.57.8&quot;</span> <span class="st">&quot;148.20.57.9&quot;</span>
+[<span class="dv">11</span>] <span class="st">&quot;148.20.57.10&quot;</span> <span class="st">&quot;148.20.57.11&quot;</span> <span class="st">&quot;148.20.57.12&quot;</span> <span class="st">&quot;148.20.57.13&quot;</span> <span class="st">&quot;148.20.57.14&quot;</span> <span class="st">&quot;148.20.57.15&quot;</span></code></pre>
+<p>On the other hand, if you simply want to check if an IP address is <em>within</em> a certain range, without caring about the range itself, you can use <code>ip_in_range</code>. This accepts a vector of IP addresses and either one range, or an equally-sized vector of ranges, to check them against. It then tells you which of the provided IPs are within the range (TRUE) or not (FALSE):</p>
 <pre class="sourceCode r"><code class="sourceCode r">ips &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;148.20.57.15&quot;</span>, <span class="st">&quot;148.20.57.255&quot;</span>)
 <span class="kw">ip_in_range</span>(ips, <span class="st">&quot;148.20.57.0/28&quot;</span>)
 [<span class="dv">1</span>]  <span class="ot">TRUE</span> <span class="ot">FALSE</span></code></pre>
 </div>
-<div id="generating-elements" class="section level3">
-<h3>Generating elements</h3>
+<div id="generating-ip-addresses" class="section level3">
+<h3>Generating IP addresses</h3>
 <p>Sometimes you need spoof data - IPs that are valid, but aren’t sourced from anywhere in particular. <code>iptools</code> contains <code>ip_random</code>, which lets you generate a set of pseudo-random and totally valid IPv4 addresses:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ip_random</span>(<span class="dt">n =</span> <span class="dv">5</span>)</code></pre>
 </div>

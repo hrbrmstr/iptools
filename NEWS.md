@@ -1,9 +1,13 @@
-iptools 0.2.0 [WIP]
+iptools 0.2.1
+=============
+* XFF origin extractor included as xff_extract
+* Documentation improvements
+
+iptools 0.2.0
 =============
 NEW FEATURES
 * Total internal rewrite. Check out the vignettes!
 * IP DNS resolution now handles IPv6 IPs
-* XFF origin extractor included as xff_extract
 
 BUG FIXES
 
