@@ -8,6 +8,13 @@ Easy IP address handling with iptools
 
 Available [on CRAN](http://cran.r-project.org/web/packages/iptools/)
 
+### NEW FOR 0.3.0.x!
+
+Thanks to @eddelbuettel we've thinned down this version of `iptools` and it should also work on Windows now! Until `AsioHeaders` is in CRAN, please do the following to test this version:
+
+    devtools::install_github("eddelbuettel/asioheaders")
+    devtools::install_github("hrbrmstr/iptools")
+
 ### Functionality
 
 The package primarily supports IPv4 addresses due to deficiencies in R's support for large numbers, but there is IPv6 support for some functionality, and we plan to build more in as R improves and as we do. Functionality includes:
@@ -50,14 +57,11 @@ library(iptools)
 library(testthat)
 
 date()
-#> [1] "Wed Jul  1 19:31:26 2015"
+#> [1] "Wed Dec 30 14:24:02 2015"
 
 test_dir("tests/")
-#> Test IP generators : ......
-#> Test IP to hostname and hostname to IP resolution : ..................
-#> Test IP conversion : ..................
-#> Ensure that ip_in_range and range_boundaries work : ...........................
-#> Test range and IP validation : .............
+#> testthat results ===========================================================
+#> OK: 64 SKIPPED: 0 FAILED: 0
 ```
 
 ### Code of Conduct

@@ -1,2 +1,0 @@
-PKG_CPPFLAGS=@CXXFLAGS@ @CPPFLAGS@ -DNDEBUG -g
-PKG_LIBS=@LDFLAGS@ -lboost_system -lboost_regex

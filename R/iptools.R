@@ -6,6 +6,7 @@
 #' @docType package
 #' @useDynLib iptools
 #' @importFrom Rcpp sourceCpp
+#' @import AsioHeaders
 #' @import utils
 #' @import stats
 NULL

@@ -1,26 +1,30 @@
 Package: iptools
 Type: Package
 Title: Manipulate, Validate and Resolve IP Addresses
-Version: 0.2.1
-Date: 2015-07-15
-Author: Bob Rudis <bob@rudis.net> [aut, cre], Oliver Keyes <ironholds@gmail.com> [aut]
+Version: 0.3.0.9000
+Date: 2015-12-30
+Author: Bob Rudis <bob@rudis.net> [aut, cre], Oliver Keyes <ironholds@gmail.com>
+    [aut]
 Maintainer: Bob Rudis <bob@rudis.net>
 Description: A toolkit for manipulating,
-             validating and testing IP addresses and ranges, along with
-             datasets relating to IP addresses. While it primarily has
-             support for the IPv4 address space, more extensive IPv6 support
-             is intended.
+    validating and testing IP addresses and ranges, along with
+    datasets relating to IP addresses. While it primarily has
+    support for the IPv4 address space, more extensive IPv6 support
+    is intended.
 License: MIT + file LICENSE
-SystemRequirements: Boost.Asio and Boost.Regex from http://www.boost.org/. See README.
+SystemRequirements: Boost.Asio and Boost.Regex from http://www.boost.org/. See
+    README.
 NeedsCompilation: yes
-Depends: R (>= 2.10)
+Depends:
+    R (>= 2.10)
 Suggests:
     testthat,
     knitr
 Imports:
     Rcpp (>= 0.11.2),
     utils,
-    stats
-LinkingTo: BH, Rcpp
+    stats,
+    AsioHeaders
+LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr
-OS_type: unix
+RoxygenNote: 5.0.1
