@@ -4,7 +4,7 @@
 Easy IP address handling with iptools
 -------------------------------------
 
-`iptools` is a set of tools for a working with IP addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `Boost` libraries. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
+`iptools` is a set of tools for a working with IP addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `AsioHeaders` package. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
 Available [on CRAN](http://cran.r-project.org/web/packages/iptools/)
 
@@ -36,19 +36,7 @@ devtools::install_github("hrbrmstr/iptools")
 install.packages("iptools")
 ```
 
-`iptools` depends on the [Boost](http://boost.org) library, which can be obtained on most linux distributions with:
-
-    sudo apt-get install libboost-all-dev
-
-or
-
-    sudo yum install boost-devel
-
-and on `homebrew` (Mac OSX) with:
-
-    brew install boost
-
-`iptools` does not currently work easily on Windows; It *may* be possible to get it working with a solid, separate build of Boost for Windows under cygwin and setting environment variables properly. The first person(s) to get this working under Windows gets a free copy of [Bob's book](http://dds.ec/amzn).
+`iptools` depends on the [AsioHeaders](https://github.com/eddelbuettel/asioheaders) package.
 
 ### Test Results
 
@@ -57,7 +45,7 @@ library(iptools)
 library(testthat)
 
 date()
-#> [1] "Wed Dec 30 14:24:02 2015"
+#> [1] "Wed Dec 30 15:44:36 2015"
 
 test_dir("tests/")
 #> testthat results ===========================================================
