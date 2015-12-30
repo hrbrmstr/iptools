@@ -11,6 +11,9 @@ env:
 apt_packages:
   - libboost-all-dev
 
+r_github_packages:
+  - eddelbuettel/asioheaders
+
 notifications:
   email:
     on_success: change
