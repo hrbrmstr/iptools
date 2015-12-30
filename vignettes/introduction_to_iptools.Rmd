@@ -42,8 +42,7 @@ These functions only currently work for IPv4 IPs - we'll have IPv6 support as so
 
 ### Resolving hostnames
 
-Thanks to Boost's [asio networking library](http://www.boost.org/doc/libs/1_58_0/doc/html/boost_asio.html), which is
-integrated with `iptools`, we can take a hostname and work out what IP address(es) are associated with it:
+The `iptools` package has integrated the `AsioHeaders` package which includes the [asio networking library](http://think-async.com/). Thanks to this we can take a hostname and work out what IP address(es) are associated with it:
 
 ```{r eval=FALSE}
 hostname_to_ip("lga15s49-in-f6.1e100.net")
