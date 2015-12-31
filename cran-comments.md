@@ -1,9 +1,20 @@
-There is a SystemRequirements field that has external dependency information and an additional README with explicit library installation recommendations.
+This is an overhaul of the package to use the new AsioHeaders by Dirk.
 
-There is also an INSTALL file that notes that this does not compile under Windows (the OS_type DESCRIPTION field has been set accordingly to 'unix').
+It has been tested on two Windows systems, 3 Linux systems and 4 OS X systems
+as well as WinBuilder (a mixture of devel and stable on most of those systems).
 
-As stated in the README, the package relies on Boost Regex and Boost ASIO which require compilation (i.e. are not just usable with the BH package) and that requires a full cygwin setup (they don't compile with regular Rtools) and then further configuration. It is highly unlikely anyone will be able to get it to work easily on Windows without significant effort.
+There's one NOTE about:
 
-We believe there is enough merit/utility in the library (extremely fast IP address operations useful for cybersecurity research and general internet/web large scale analyses) that we are attempting to get it on CRAN.
+* checking data for non-ASCII characters ... NOTE
+  Note: found 12 marked UTF-8 strings
+  
+That's fine given that there are UTF-8 domain names in some data files.
 
-There is a configuration script for the C/C++ src build and it has been tested on vanilla Ubuntu Trusty/Precise (64-bit) systems, CentOS 7.1, Debian 8 (r-devel) and OS X 10.10.3.
+It's also been tested against g++ & clang compilers.
+
+It's been checked with devtools::check(), RStudio "Check" and std R pkg check
+from the command-line on all three platforms.
+
+If it fails on Solaris, it fails with apologies but also with complete knowledge
+that it's highly unlikely Solaris folks are going to be doing work requiring
+manipulation of IP addresses.

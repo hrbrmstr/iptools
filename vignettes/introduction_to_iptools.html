@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Oliver Keyes" />
+
+<meta name="date" content="2015-12-30" />
+
+<title>Introduction to iptools</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Introduction to iptools</h1>
+<h4 class="author"><em>Oliver Keyes</em></h4>
+<h4 class="date"><em>2015-12-30</em></h4>
+</div>
+
+
+<div id="ip-handling-conversion-and-validation" class="section level2">
+<h2>IP handling, conversion and validation</h2>
+<p><code>iptools</code> is a package to make IP addresses convenient to deal with, parse and validate. It is heavily influenced by the Python <a href="https://python-iptools.readthedocs.org/en/latest/">iptools</a> module, and will hopefully make users’ lives a heck of a lot easier if they have to deal with IP data. Much of it is currently IPv4-specific, out of necessity, but as R’s support for bigger numbers increases, we’ll hopefully make as much of it support IPv6 as possible!</p>
+<div id="validating-converting-and-classifying-ip-addresses" class="section level3">
+<h3>Validating, converting and classifying IP addresses</h3>
+<p>How do you know an IP address is an IP address? How do you know what <em>type</em> of IP address it is? Most of the time the answer is a complicated regular expression, made more complicated by the need to check for things that are syntactically valid IP addresses, but aren’t actually possible. <code>iptools</code> contains <code>ip_classify</code>, which accepts a vector of IP addresses (or things that might be IP addresses) and identifies whether they’re valid - and if they are valid, what type they are.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ips &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;192.168.0.1&quot;</span>, <span class="st">&quot;2607:f8b0:4006:80b::aaa&quot;</span>,
+         <span class="st">&quot;the next IP is also invalid&quot;</span>, <span class="st">&quot;256.256.190.900&quot;</span>)
+<span class="kw">ip_classify</span>(ips)
+[<span class="dv">1</span>] <span class="st">&quot;IPv4&quot;</span>    <span class="st">&quot;IPv6&quot;</span>    <span class="st">&quot;Invalid&quot;</span> <span class="st">&quot;Invalid&quot;</span></code></pre></div>
+<p>Once you’ve validated and classified the IPs, you might want to look at them in their numeric form, rather than the “dotted-decimal” form - or you might have numeric forms, and need dotted-decimal. Either way, there’s a function for it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Dotted-decimal to numeric</span>
+ips &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;192.168.0.1&quot;</span>,<span class="st">&quot;172.18.0.0&quot;</span>,<span class="st">&quot;172.18.0.15&quot;</span>)
+numeric_ips &lt;-<span class="st"> </span><span class="kw">ip_to_numeric</span>(ips)
+numeric_ips
+[<span class="dv">1</span>] <span class="dv">3232235521</span> <span class="dv">2886860800</span> <span class="dv">2886860815</span>
+
+<span class="co">#And back again</span>
+<span class="kw">numeric_to_ip</span>(numeric_ips)
+[<span class="dv">1</span>] <span class="st">&quot;192.168.0.1&quot;</span> <span class="st">&quot;172.18.0.0&quot;</span>  <span class="st">&quot;172.18.0.15&quot;</span></code></pre></div>
+<p>These functions only currently work for IPv4 IPs - we’ll have IPv6 support as soon as R can handle numbers that big!</p>
+</div>
+<div id="resolving-hostnames" class="section level3">
+<h3>Resolving hostnames</h3>
+<p>The <code>iptools</code> package has integrated the <code>AsioHeaders</code> package which includes the <a href="http://think-async.com/">asio networking library</a>. Thanks to this we can take a hostname and work out what IP address(es) are associated with it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hostname_to_ip</span>(<span class="st">&quot;lga15s49-in-f6.1e100.net&quot;</span>)
+[[<span class="dv">1</span>]]
+[<span class="dv">1</span>] <span class="st">&quot;173.194.123.102&quot;</span></code></pre></div>
+<p>This works in reverse, too:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ip_to_hostname</span>(<span class="st">&quot;173.194.123.10&quot;</span>)
+[[<span class="dv">1</span>]]
+[<span class="dv">1</span>] <span class="st">&quot;lga15s46-in-f10.1e100.net&quot;</span></code></pre></div>
+<p>Both operations are fully recognised, but aren’t particularly fast - in fact, they’re incredibly slow compared to the rest of the package - since they need to call out of the system to work. For the same reason, they require a net connection to work, and may slow down said connection while running. You’ve been warned.</p>
+</div>
+<div id="handling-ip-ranges" class="section level3">
+<h3>Handling IP ranges</h3>
+<p>As well as specific, unique IP addresses, you may also encounter IP ranges - subsets of the IP address space, looking something like “172.18.0.0/28”. <code>iptools</code> provides a variety of functions to manipulate and expand on these.</p>
+<p><code>range_boundaries</code> takes an IP range (or as many IP ranges as you want!) and produces a data.frame containing the smallest-valued and largest-valued IP addresses in that range:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range_boundaries</span>(<span class="kw">c</span>(<span class="st">&quot;172.18.0.0/28&quot;</span>,<span class="st">&quot;148.20.57.0/28&quot;</span>,<span class="st">&quot;148.20.57.0/24&quot;</span>)
+   minimum_ip    maximum_ip
+<span class="dv">1</span>  <span class="fl">172.18.0.0</span>   <span class="fl">172.18.0.15</span>
+<span class="dv">2</span> <span class="fl">148.20.57.0</span>  <span class="fl">148.20.57.15</span>
+<span class="dv">3</span> <span class="fl">148.20.57.0</span> <span class="fl">148.20.57.255</span></code></pre></div>
+<p>If you want all the values within a certain range, rather than just the smallest and largest, you can use <code>range_generate</code>, which provides you with all of the valid addresses within a specific IP range:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range_generate</span>(<span class="dt">range =</span> <span class="st">&quot;148.20.57.0/28&quot;</span>)
+[<span class="dv">1</span>]  <span class="st">&quot;148.20.57.0&quot;</span>  <span class="st">&quot;148.20.57.1&quot;</span>  <span class="st">&quot;148.20.57.2&quot;</span>  <span class="st">&quot;148.20.57.3&quot;</span>  <span class="st">&quot;148.20.57.4&quot;</span>
+[<span class="dv">6</span>]  <span class="st">&quot;148.20.57.5&quot;</span>  <span class="st">&quot;148.20.57.6&quot;</span>  <span class="st">&quot;148.20.57.7&quot;</span>  <span class="st">&quot;148.20.57.8&quot;</span> <span class="st">&quot;148.20.57.9&quot;</span>
+[<span class="dv">11</span>] <span class="st">&quot;148.20.57.10&quot;</span> <span class="st">&quot;148.20.57.11&quot;</span> <span class="st">&quot;148.20.57.12&quot;</span> <span class="st">&quot;148.20.57.13&quot;</span> <span class="st">&quot;148.20.57.14&quot;</span> <span class="st">&quot;148.20.57.15&quot;</span></code></pre></div>
+<p>On the other hand, if you simply want to check if an IP address is <em>within</em> a certain range, without caring about the range itself, you can use <code>ip_in_range</code>. This accepts a vector of IP addresses and either one range, or an equally-sized vector of ranges, to check them against. It then tells you which of the provided IPs are within the range (TRUE) or not (FALSE):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ips &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;148.20.57.15&quot;</span>, <span class="st">&quot;148.20.57.255&quot;</span>)
+<span class="kw">ip_in_range</span>(ips, <span class="st">&quot;148.20.57.0/28&quot;</span>)
+[<span class="dv">1</span>]  <span class="ot">TRUE</span> <span class="ot">FALSE</span></code></pre></div>
+</div>
+<div id="generating-ip-addresses" class="section level3">
+<h3>Generating IP addresses</h3>
+<p>Sometimes you need spoof data - IPs that are valid, but aren’t sourced from anywhere in particular. <code>iptools</code> contains <code>ip_random</code>, which lets you generate a set of pseudo-random and totally valid IPv4 addresses:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ip_random</span>(<span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

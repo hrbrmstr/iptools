@@ -1,8 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^README.Rmd$
-^NEWS.md$
-^README.md$
+^README\.Rmd$
+^README\.html$
+^NEWS\.md$
+^README\.md$
 ^CONDUCT\.md$
 ^README\.Rmd$
 ^README-.*\.png$

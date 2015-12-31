@@ -1,3 +1,8 @@
+iptools 0.3.0
+=============
+* Removal of the need for linking to Boost
+* Windows support!
+
 iptools 0.2.1
 =============
 * XFF origin extractor included as xff_extract

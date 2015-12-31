@@ -6,14 +6,10 @@ Date: 2015-12-30
 Author: Bob Rudis <bob@rudis.net> [aut, cre], Oliver Keyes <ironholds@gmail.com>
     [aut]
 Maintainer: Bob Rudis <bob@rudis.net>
-Description: A toolkit for manipulating,
-    validating and testing IP addresses and ranges, along with
-    datasets relating to IP addresses. While it primarily has
-    support for the IPv4 address space, more extensive IPv6 support
-    is intended.
+Description: A toolkit for manipulating, validating and testing IP addresses and
+    ranges, along with datasets relating to IP addresses. While it primarily has
+    support for the IPv4 address space, more extensive IPv6 support is intended.
 License: MIT + file LICENSE
-SystemRequirements: Boost.Asio and Boost.Regex from http://www.boost.org/. See
-    README.
 NeedsCompilation: yes
 Depends:
     R (>= 2.10)
@@ -25,6 +21,7 @@ Imports:
     utils,
     stats,
     AsioHeaders
+Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
