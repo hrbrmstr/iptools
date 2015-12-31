@@ -10,6 +10,8 @@ Description: A toolkit for manipulating, validating and testing IP addresses and
     ranges, along with datasets relating to IP addresses. While it primarily has
     support for the IPv4 address space, more extensive IPv6 support is intended.
 License: MIT + file LICENSE
+URL: http://github.com/hrbrmstr/iptools
+BugReports: https://github.com/hrbrmstr/iptools/issues
 NeedsCompilation: yes
 Depends:
     R (>= 2.10)
