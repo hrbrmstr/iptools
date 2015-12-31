@@ -2,6 +2,7 @@ iptools 0.3.0
 =============
 * Removal of the need for linking to Boost
 * Windows support!
+* is\_ipv4, is\_ipv6, is\_valid and is\_multicast added.
 
 iptools 0.2.1
 =============

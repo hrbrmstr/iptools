@@ -196,6 +196,17 @@ public:
   std::vector < std::string > classify_ip_ (std::vector < std::string > ip_addresses);
 
   /**
+   * Identify if IP addresses are multicast or not
+   *
+   * @param a vector of strings containing IP addresses, in
+   * dotted-decimal form.
+   *
+   * @return a boolean vector containing trues for those that
+   * are multicast, and false for those that aren't.
+   */
+  LogicalVector is_multicast_ (std::vector < std::string > ip_addresses);
+
+  /**
    * A function for identifying whether or vector of
    * IP addresses fall within a CIDR range
    *

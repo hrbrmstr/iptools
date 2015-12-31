@@ -110,7 +110,8 @@ numeric_to_ip <- function(ip_addresses) {
 #'@return a vector containing the class of each input IP address; either
 #'"IPv4", "IPv6" or, for IP addresses that were not valid, "Invalid".
 #'
-#'@seealso \code{\link{ip_to_hostname}} for resolving IP addresses to their
+#'@seealso \code{\link{is_valid}} et al for logical checks of IP addresses,
+#'\code{\link{ip_to_hostname}} for resolving IP addresses to their
 #'hostnames, and \code{\link{ip_to_numeric}} for converting (IPv4) IP addresses
 #'to their numeric representation.
 #'
@@ -237,5 +238,32 @@ validate_range <- function(ranges) {
 #'@export
 xff_extract <- function(ip_addresses, x_forwarded_for) {
     .Call('iptools_xff_extract', PACKAGE = 'iptools', ip_addresses, x_forwarded_for)
+}
+
+#'@title Logical checks for IP addresses
+#'@description Check whether an IP address is valid with \code{is_valid},
+#'IPv4 with \code{is_ipv4}, IPv6 with \code{is_ipv6}, or multicast (intended to point to
+#'multiple machines) with \code{is_multicast}
+#'
+#'@param ip_addresses a vector of IP addresses
+#'
+#'@seealso \code{\link{ip_classify}} for character rather than logical classification.
+#'
+#'@examples
+#'# This is multicast
+#'is_multicast("224.0.0.2")
+#'
+#'# It's also IPv4
+#'is_ipv4("224.0.0.2")
+#'
+#'
+#'# It's not IPv6
+#'is_ipv6("224.0.0.2")
+#'
+#'@aliases is_ipv4 is_multicast is_ipv6 is_valid
+#'@rdname is_checks
+#'@export
+is_multicast <- function(ip_addresses) {
+    .Call('iptools_is_multicast', PACKAGE = 'iptools', ip_addresses)
 }
 

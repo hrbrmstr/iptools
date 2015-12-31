@@ -403,6 +403,31 @@ std::vector < std::string > asio_bindings::classify_ip_ (std::vector < std::stri
   return ip_addresses;
 }
 
+LogicalVector asio_bindings::is_multicast_ (std::vector < std::string > ip_addresses){
+
+  unsigned int input_size = ip_addresses.size();
+  LogicalVector output(input_size);
+  asio::ip::address holding;
+
+  for(unsigned int i = 0; i < input_size; i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
+    try{
+      holding = asio::ip::address::from_string(ip_addresses[i]);
+      if(holding.is_multicast()){
+        output[i] = true;
+      } else {
+        output[i] = false;
+      }
+    } catch(...){
+      output[i] = NA_LOGICAL;
+    }
+
+  }
+  return output;
+}
+
 std::vector < bool > asio_bindings::ip_in_range_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges){
 
   if(ip_addresses.size() != ranges.size() && ranges.size() != 1){
