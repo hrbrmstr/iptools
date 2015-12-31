@@ -1,16 +1,24 @@
-iptools relies on Boost.Asio for IP address conversions and Boost.Regex for
-working with IP addresses. This requires more than just Boost headers (i.e.
-you can't just install the BH R package and have iptools work).
+Easy IP address handling with iptools
 
-The easiest way to satisfy the requirements is to use the comprehensive Boost
-package available on most Unix-like systems:
+'iptools' is a set of tools for a working with IP addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the 'AsioHeaders' package. A current, lofty goal is to mimic most of the functionality of the Python 'iptools' module and make IP addresses first class R objects.
 
-       Debian/Ubuntu: apt-get install libboost-all-dev
-Fedora/CentOS/RedHat: yum install boost-devel
-         OS X/Darwin: brew install boost
 
-You may be able to get it working on some systems with the BH R package and just
-installing the Regex and System packages (if available separately on your system):
+Functionality
 
-       Debian/Ubuntu: apt-get install libboost-regex-dev libboost-system-dev
-Fedora/CentOS/RedHat: yum install boost-regex boost-system
+The package primarily supports IPv4 addresses due to deficiencies in R's support for large numbers, but there is IPv6 support for some functionality, and we plan to build more in as R improves and as we do. Functionality includes:
+
+- Converting IP addresses to their numeric form, and then back to strings, with
+  'ip_to_numeric' and 'numeric_to_ip';
+- Validating and classifying IP addresses with 'ip_classify';
+- Range generation and checking with 'range_boundaries', 'range_generate' and
+  'validate_range', and;
+- Several inbuilt IP-related datasets.
+
+The vignettes contain detailed examples and are well worth the viewing time.
+
+
+Thank You!
+
+We owe Dirk Eddelbuettel many thanks for creating the 'AsioHeaders' package
+which made it possible to both remove the Boost dependency and to get 'iptools'
+running under Windows.
