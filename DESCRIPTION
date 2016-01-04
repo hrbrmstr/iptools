@@ -21,7 +21,8 @@ Suggests:
 Imports:
     Rcpp (>= 0.11.2),
     utils,
-    stats
+    stats,
+    AsioHeaders
 Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr

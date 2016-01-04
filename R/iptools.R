@@ -8,4 +8,5 @@
 #' @importFrom Rcpp sourceCpp
 #' @import utils
 #' @import stats
+#' @import AsioHeaders
 NULL
