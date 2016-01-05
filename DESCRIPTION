@@ -27,3 +27,5 @@ Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
+Remotes:
+    eddelbuettel/asioheaders
