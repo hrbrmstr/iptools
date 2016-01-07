@@ -3,10 +3,14 @@
 
 #include <Rcpp.h>
 
+#ifdef __APPLE__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-local-typedef"
+#endif
 #include <asio.hpp>
+#ifdef __APPLE__
 #pragma clang diagnostic pop
+#endif
 
 #include "asio_bindings.h"
 

@@ -1,2 +1,0 @@
-PKG_CPPFLAGS=-I/usr/local/include -Wall -mtune=core2 -g -O2  -DNDEBUG -g
-PKG_LIBS=-L/usr/local/lib
