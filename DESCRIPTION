@@ -17,7 +17,8 @@ Depends:
     R (>= 2.10)
 Suggests:
     testthat,
-    knitr
+    knitr,
+    rmarkdown
 Imports:
     Rcpp (>= 0.11.2),
     utils,
