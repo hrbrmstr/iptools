@@ -15,10 +15,7 @@ Available [on CRAN](http://cran.r-project.org/web/packages/iptools/)
 
 ### NEW FOR 0.3.0.x!
 
-Thanks to @eddelbuettel we've thinned down this version of `iptools` and it should also work on Windows now! Until `AsioHeaders` is in CRAN, please do the following to test this version:
-
-    devtools::install_github("eddelbuettel/asioheaders")
-    devtools::install_github("hrbrmstr/iptools")
+Thanks to @eddelbuettel we've thinned down this version of `iptools` and it should also work on Windows now!
 
 ### Functionality
 
@@ -43,7 +40,7 @@ devtools::install_github("hrbrmstr/iptools")
 install.packages("iptools")
 ```
 
-`iptools` depends on the [AsioHeaders](https://github.com/eddelbuettel/asioheaders) package.
+`iptools` depends on the [AsioHeaders](https://github.com/eddelbuettel/asioheaders) package which is now in CRAN.
 
 ### Test Results
 
@@ -53,11 +50,11 @@ library(iptools)
 library(testthat)
 
 date()
-#> [1] "Wed Dec 30 22:18:23 2015"
+#> [1] "Thu Jan  7 12:05:33 2016"
 
 test_dir("tests/")
 #> testthat results ===========================================================
-#> OK: 64 SKIPPED: 0 FAILED: 0
+#> OK: 74 SKIPPED: 0 FAILED: 0
 ```
 
 ### Code of Conduct
