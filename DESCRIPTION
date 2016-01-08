@@ -25,6 +25,6 @@ Imports:
     stats,
     AsioHeaders
 Encoding: UTF-8
-LinkingTo: Rcpp, AsioHeaders
+LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1

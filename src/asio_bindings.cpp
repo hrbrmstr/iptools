@@ -1,3 +1,4 @@
+// [[Rcpp::depends(BH)]]
 // [[Rcpp::depends(AsioHeaders)]]
 
 #include <Rcpp.h>
