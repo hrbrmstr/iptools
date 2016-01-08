@@ -1,20 +1,23 @@
-This is an overhaul of the package to use the new AsioHeaders by Dirk.
+## Test environments
+- It has been tested on:
 
-It has been tested on two Windows systems, 3 Linux systems and 4 OS X systems
-as well as WinBuilder (a mixture of devel and stable on most of those systems).
+  * two Windows systems (release)
+  * 3 Linux systems (devel)
+  * 4 OS X systems (devel & release)
+  * WinBuilder (devel & release)
 
-There's one NOTE about:
+- It's also been tested against g++ & clang compilers.
 
-* checking data for non-ASCII characters ... NOTE
-  Note: found 12 marked UTF-8 strings
-  
-That's fine given that there are UTF-8 domain names in some data files.
+- It's been checked with devtools::check(), RStudio "Check" and std R pkg check
+  from the command-line on all three platforms.
 
-It's also been tested against g++ & clang compilers.
+## R CMD check results
+- There were no ERRORs, NOTEs or WARNINGs. 
+- The previous NOTE - "Note: found 12 marked UTF-8 strings" - has not come up
+  on any system we've done this round of package checks on.
 
-It's been checked with devtools::check(), RStudio "Check" and std R pkg check
-from the command-line on all three platforms.
-
-If it fails on Solaris, it fails with apologies but also with complete knowledge
-that it's highly unlikely Solaris folks are going to be doing work requiring
-manipulation of IP addresses.
+## Other
+- This is an overhaul of the package to use the new AsioHeaders pkg by Dirk which
+  makes it far more lightweight and able to support Windows installs. This has
+  also fixed the "CRAN Package Check Results for Package iptools" on OS X:
+  https://cran.rstudio.com/web/checks/check_results_iptools.html

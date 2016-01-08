@@ -50,7 +50,7 @@ library(iptools)
 library(testthat)
 
 date()
-#> [1] "Thu Jan  7 12:05:33 2016"
+#> [1] "Fri Jan  8 09:38:50 2016"
 
 test_dir("tests/")
 #> testthat results ===========================================================
