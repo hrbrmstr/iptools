@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.44526.svg)](https://zenodo.org/record/44526)
 [![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/iptools.svg?branch=master)](https://travis-ci.org/hrbrmstr/iptools)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/iptools)](http://cran.r-project.org/web/packages/iptools) 
@@ -22,7 +23,7 @@ knitr::opts_chunk$set(
 
 ## Easy IP address handling with iptools
 
-`iptools` is a set of tools for a working with IP addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `AsioHeaders` package. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
+`iptools` is a set of tools for working with IP addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `AsioHeaders` package. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
 Available [on CRAN](http://cran.r-project.org/web/packages/iptools/)
 
