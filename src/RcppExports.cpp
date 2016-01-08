@@ -5,6 +5,28 @@
 
 using namespace Rcpp;
 
+// ipv4matrix
+NumericMatrix ipv4matrix(CharacterVector ip);
+RcppExport SEXP iptools_ipv4matrix(SEXP ipSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type ip(ipSEXP);
+    __result = Rcpp::wrap(ipv4matrix(ip));
+    return __result;
+END_RCPP
+}
+// boundingBoxFromCIDR
+List boundingBoxFromCIDR(CharacterVector cidr);
+RcppExport SEXP iptools_boundingBoxFromCIDR(SEXP cidrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type cidr(cidrSEXP);
+    __result = Rcpp::wrap(boundingBoxFromCIDR(cidr));
+    return __result;
+END_RCPP
+}
 // hostname_to_ip
 std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::string > hostnames);
 RcppExport SEXP iptools_hostname_to_ip(SEXP hostnamesSEXP) {

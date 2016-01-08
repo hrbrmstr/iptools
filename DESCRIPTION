@@ -18,12 +18,17 @@ Depends:
 Suggests:
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    viridis
 Imports:
     Rcpp (>= 0.11.2),
     utils,
     stats,
-    AsioHeaders
+    AsioHeaders,
+    data.table,
+    grid,
+    RColorBrewer,
+    ISOcodes
 Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr
