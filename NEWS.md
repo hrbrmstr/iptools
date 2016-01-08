@@ -1,6 +1,5 @@
 iptools 0.3.1
 =============
-- Removed BH dependency
 
 iptools 0.3.0
 =============
