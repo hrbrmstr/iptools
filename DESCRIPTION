@@ -29,7 +29,6 @@ Imports:
     grid,
     RColorBrewer,
     ggplot2,
-    httr,
     ISOcodes
 Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
