@@ -11,7 +11,6 @@
 #' @import AsioHeaders
 #' @import grid
 #' @import ISOcodes
-#' @import data.table
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom ggplot2 ggplot geom_point aes labs scale_color_manual element_blank
 #' @importFrom ggplot2 scale_x_continuous scale_y_reverse coord_equal

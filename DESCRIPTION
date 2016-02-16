@@ -1,7 +1,7 @@
 Package: iptools
 Type: Package
 Title: Manipulate, Validate and Resolve 'IP' Addresses
-Version: 0.3.2.9000
+Version: 0.3.2.9001
 Date: 2016-01-08
 Author: Bob Rudis <bob@rudis.net> [aut, cre],
         Oliver Keyes <ironholds@gmail.com> [aut],
@@ -26,7 +26,6 @@ Imports:
     utils,
     stats,
     AsioHeaders,
-    data.table,
     grid,
     RColorBrewer,
     ggplot2,
