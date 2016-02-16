@@ -21,6 +21,11 @@ test_that("ip_in_range works with multiple IP values and multiple range values",
   expect_that(result, equals(c(TRUE,TRUE)))
 })
 
+test_that("/32s are handled correctly", {
+  result <- ip_in_range(c("8.8.8.8", "127.0.0.1"), "8.8.8.8/32")
+  expect_that(result, equals(c(TRUE, FALSE)))
+})
+
 test_that("ip_in_range error handlers function",{
   result <- ip_in_range("asdasdas12","aaaah")
   expect_that(is.vector(result, "logical"), equals(TRUE))
