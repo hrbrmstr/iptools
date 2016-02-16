@@ -1,8 +1,8 @@
 Package: iptools
 Type: Package
 Title: Manipulate, Validate and Resolve 'IP' Addresses
-Version: 0.3.2.9001
-Date: 2016-01-08
+Version: 0.3.2.9002
+Date: 2016-02-15
 Author: Bob Rudis <bob@rudis.net> [aut, cre],
         Oliver Keyes <ironholds@gmail.com> [aut],
         Tim Smith [ctb]
@@ -15,7 +15,7 @@ URL: http://github.com/hrbrmstr/iptools
 BugReports: https://github.com/hrbrmstr/iptools/issues
 NeedsCompilation: yes
 Depends:
-    R (>= 2.10)
+    R (>= 3.0.0)
 Suggests:
     testthat,
     knitr,

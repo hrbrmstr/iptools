@@ -17,7 +17,7 @@
 #' rng <- country_ranges(c("PW", "UZ"))
 country_ranges <- function(countries) {
 
-  data("ISO_3166_1", package="ISOcodes")
+  ISO_3166_1 <- get("ISO_3166_1", envir=.pkgenv)
 
   countries <- toupper(countries)
   retrieve <- countries[countries %in% ISO_3166_1$Alpha_2]
@@ -63,7 +63,7 @@ cached_country_cidrs <- function() {
 #' @export
 get_all_country_ranges <- function() {
 
-  data("ISO_3166_1", package="ISOcodes")
+  ISO_3166_1 <- get("ISO_3166_1", envir=.pkgenv)
 
   setNames(lapply(ISO_3166_1$Alpha_2, get_country_cidrs), ISO_3166_1$Alpha_2)
 
