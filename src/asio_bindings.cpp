@@ -476,8 +476,12 @@ DataFrame asio_bindings::calculate_range_(std::vector < std::string > ranges){
     max_holding[i] = holding[1];
     holding.clear();
   }
+
   return DataFrame::create(_["minimum_ip"] = min_holding,
                            _["maximum_ip"] = max_holding,
+                           _["min_numeric"] = ip_to_numeric_(min_holding),
+                           _["max_numeric"] = ip_to_numeric_(max_holding),
+                           _["range"] = ranges,
                            _["stringsAsFactors"] = false);
 }
 
