@@ -5,46 +5,6 @@
 
 using namespace Rcpp;
 
-// asn_init
-void asn_init(std::string path);
-RcppExport SEXP iptools_asn_init(SEXP pathSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::string >::type path(pathSEXP);
-    asn_init(path);
-    return R_NilValue;
-END_RCPP
-}
-// asn_db_is_loaded
-bool asn_db_is_loaded();
-RcppExport SEXP iptools_asn_db_is_loaded() {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    __result = Rcpp::wrap(asn_db_is_loaded());
-    return __result;
-END_RCPP
-}
-// asn_lookup_
-DataFrame asn_lookup_(std::vector < std::string > ips);
-RcppExport SEXP iptools_asn_lookup_(SEXP ipsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < std::string > >::type ips(ipsSEXP);
-    __result = Rcpp::wrap(asn_lookup_(ips));
-    return __result;
-END_RCPP
-}
-// asn_fin
-void asn_fin();
-RcppExport SEXP iptools_asn_fin() {
-BEGIN_RCPP
-    Rcpp::RNGScope __rngScope;
-    asn_fin();
-    return R_NilValue;
-END_RCPP
-}
 // hostname_to_ip
 std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::string > hostnames);
 RcppExport SEXP iptools_hostname_to_ip(SEXP hostnamesSEXP) {

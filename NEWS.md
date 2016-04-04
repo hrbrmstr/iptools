@@ -1,11 +1,15 @@
-iptools 0.3.1
+iptools 0.4.0
 =============
+* bug fix for `ip_in_range` always returniong TRUE for /32 ranges (@tdsmith)
+* enhanced `range_boundaries()` to include more columns in output
+* added `country_ranges()` which enables obtaining all the IPv4 ranges
+  "assigned" within a country.
 
 iptools 0.3.0
 =============
 * Removal of the need for linking to Boost
 * Windows support!
-* is\_ipv4, is\_ipv6, is\_valid and is\_multicast added.
+* `is_ipv4`, `is_ipv6`, `is_valid` and `is_multicast` added.
 
 iptools 0.2.1
 =============

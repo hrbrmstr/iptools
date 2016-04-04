@@ -1,1 +1,1 @@
-PKG_LIBS = -lgeoip
+PKG_LIBS =

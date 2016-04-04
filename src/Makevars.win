@@ -1,1 +1,1 @@
-PKG_LIBS = -lwsock32 -lws2_32 -lgeoip
+PKG_LIBS = -lwsock32 -lws2_32

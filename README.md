@@ -14,7 +14,7 @@
 
 Available [on CRAN](http://cran.r-project.org/web/packages/iptools/)
 
-### NEW FOR 0.3.0.x!
+### NEW FOR 0.3.0.x+!
 
 Thanks to @eddelbuettel we've thinned down this version of `iptools` and it should also work on Windows now!
 
@@ -24,7 +24,7 @@ The package primarily supports IPv4 addresses due to deficiencies in R's support
 
 -   Converting IP addresses to their numeric form, and then back to strings, with `ip_to_numeric` and `numeric_to_ip`;
 -   Validating and classifying IP addresses with `ip_classify`;
--   Range generation and checking with `range_boundaries`, `range_generate` and `validate_range`, and;
+-   Range generation and checking with `range_boundaries`, `range_generate` and `validate_range`, `country_ranges`, and;
 -   Several inbuilt IP-related datasets.
 
 For more information, see the vignettes on [the functionality](https://github.com/hrbrmstr/iptools/blob/master/vignettes/introduction_to_iptools.Rmd) and [the datasets](https://github.com/hrbrmstr/iptools/blob/master/vignettes/iptools_datasets.Rmd) within `iptools`.
@@ -51,11 +51,11 @@ library(iptools)
 library(testthat)
 
 date()
-#> [1] "Fri Jan  8 14:26:28 2016"
+#> [1] "Mon Apr  4 11:30:50 2016"
 
 test_dir("tests/")
 #> testthat results ===========================================================
-#> OK: 74 SKIPPED: 0 FAILED: 0
+#> OK: 75 SKIPPED: 0 FAILED: 0
 ```
 
 ### Code of Conduct

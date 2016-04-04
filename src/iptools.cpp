@@ -176,7 +176,7 @@ std::vector < std::string > ip_classify(std::vector < std::string > ip_addresses
 //' @examples
 //' range_boundaries("172.18.0.0/28")
 //' ##   minimum_ip  maximum_ip min_numeric max_numeric         range
-//' ## 1 172.18.0.0 172.18.0.15  2886860800  2886860815 172.18.0.0/28//'
+//' ## 1 172.18.0.0 172.18.0.15  2886860800  2886860815 172.18.0.0/28
 //'
 //' @seealso \code{\link{ip_in_range}} to calculate if an IP address
 //' falls within a particular range, or \code{\link{ip_to_numeric}} to

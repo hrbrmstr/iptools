@@ -2,9 +2,8 @@
 #'
 #' @description A toolkit for manipulating, validating and testing 'IP' addresses and
 #'  ranges, along with datasets relating to 'IP' addresses. Tools are also provided
-#'  to retrieve autonomous system information for IPv4 addresses and map IPv4 blocks
-#'  to country codes. While it primarily has support for the 'IPv4' address space,
-#'  more extensive 'IPv6' support is intended.
+#'  to map IPv4 blocks to country codes. While it primarily has support for the 'IPv4'
+#'  address space, more extensive 'IPv6' support is intended.
 #'
 #' @name iptools
 #' @docType package
@@ -19,7 +18,4 @@
 #' @import stats
 #' @import AsioHeaders
 #' @import ISOcodes
-#' @import rappdirs
-#' @importFrom R.utils gunzip
-#' @importFrom stringi stri_split_fixed stri_replace_all_regex
 NULL
