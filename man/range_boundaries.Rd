@@ -14,13 +14,19 @@ work.}
 a data.frame of four columns, "minimum_ip" (containing the
 smallest IP in the provided range) and "maximum_ip" (containing the
 largest). "min_numeric" & "max_numeric" (the min & max numeric versions
-of "minimum_ip" and "maxiumu_ip") and the original range string.
+of "minimum_ip" and "maximum_ip") and the original range string.
 If the range was invalid, both columns will contain Invalid" as the value.
 }
 \description{
 when provided with a vector of IP ranges
 ("172.18.0.0/28"), \code{range_boundaries} calculates the
 maximum and minimum IP addresses in that range.
+}
+\examples{
+range_boundaries("172.18.0.0/28")
+##   minimum_ip  maximum_ip min_numeric max_numeric         range
+## 1 172.18.0.0 172.18.0.15  2886860800  2886860815 172.18.0.0/28//'
+
 }
 \seealso{
 \code{\link{ip_in_range}} to calculate if an IP address

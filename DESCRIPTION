@@ -1,35 +1,37 @@
 Package: iptools
 Type: Package
 Title: Manipulate, Validate and Resolve 'IP' Addresses
-Version: 0.3.2.9002
-Date: 2016-02-15
+Version: 0.4.0.9000
+Date: 2016-04-03
 Author: Bob Rudis <bob@rudis.net> [aut, cre],
         Oliver Keyes <ironholds@gmail.com> [aut],
         Tim Smith [ctb]
 Maintainer: Bob Rudis <bob@rudis.net>
 Description: A toolkit for manipulating, validating and testing 'IP' addresses and
-    ranges, along with datasets relating to 'IP' addresses. While it primarily has
-    support for the 'IPv4' address space, more extensive 'IPv6' support is intended.
+    ranges, along with datasets relating to 'IP' addresses. Tools are also provided
+    to retrieve autonomous system information for IPv4 addresses and map IPv4 blocks
+    to country codes. While it primarily has support for the 'IPv4' address space,
+    more extensive 'IPv6' support is intended.
 License: MIT + file LICENSE
 URL: http://github.com/hrbrmstr/iptools
 BugReports: https://github.com/hrbrmstr/iptools/issues
+SystemRequirements: Legacy maxmind libgeoip <https://github.com/maxmind/geoip-api-c>
 NeedsCompilation: yes
 Depends:
     R (>= 3.0.0)
 Suggests:
     testthat,
     knitr,
-    rmarkdown,
-    viridis
+    rmarkdown
 Imports:
     Rcpp (>= 0.11.2),
     utils,
     stats,
     AsioHeaders,
-    grid,
-    RColorBrewer,
-    ggplot2,
-    ISOcodes
+    ISOcodes,
+    rappdirs,
+    R.utils,
+    stringi
 Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr
