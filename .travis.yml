@@ -4,12 +4,12 @@ language: r
 warnings_are_errors: true
 sudo: required
 
+apt_packages:
+  - libgeoip-dev
+
 env:
  global:
    - CRAN: http://cran.rstudio.com
-
-r_github_packages:
-  - eddelbuettel/asioheaders
 
 notifications:
   email:
