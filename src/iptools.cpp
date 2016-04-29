@@ -115,6 +115,19 @@ std::vector < unsigned int > ip_to_numeric(std::vector < std::string > ip_addres
   asio_bindings asio_inst;
   return asio_inst.ip_to_numeric_(ip_addresses);
 }
+//' @export
+// [[Rcpp::export]]
+std::vector < unsigned long > v6_scope(std::vector < std::string > ip_addresses){
+  asio_bindings asio_inst;
+  return asio_inst.v6_scope_(ip_addresses);
+}
+
+//' @export
+// [[Rcpp::export]]
+std::vector < std::string > expand_ipv6(std::vector < std::string > ip_addresses){
+  asio_bindings asio_inst;
+  return asio_inst.expand_ipv6_(ip_addresses);
+}
 
 //' @rdname ip_numeric
 //' @export

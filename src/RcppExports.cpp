@@ -38,6 +38,28 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// v6_scope
+std::vector < unsigned long > v6_scope(std::vector < std::string > ip_addresses);
+RcppExport SEXP iptools_v6_scope(SEXP ip_addressesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
+    __result = Rcpp::wrap(v6_scope(ip_addresses));
+    return __result;
+END_RCPP
+}
+// expand_ipv6
+std::vector < std::string > expand_ipv6(std::vector < std::string > ip_addresses);
+RcppExport SEXP iptools_expand_ipv6(SEXP ip_addressesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
+    __result = Rcpp::wrap(expand_ipv6(ip_addresses));
+    return __result;
+END_RCPP
+}
 // numeric_to_ip
 std::vector < std::string > numeric_to_ip(std::vector < unsigned int > ip_addresses);
 RcppExport SEXP iptools_numeric_to_ip(SEXP ip_addressesSEXP) {

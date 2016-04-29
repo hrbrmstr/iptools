@@ -157,6 +157,10 @@ public:
       std::vector < std::string > ip_addresses
   );
 
+  std::vector < unsigned long > v6_scope_(std::vector < std::string > ip_addresses);
+
+  std::vector < std::string > expand_ipv6_(std::vector < std::string > ip_addresses);
+
   /**
    * A function for taking a vector of IPv4 addresses in dotted-decimal
    * notation ("162.243.111.4") and converting them to their numeric

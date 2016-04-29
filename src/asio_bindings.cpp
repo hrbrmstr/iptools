@@ -2,6 +2,7 @@
 // [[Rcpp::depends(AsioHeaders)]]
 
 #include <Rcpp.h>
+#include <stdio.h>
 
 #ifdef __APPLE__
 #pragma clang diagnostic push
@@ -343,6 +344,51 @@ std::list < std::vector < std::string > > asio_bindings::multi_ip_to_dns(std::ve
   } catch(...){
     throw std::range_error("Service could not be created");
   }
+  return output;
+}
+
+std::vector < std::string > asio_bindings::expand_ipv6_(std::vector < std::string > ip_addresses) {
+
+  unsigned int input_size = ip_addresses.size();
+  std::vector < std::string > output(input_size);
+  asio::ip::address_v6::bytes_type v;
+  char str[50];
+
+  for(unsigned int i = 0; i < input_size; i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
+    try{
+      //      output[i] = asio::ip::address_v6::from_string(ip_addresses[i]).to_string();
+      v = asio::ip::address_v6::from_string(ip_addresses[i]).to_bytes();
+      (void)sprintf(str, "%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x",
+       (uint8_t)v[0], (uint8_t)v[1], (uint8_t)v[2], (uint8_t)v[3], (uint8_t)v[4], (uint8_t)v[5], (uint8_t)v[6], (uint8_t)v[7], (uint8_t)v[8], (uint8_t)v[9], (uint8_t)v[10], (uint8_t)v[11], (uint8_t)v[12], (uint8_t)v[13], (uint8_t)v[14], (uint8_t)v[15]);
+      output[i] = std::string(str);
+    } catch (...) {
+      output[i] = "";
+    }
+  }
+
+  return output;
+}
+
+std::vector < unsigned long > asio_bindings::v6_scope_(std::vector < std::string > ip_addresses){
+
+  unsigned int input_size = ip_addresses.size();
+  std::vector < unsigned long > output(input_size);
+
+  for(unsigned int i = 0; i < input_size; i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
+    try{
+      output[i] = asio::ip::address_v6::from_string(ip_addresses[i]).scope_id();
+    } catch (...) {
+      Rcout << "error" << std::endl;
+      output[i] = -1;
+    }
+  }
+
   return output;
 }
 

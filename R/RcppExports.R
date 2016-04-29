@@ -95,6 +95,16 @@ ip_to_numeric <- function(ip_addresses) {
     .Call('iptools_ip_to_numeric', PACKAGE = 'iptools', ip_addresses)
 }
 
+#' @export
+v6_scope <- function(ip_addresses) {
+    .Call('iptools_v6_scope', PACKAGE = 'iptools', ip_addresses)
+}
+
+#' @export
+expand_ipv6 <- function(ip_addresses) {
+    .Call('iptools_expand_ipv6', PACKAGE = 'iptools', ip_addresses)
+}
+
 #' @rdname ip_numeric
 #' @export
 numeric_to_ip <- function(ip_addresses) {
