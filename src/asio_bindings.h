@@ -200,7 +200,7 @@ public:
    * @return a vector of strings containing "IPv4", "IPv6"
    * or "Invalid" for each element of the input vector.
    */
-  std::vector < std::string > classify_ip_ (std::vector < std::string > ip_addresses);
+  CharacterVector classify_ip_ (CharacterVector ip_addresses);
 
   /**
    * Identify if IP addresses are multicast or not
@@ -211,7 +211,7 @@ public:
    * @return a boolean vector containing trues for those that
    * are multicast, and false for those that aren't.
    */
-  LogicalVector is_multicast_ (std::vector < std::string > ip_addresses);
+  LogicalVector is_multicast_ (CharacterVector ip_addresses);
 
   /**
    * A function for identifying whether or vector of

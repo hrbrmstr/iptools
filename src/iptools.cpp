@@ -144,7 +144,7 @@ std::vector < std::string > numeric_to_ip (std::vector < unsigned int > ip_addre
 //'@param ip_addresses a vector of IPv4 or IPv6 IP addresses.
 //'
 //'@return a vector containing the class of each input IP address; either
-//'"IPv4", "IPv6" or, for IP addresses that were not valid, "Invalid".
+//'"IPv4", "IPv6" or, for IP addresses that were not valid, NA.
 //'
 //'@seealso \code{\link{is_valid}} et al for logical checks of IP addresses,
 //'\code{\link{ip_to_hostname}} for resolving IP addresses to their
@@ -163,11 +163,11 @@ std::vector < std::string > numeric_to_ip (std::vector < unsigned int > ip_addre
 //'
 //'#Invalid
 //'ip_classify("East Coast Twitter is Best Twitter")
-//'#[1] "Invalid"
+//'#[1] NA
 //'
 //'@export
 //[[Rcpp::export]]
-std::vector < std::string > ip_classify(std::vector < std::string > ip_addresses){
+CharacterVector ip_classify(CharacterVector ip_addresses){
   asio_bindings asio_inst;
   return asio_inst.classify_ip_(ip_addresses);
 }
@@ -297,13 +297,15 @@ std::vector < std::string > xff_extract(std::vector < std::string > ip_addresses
 //'
 //'@seealso \code{\link{ip_classify}} for character rather than logical classification.
 //'
+//'@return a vector of TRUE or FALSE values, indicating whether an IP is multicast or not,
+//'or NA values if the IP addresses are NAs.
+//'
 //'@examples
 //'# This is multicast
 //'is_multicast("224.0.0.2")
 //'
 //'# It's also IPv4
 //'is_ipv4("224.0.0.2")
-//'
 //'
 //'# It's not IPv6
 //'is_ipv6("224.0.0.2")
@@ -312,7 +314,7 @@ std::vector < std::string > xff_extract(std::vector < std::string > ip_addresses
 //'@rdname is_checks
 //'@export
 // [[Rcpp::export]]
-LogicalVector is_multicast(std::vector < std::string > ip_addresses){
+LogicalVector is_multicast(CharacterVector ip_addresses){
   asio_bindings asio_inst;
   return asio_inst.is_multicast_(ip_addresses);
 }

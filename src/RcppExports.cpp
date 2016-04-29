@@ -72,12 +72,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // ip_classify
-std::vector < std::string > ip_classify(std::vector < std::string > ip_addresses);
+CharacterVector ip_classify(CharacterVector ip_addresses);
 RcppExport SEXP iptools_ip_classify(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type ip_addresses(ip_addressesSEXP);
     __result = Rcpp::wrap(ip_classify(ip_addresses));
     return __result;
 END_RCPP
@@ -129,12 +129,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // is_multicast
-LogicalVector is_multicast(std::vector < std::string > ip_addresses);
+LogicalVector is_multicast(CharacterVector ip_addresses);
 RcppExport SEXP iptools_is_multicast(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type ip_addresses(ip_addressesSEXP);
     __result = Rcpp::wrap(is_multicast(ip_addresses));
     return __result;
 END_RCPP

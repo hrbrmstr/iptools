@@ -14,11 +14,18 @@ test_that("IPv6 identification works",{
 test_that("Validity checks work",{
   expect_equal(is_valid("127.0.0.1"), TRUE)
   expect_equal(is_valid("2607:f8b0:4006:80b::1004"), TRUE)
-  expect_equal(is_valid("Cooper-Temple Clause"), FALSE)
+  expect_true(is.na(is_valid("Cooper-Temple Clause")))
 })
 
 test_that("Multicast checks work",{
   expect_equal(is_multicast("224.0.0.5"), TRUE)
   expect_equal(is_multicast("193.168.0.1"), FALSE)
-  expect_equal(is_multicast("Cooper-Temple Clause"), NA)
+})
+
+test_that("NA handling works", {
+  expect_true(is.na(is_valid("kfdsmlkfdm")))
+  expect_true(is.na(is_ipv4("kfdsmlkfdm")))
+  expect_true(is.na(is_multicast("kfdsmlkfdm")))
+  expect_true(is.na(is_ipv6("kfdsmlkfdm")))
+
 })
