@@ -429,32 +429,37 @@ std::vector < std::string > asio_bindings::numeric_to_ip_ (std::vector < unsigne
   return output;
 }
 
-std::vector < std::string > asio_bindings::classify_ip_ (std::vector < std::string > ip_addresses){
+CharacterVector asio_bindings::classify_ip_(CharacterVector ip_addresses){
   unsigned int input_size = ip_addresses.size();
   asio::ip::address holding;
+  CharacterVector output(input_size);
 
   for(unsigned int i = 0; i < input_size; i++){
     if((i % 10000) == 0){
       Rcpp::checkUserInterrupt();
     }
-    try{
-      holding = asio::ip::address::from_string(ip_addresses[i]);
-      if(holding.is_v4()){
-        ip_addresses[i] = "IPv4";
-      } else if(holding.is_v6()){
-        ip_addresses[i] = "IPv6";
-      } else {
-        ip_addresses[i] = "Invalid";
+    if(ip_addresses[i] == NA_STRING){
+      output[i] = NA_STRING;
+    } else {
+      try{
+        holding = asio::ip::address::from_string(ip_addresses[i]);
+        if(holding.is_v4()){
+          output[i] = "IPv4";
+        } else if(holding.is_v6()){
+          output[i] = "IPv6";
+        } else {
+          output[i] = NA_STRING;
+        }
+      } catch(...){
+        output[i] = NA_STRING;
       }
-    } catch(...){
-      ip_addresses[i] = "Invalid";
     }
 
   }
-  return ip_addresses;
+  return output;
 }
 
-LogicalVector asio_bindings::is_multicast_ (std::vector < std::string > ip_addresses){
+LogicalVector asio_bindings::is_multicast_ (CharacterVector ip_addresses){
 
   unsigned int input_size = ip_addresses.size();
   LogicalVector output(input_size);
@@ -464,17 +469,20 @@ LogicalVector asio_bindings::is_multicast_ (std::vector < std::string > ip_addre
     if((i % 10000) == 0){
       Rcpp::checkUserInterrupt();
     }
-    try{
-      holding = asio::ip::address::from_string(ip_addresses[i]);
-      if(holding.is_multicast()){
-        output[i] = true;
-      } else {
-        output[i] = false;
-      }
-    } catch(...){
+    if(ip_addresses[i] == NA_STRING){
       output[i] = NA_LOGICAL;
+    } else {
+      try{
+        holding = asio::ip::address::from_string(ip_addresses[i]);
+        if(holding.is_multicast()){
+          output[i] = true;
+        } else {
+          output[i] = false;
+        }
+      } catch(...){
+        output[i] = NA_LOGICAL;
+      }
     }
-
   }
   return output;
 }

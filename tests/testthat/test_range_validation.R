@@ -27,6 +27,6 @@ test_that("IP validation and classification works with valid IPs",{
 })
 
 test_that("IP validation and classification registers that invalid IPs are invalid, even if they look plausible",{
-  expect_that(ip_classify("256.256.256.256"),equals("Invalid"))
-  expect_that(ip_classify("2607:f8b0:4006:80b::aaaaa"), equals("Invalid"))
+  expect_true(is.na(ip_classify("256.256.256.256")))
+  expect_true(is.na(ip_classify("2607:f8b0:4006:80b::aaaaa")))
 })

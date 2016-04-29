@@ -126,7 +126,7 @@ numeric_to_ip <- function(ip_addresses) {
 #'@param ip_addresses a vector of IPv4 or IPv6 IP addresses.
 #'
 #'@return a vector containing the class of each input IP address; either
-#'"IPv4", "IPv6" or, for IP addresses that were not valid, "Invalid".
+#'"IPv4", "IPv6" or, for IP addresses that were not valid, NA.
 #'
 #'@seealso \code{\link{is_valid}} et al for logical checks of IP addresses,
 #'\code{\link{ip_to_hostname}} for resolving IP addresses to their
@@ -145,7 +145,7 @@ numeric_to_ip <- function(ip_addresses) {
 #'
 #'#Invalid
 #'ip_classify("East Coast Twitter is Best Twitter")
-#'#[1] "Invalid"
+#'#[1] NA
 #'
 #'@export
 ip_classify <- function(ip_addresses) {
@@ -268,13 +268,15 @@ xff_extract <- function(ip_addresses, x_forwarded_for) {
 #'
 #'@seealso \code{\link{ip_classify}} for character rather than logical classification.
 #'
+#'@return a vector of TRUE or FALSE values, indicating whether an IP is multicast or not,
+#'or NA values if the IP addresses are NAs.
+#'
 #'@examples
 #'# This is multicast
 #'is_multicast("224.0.0.2")
 #'
 #'# It's also IPv4
 #'is_ipv4("224.0.0.2")
-#'
 #'
 #'# It's not IPv6
 #'is_ipv6("224.0.0.2")

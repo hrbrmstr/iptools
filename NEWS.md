@@ -1,3 +1,8 @@
+iptools 0.5.0 [WIP]
+=============
+
+* NA support added for IP validity checkers and classifiers
+
 iptools 0.4.0
 =============
 * bug fix for `ip_in_range` always returniong TRUE for /32 ranges (@tdsmith)
