@@ -115,6 +115,11 @@ std::vector < unsigned int > ip_to_numeric(std::vector < std::string > ip_addres
   asio_bindings asio_inst;
   return asio_inst.ip_to_numeric_(ip_addresses);
 }
+
+//' Return the scope of an IPv6 address (string)
+//'
+//' @references \url{https://tools.ietf.org/html/rfc4007}
+//' @return a numeric vector of scopes
 //' @export
 // [[Rcpp::export]]
 std::vector < unsigned long > v6_scope(std::vector < std::string > ip_addresses){
@@ -122,6 +127,10 @@ std::vector < unsigned long > v6_scope(std::vector < std::string > ip_addresses)
   return asio_inst.v6_scope_(ip_addresses);
 }
 
+//' Expand an IPv6 address from an abbreviated version
+//'
+//' @references \url{http://www.ipv6tf.org/index.php?page=meet/faqs&faq_id=1000&q=11}
+//' @return a character vector of expanded IPv6 addresses
 //' @export
 // [[Rcpp::export]]
 std::vector < std::string > expand_ipv6(std::vector < std::string > ip_addresses){

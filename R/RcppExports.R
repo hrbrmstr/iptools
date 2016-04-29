@@ -95,11 +95,19 @@ ip_to_numeric <- function(ip_addresses) {
     .Call('iptools_ip_to_numeric', PACKAGE = 'iptools', ip_addresses)
 }
 
+#' Return the scope of an IPv6 address (string)
+#'
+#' @references \url{https://tools.ietf.org/html/rfc4007}
+#' @return a numeric vector of scopes
 #' @export
 v6_scope <- function(ip_addresses) {
     .Call('iptools_v6_scope', PACKAGE = 'iptools', ip_addresses)
 }
 
+#' Expand an IPv6 address from an abbreviated version
+#'
+#' @references \url{http://www.ipv6tf.org/index.php?page=meet/faqs&faq_id=1000&q=11}
+#' @return a character vector of expanded IPv6 addresses
 #' @export
 expand_ipv6 <- function(ip_addresses) {
     .Call('iptools_expand_ipv6', PACKAGE = 'iptools', ip_addresses)
