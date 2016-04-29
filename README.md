@@ -1,14 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.44526.svg)](https://zenodo.org/record/44526) [![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/iptools.svg?branch=master)](https://travis-ci.org/hrbrmstr/iptools) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/iptools)](http://cran.r-project.org/web/packages/iptools) ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/iptools)
 
-
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.44526.svg)](https://zenodo.org/record/44526)
-[![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/iptools.svg?branch=master)](https://travis-ci.org/hrbrmstr/iptools)
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active) 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/iptools)](http://cran.r-project.org/web/packages/iptools) 
-![downloads](http://cranlogs.r-pkg.org/badges/grand-total/iptools)
-
-## Easy IP address handling with iptools
+Easy IP address handling with iptools
+-------------------------------------
 
 `iptools` is a set of tools for working with IP addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `AsioHeaders` package. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
 
@@ -29,13 +24,11 @@ The package primarily supports IPv4 addresses due to deficiencies in R's support
 
 For more information, see the vignettes on [the functionality](https://github.com/hrbrmstr/iptools/blob/master/vignettes/introduction_to_iptools.Rmd) and [the datasets](https://github.com/hrbrmstr/iptools/blob/master/vignettes/iptools_datasets.Rmd) within `iptools`.
 
-
 ### Installation
 
 To install the development version:
 
-
-```r
+``` r
 devtools::install_github("hrbrmstr/iptools")
 # or
 install.packages("iptools")
@@ -45,17 +38,18 @@ install.packages("iptools")
 
 ### Test Results
 
-
-```r
+``` r
 library(iptools)
 library(testthat)
 
 date()
-#> [1] "Mon Apr  4 11:30:50 2016"
+#> [1] "Fri Apr 29 15:02:00 2016"
 
 test_dir("tests/")
 #> testthat results ===========================================================
 #> OK: 75 SKIPPED: 0 FAILED: 0
+#> 
+#> DONE ======================================================================
 ```
 
 ### Code of Conduct

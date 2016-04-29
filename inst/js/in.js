@@ -1,1 +1,0 @@
-global.mm = require('maxmind');
