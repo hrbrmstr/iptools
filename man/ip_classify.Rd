@@ -11,7 +11,7 @@ ip_classify(ip_addresses)
 }
 \value{
 a vector containing the class of each input IP address; either
-"IPv4", "IPv6" or, for IP addresses that were not valid, "Invalid".
+"IPv4", "IPv6" or, for IP addresses that were not valid, NA.
 }
 \description{
 Identify the form (IPv4 or IPv6) of a vector
@@ -29,7 +29,7 @@ ip_classify("2607:f8b0:4006:80b::1004")
 
 #Invalid
 ip_classify("East Coast Twitter is Best Twitter")
-#[1] "Invalid"
+#[1] NA
 
 }
 \seealso{

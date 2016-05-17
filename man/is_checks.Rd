@@ -18,6 +18,10 @@ is_valid(ip_addresses)
 \arguments{
 \item{ip_addresses}{a vector of IP addresses}
 }
+\value{
+a vector of TRUE or FALSE values, indicating whether an IP is multicast or not,
+or NA values if the IP addresses are NAs.
+}
 \description{
 Check whether an IP address is valid with \code{is_valid},
 IPv4 with \code{is_ipv4}, IPv6 with \code{is_ipv6}, or multicast (intended to point to
@@ -29,7 +33,6 @@ is_multicast("224.0.0.2")
 
 # It's also IPv4
 is_ipv4("224.0.0.2")
-
 
 # It's not IPv6
 is_ipv6("224.0.0.2")

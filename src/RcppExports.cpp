@@ -5,6 +5,18 @@
 
 using namespace Rcpp;
 
+// hilbert_encode
+NumericMatrix hilbert_encode(std::vector<unsigned> x, int bpp);
+RcppExport SEXP iptools_hilbert_encode(SEXP xSEXP, SEXP bppSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector<unsigned> >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type bpp(bppSEXP);
+    __result = Rcpp::wrap(hilbert_encode(x, bpp));
+    return __result;
+END_RCPP
+}
 // hostname_to_ip
 std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::string > hostnames);
 RcppExport SEXP iptools_hostname_to_ip(SEXP hostnamesSEXP) {
