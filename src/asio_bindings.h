@@ -228,6 +228,19 @@ public:
    * in range) for each IP.
    */
   std::vector < bool > ip_in_range_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
+
+  /**
+   * A function for identifying whether or vector of
+   * IP addresses fall within a set of CIDR ranges
+   *
+   * @param ip_addresses a vector of IP addresses
+   *
+   * @param range a vector of ranges.
+   *
+   * @return a vector of boolean true (in ranges) or false (not
+   * in ranges) for each IP.
+   */
+
   std::vector < bool > ip_in_any_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
 
   /**

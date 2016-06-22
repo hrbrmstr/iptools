@@ -18,4 +18,30 @@ a logical vector of whether a given IP was in any of the ranges
 \code{ip_in_any} checks whether a vector of IP addresses
 fall within any of the speficied ranges.
 }
+\examples{
+\dontrun{
+north_america <- unlist(country_ranges(countries=c("US", "CA", "MX")))
+germany <- unlist(country_ranges("DE"))
+
+set.seed(1492)
+targets <- ip_random(1000)
+
+for_sure <- range_generate(sample(north_america, 1))
+all(ip_in_any(for_sure, north_america)) # shld be TRUE
+## [1] TRUE
+
+absolutely_not <- range_generate(sample(germany, 1))
+any(ip_in_any(absolutely_not, north_america)) # shld be FALSE
+## [1] FALSE
+
+who_knows_na <- ip_in_any(targets, north_america)
+who_knows_de <- ip_in_any(targets, germany)
+
+sum(who_knows_na)
+## [1] 464
+
+sum(who_knows_de)
+## [1] 43
+}
+}
 

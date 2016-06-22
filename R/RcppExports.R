@@ -223,6 +223,30 @@ ip_in_range <- function(ip_addresses, ranges) {
 #'@param ip_addresses character vector of IP addresses
 #'@param ranges character vector of CIDR reanges
 #'@return a logical vector of whether a given IP was in any of the ranges
+#'@examples \dontrun{
+#' north_america <- unlist(country_ranges(countries=c("US", "CA", "MX")))
+#' germany <- unlist(country_ranges("DE"))
+#'
+#' set.seed(1492)
+#' targets <- ip_random(1000)
+#'
+#' for_sure <- range_generate(sample(north_america, 1))
+#' all(ip_in_any(for_sure, north_america)) # shld be TRUE
+#' ## [1] TRUE
+#'
+#' absolutely_not <- range_generate(sample(germany, 1))
+#' any(ip_in_any(absolutely_not, north_america)) # shld be FALSE
+#' ## [1] FALSE
+#'
+#' who_knows_na <- ip_in_any(targets, north_america)
+#' who_knows_de <- ip_in_any(targets, germany)
+#'
+#' sum(who_knows_na)
+#' ## [1] 464
+#'
+#' sum(who_knows_de)
+#' ## [1] 43
+#'}
 #'@export
 ip_in_any <- function(ip_addresses, ranges) {
     .Call('iptools_ip_in_any', PACKAGE = 'iptools', ip_addresses, ranges)

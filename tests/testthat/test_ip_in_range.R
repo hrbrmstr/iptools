@@ -1,4 +1,4 @@
-context("Ensure that ip_in_range and range_boundaries work")
+context("Ensure that ip_in_range, ip_in_any and range_boundaries work")
 
 test_that("ip_in_range works with single values", {
   result <- ip_in_range("172.18.0.0","172.18.0.0/12")
