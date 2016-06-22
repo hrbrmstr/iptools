@@ -244,6 +244,20 @@ std::vector < bool > ip_in_range(std::vector < std::string > ip_addresses, std::
   return asio_inst.ip_in_range_(ip_addresses, ranges);
 }
 
+//'@title check if IP address falls within any of the ranges specified
+//'@description \code{ip_in_any} checks whether a vector of IP addresses
+//'fall within any of the speficied ranges.
+//'
+//'@param ip_addresses character vector of IP addresses
+//'@param ranges character vector of CIDR reanges
+//'@return a logical vector of whether a given IP was in any of the ranges
+//'@export
+//[[Rcpp::export]]
+std::vector < bool > ip_in_any(std::vector < std::string > ip_addresses, std::vector < std::string > ranges){
+  asio_bindings asio_inst;
+  return asio_inst.ip_in_any_(ip_addresses, ranges);
+}
+
 //'@title check whether IPv4 ranges are valid
 //'@description \code{validate_range} checks whether
 //'a vector of IPv4 CIDR ranges ("127.0.0.1/32") are valid or not.

@@ -228,6 +228,7 @@ public:
    * in range) for each IP.
    */
   std::vector < bool > ip_in_range_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
+  std::vector < bool > ip_in_any_(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
 
   /**
    * A vectorised version of calculate_ip_range

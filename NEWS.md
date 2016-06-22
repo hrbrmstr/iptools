@@ -2,6 +2,8 @@ iptools 0.5.0 [WIP]
 =============
 
 * NA support added for IP validity checkers and classifiers
+* Hilbert coordiates generator function added
+* `ip_in_any()` added for a more generic range membership test
 
 iptools 0.4.0
 =============

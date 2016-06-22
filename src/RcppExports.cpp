@@ -117,6 +117,18 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// ip_in_any
+std::vector < bool > ip_in_any(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
+RcppExport SEXP iptools_ip_in_any(SEXP ip_addressesSEXP, SEXP rangesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ip_addresses(ip_addressesSEXP);
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type ranges(rangesSEXP);
+    __result = Rcpp::wrap(ip_in_any(ip_addresses, ranges));
+    return __result;
+END_RCPP
+}
 // validate_range
 std::vector < bool > validate_range(std::vector < std::string > ranges);
 RcppExport SEXP iptools_validate_range(SEXP rangesSEXP) {

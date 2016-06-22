@@ -515,6 +515,48 @@ std::vector < bool > asio_bindings::ip_in_range_(std::vector < std::string > ip_
   return output;
 }
 
+
+bool rng_sort(const std::vector<unsigned int>&a,
+              const std::vector<unsigned int>&b) {
+  return(a[0] < b[0]);
+}
+
+
+std::vector < bool > asio_bindings::ip_in_any_(std::vector < std::string > ip_addresses,
+                                               std::vector < std::string > ranges){
+
+  unsigned int input_size = ip_addresses.size();
+  unsigned int ranges_size = ranges.size();
+
+  std::vector < std::vector < unsigned int> > range_bounds(ranges_size);
+
+  std::vector < bool > output(input_size);
+
+  for (unsigned int i=0; i<ranges_size; i++) {
+    range_bounds[i] = ip_to_numeric_(calculate_ip_range(ranges[i]));
+  }
+
+  std::sort(range_bounds.begin(), range_bounds.end(), rng_sort);
+
+  for(unsigned int i = 0; i < input_size; i++){
+    if((i % 10000) == 0){
+      Rcpp::checkUserInterrupt();
+    }
+    unsigned int ipl = asio::ip::address_v4::from_string(ip_addresses[i]).to_ulong();
+    output[i] = false;
+    for (unsigned int j=0; j < ranges_size; j++) {
+      if((j % 10000) == 0){
+        Rcpp::checkUserInterrupt();
+      }
+      if ( (ipl - range_bounds[j][0]) <= (range_bounds[j][1] - range_bounds[j][0])  ) {
+        output[i] = true;
+        break;
+      }
+    }
+  }
+  return output;
+}
+
 DataFrame asio_bindings::calculate_range_(std::vector < std::string > ranges){
   int input_size = ranges.size();
   std::vector < std::string > min_holding(input_size);
