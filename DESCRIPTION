@@ -2,7 +2,7 @@ Package: iptools
 Type: Package
 Title: Manipulate, Validate and Resolve 'IP' Addresses
 Version: 0.5.0.90000
-Date: 2016-06-22
+Date: 2016-07-12
 Author: Bob Rudis <bob@rudis.net> [aut, cre],
         Oliver Keyes <ironholds@gmail.com> [aut],
         Tim Smith [ctb]
@@ -26,7 +26,10 @@ Imports:
     utils,
     stats,
     AsioHeaders,
-    ISOcodes
+    ISOcodes,
+    dplyr,
+    tidyr,
+    stringi
 Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr

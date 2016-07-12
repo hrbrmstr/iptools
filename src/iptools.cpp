@@ -365,3 +365,48 @@ LogicalVector is_multicast(CharacterVector ip_addresses){
   asio_bindings asio_inst;
   return asio_inst.is_multicast_(ip_addresses);
 }
+
+//' Convert a charcter vector of IPv4 addresses to a character vector of
+//' bit strings.
+//'
+//' @param input numeric vector of IP addresses
+//' @export
+// [[Rcpp::export]]
+CharacterVector ip_numeric_to_binary_string(std::vector < unsigned int > input) {
+
+  std::vector<std::string> output(input.size());
+
+  for (unsigned int i=0; i<input.size(); i++){
+
+    if ((i % 10000) == 0) Rcpp::checkUserInterrupt();
+
+    output[i] = std::bitset<32>(input[i]).to_string();
+
+  }
+
+  return(Rcpp::wrap(output));
+}
+
+//' Convert a numeric vector of IPv4 addresses to a character vector of
+//' bit strings.
+//'
+//' @param input character vector of IP addresses
+//' @export
+// [[Rcpp::export]]
+CharacterVector ip_to_binary_string(std::vector < std::string > input) {
+
+  asio_bindings asio_inst;
+
+  std::vector<std::string> output(input.size());
+  std::vector<unsigned int> x = asio_inst.ip_to_numeric_(input);
+
+  for (unsigned int i=0; i<input.size(); i++){
+
+    if ((i % 10000) == 0) Rcpp::checkUserInterrupt();
+
+    output[i] = std::bitset<32>(x[i]).to_string();
+
+  }
+
+  return(Rcpp::wrap(output));
+}

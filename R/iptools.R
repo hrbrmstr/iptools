@@ -14,6 +14,10 @@
 # @importFrom ggplot2 ggplot geom_point aes labs scale_color_manual element_blank
 # @importFrom ggplot2 scale_x_continuous scale_y_reverse coord_equal
 # @importFrom ggplot2 element_blank element_rect element_text theme theme_bw
+#' @importFrom readr read_tsv
+#' @importFrom stringi stri_sub
+#' @importFrom dplyr mutate
+#' @import triebeard
 #' @import utils
 #' @import stats
 #' @import AsioHeaders

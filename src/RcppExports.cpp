@@ -163,3 +163,25 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// ip_numeric_to_binary_string
+CharacterVector ip_numeric_to_binary_string(std::vector < unsigned int > input);
+RcppExport SEXP iptools_ip_numeric_to_binary_string(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector < unsigned int > >::type input(inputSEXP);
+    __result = Rcpp::wrap(ip_numeric_to_binary_string(input));
+    return __result;
+END_RCPP
+}
+// ip_to_binary_string
+CharacterVector ip_to_binary_string(std::vector < std::string > input);
+RcppExport SEXP iptools_ip_to_binary_string(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type input(inputSEXP);
+    __result = Rcpp::wrap(ip_to_binary_string(input));
+    return __result;
+END_RCPP
+}

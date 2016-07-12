@@ -329,3 +329,21 @@ is_multicast <- function(ip_addresses) {
     .Call('iptools_is_multicast', PACKAGE = 'iptools', ip_addresses)
 }
 
+#' Convert a charcter vector of IPv4 addresses to a character vector of
+#' bit strings.
+#'
+#' @param input numeric vector of IP addresses
+#' @export
+ip_numeric_to_binary_string <- function(input) {
+    .Call('iptools_ip_numeric_to_binary_string', PACKAGE = 'iptools', input)
+}
+
+#' Convert a numeric vector of IPv4 addresses to a character vector of
+#' bit strings.
+#'
+#' @param input character vector of IP addresses
+#' @export
+ip_to_binary_string <- function(input) {
+    .Call('iptools_ip_to_binary_string', PACKAGE = 'iptools', input)
+}
+
