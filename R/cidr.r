@@ -34,6 +34,7 @@ ip_to_asn <- function(cidr_trie, ip) {
 #'
 #' @param ips character vector or numeric vector of IPv4 addresses
 #' @param cidrs character vector or numeric vector of IPv4 CIDRs
+#' @note auto-appends \code{/32} if a bare IPv4 is detected
 #' @return \code{data_frame} with \code{ips} column and a logical \code{in_cdir} column
 #' @export
 ips_in_cidrs <- function(ips, cidrs) {
