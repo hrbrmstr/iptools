@@ -29,3 +29,27 @@ ip_to_asn <- function(cidr_trie, ip) {
   triebeard::longest_match(cidr_trie, ip)
 
 }
+
+#' Determine if a vector if IPv4 addresses are in a vector of CIDRs
+#'
+#' @param ips character vector or numeric vector of IPv4 addresses
+#' @param cidrs character vector or numeric vector of IPv4 CIDRs
+#' @return \code{data_frame} with \code{ips} column and a logical \code{in_cdir} column
+#' @export
+ips_in_cidrs <- function(ips, cidrs) {
+
+  cidrs[!grepl("/", cidrs)] <- sprintf("%s/32", cidrs[!grepl("/", cidrs)])
+
+  dplyr::data_frame(cidr=cidrs) %>%
+    tidyr::separate(cidr, c("ip", "mask"), "/") %>%
+    dplyr::mutate(prefix=stri_sub(ip_to_binary_string(ip), 1, mask),
+                  value=TRUE) -> tr
+
+  cidr_trie <- trie(tr$prefix, tr$value)
+
+  dplyr::data_frame(ips=ips,
+                    in_cidr=longest_match(cidr_trie,
+                                          ip_to_binary_string(ips))) %>%
+    mutate(in_cidr=!is.na(in_cidr))
+
+}

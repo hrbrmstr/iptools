@@ -16,7 +16,8 @@
 # @importFrom ggplot2 element_blank element_rect element_text theme theme_bw
 #' @importFrom readr read_tsv
 #' @importFrom stringi stri_sub
-#' @importFrom dplyr mutate
+#' @importFrom tidyr separate
+#' @importFrom dplyr mutate data_frame
 #' @import triebeard
 #' @import utils
 #' @import stats
