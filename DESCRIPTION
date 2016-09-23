@@ -28,6 +28,7 @@ Imports:
     AsioHeaders,
     ISOcodes,
     dplyr,
+    readr,
     tidyr,
     stringi,
     triebeard
