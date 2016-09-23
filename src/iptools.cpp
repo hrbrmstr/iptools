@@ -12,6 +12,8 @@
 #pragma clang diagnostic pop
 #endif
 
+#include <bitset>
+
 #include "asio_bindings.h"
 
 using namespace Rcpp;
