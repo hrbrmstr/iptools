@@ -6,6 +6,9 @@
 \usage{
 v6_scope(ip_addresses)
 }
+\arguments{
+\item{ip_addresses}{a vector of IPv6 IP addresses.}
+}
 \value{
 a numeric vector of scopes
 }

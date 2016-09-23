@@ -102,6 +102,7 @@ ip_to_numeric <- function(ip_addresses) {
 
 #' Return the scope of an IPv6 address (string)
 #'
+#' @param ip_addresses a vector of IPv6 IP addresses.
 #' @references \url{https://tools.ietf.org/html/rfc4007}
 #' @return a numeric vector of scopes
 #' @export
@@ -111,6 +112,7 @@ v6_scope <- function(ip_addresses) {
 
 #' Expand an IPv6 address from an abbreviated version
 #'
+#' @param ip_addresses a vector of IPv6 IP addresses.
 #' @references \url{http://www.ipv6tf.org/index.php?page=meet/faqs&faq_id=1000&q=11}
 #' @return a character vector of expanded IPv6 addresses
 #' @export

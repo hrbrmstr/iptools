@@ -17,7 +17,7 @@
 #' @importFrom readr read_tsv
 #' @importFrom stringi stri_sub
 #' @importFrom tidyr separate
-#' @importFrom dplyr mutate data_frame
+#' @importFrom dplyr mutate data_frame %>%
 #' @import triebeard
 #' @import utils
 #' @import stats

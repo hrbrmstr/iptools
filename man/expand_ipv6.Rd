@@ -6,6 +6,9 @@
 \usage{
 expand_ipv6(ip_addresses)
 }
+\arguments{
+\item{ip_addresses}{a vector of IPv6 IP addresses.}
+}
 \value{
 a character vector of expanded IPv6 addresses
 }
