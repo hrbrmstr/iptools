@@ -8,5 +8,9 @@ env:
 
 notifications:
   email:
-    on_success: change
-    on_failure: change
+    - bob@rud.is
+  irc:
+    channels:
+      - "irc.irccloud.com#builds"
+    nick: travisci
+    password: Mangrove
