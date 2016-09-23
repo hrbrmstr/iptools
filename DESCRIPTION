@@ -29,7 +29,7 @@ Imports:
     ISOcodes,
     dplyr,
     tidyr,
-    stringi
+    stringi,
     triebeard
 Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
