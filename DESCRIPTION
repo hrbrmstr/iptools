@@ -30,6 +30,7 @@ Imports:
     dplyr,
     tidyr,
     stringi
+    triebeard
 Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr
