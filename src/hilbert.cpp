@@ -7,6 +7,10 @@ int addr_space_bits_per_pixel = 8;	/* /24 */
 unsigned int addr_space_first_addr = 0;
 unsigned int addr_space_last_addr = ~0;
 
+//' Encode an IPv4 address to Hilbert space
+//'
+//' @param x IPv4 address
+//' @param bpp Hilbert depth (max 12)
 //' @export
 // [[Rcpp::export]]
 NumericMatrix hilbert_encode(std::vector<unsigned> x, int bpp=8) {
