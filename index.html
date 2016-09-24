@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<canvas id="canvas"></canvas>
+<script>
+var canvas = document.getElementById("canvas");
+
+var ctx = canvas.getContext('2d');
+
+var maxW = 4096;
+var maxH = 4096;
+
+canvas.setAttribute("width", maxW);
+canvas.setAttribute("height", maxH);
+
+ctx.fillStyle = "#000000";
+//ctx.fillStyle = "#ffffff";
+
+for (var j = 0; j < maxH; j++) {
+  for (var i = 0; i < maxW; i++) {
+    ctx.fillRect(i, j, 6, 1);
+  }
+}
+</script>
