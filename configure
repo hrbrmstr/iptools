@@ -1,4 +1,0 @@
-cd inst/src/geoip-api-c
-./bootstrap
-./configure
-make
