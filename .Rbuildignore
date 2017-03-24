@@ -10,3 +10,5 @@
 ^\.Rhistory$
 ^cran-comments\.md$
 ^\.travis\.yml$
+^docs$
+^map\.png$
