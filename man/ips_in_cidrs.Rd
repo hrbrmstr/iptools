@@ -20,4 +20,3 @@ Determine if a vector if IPv4 addresses are in a vector of CIDRs
 \note{
 auto-appends \code{/32} if a bare IPv4 is detected
 }
-

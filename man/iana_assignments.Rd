@@ -39,4 +39,3 @@ Last updated 2015-05-01.
 \code{\link{iana_special_assignments}} for particular, special IPv4 assignments.
 }
 \keyword{datasets}
-

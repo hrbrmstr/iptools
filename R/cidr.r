@@ -54,3 +54,22 @@ ips_in_cidrs <- function(ips, cidrs) {
     mutate(in_cidr=!is.na(in_cidr))
 
 }
+
+#' Return the number of hosts in a CIDR block
+#'
+#' TODO: ipv4 validation
+#'
+#' @param cidrs character vector of IPv4 CIDRs
+#' @export
+host_count <- function(cidrs) {
+
+  is_cidr <- stri_detect_fixed(cidrs, "/")
+
+  cidrs[!is_cidr] <- sprintf("%s/32", cidrs[!is_cidr])
+
+  stri_split_fixed(cidrs, "/") %>%
+    sapply("[", 2) %>%
+    as.numeric() %>%
+    sapply(function(x) (2^(32-x)))
+
+}

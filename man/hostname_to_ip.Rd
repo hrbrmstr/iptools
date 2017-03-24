@@ -40,4 +40,3 @@ IP addresses to their associated hostname(s) - and \code{\link{ip_to_numeric}}
 for converting IP addresses retrieved from \code{hostname_to_ip} into their
 numeric representation.
 }
-

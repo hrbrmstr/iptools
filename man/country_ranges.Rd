@@ -29,4 +29,3 @@ This function requires internet connectivity as it pulls daily updated data
 \examples{
 rng <- country_ranges(c("PW", "UZ"))
 }
-

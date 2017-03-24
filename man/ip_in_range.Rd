@@ -35,4 +35,3 @@ ip_in_range("172.18.0.1","172.18.0.0/28")
 and maximum IPs within a range, and \code{\link{validate_range}} for
 validating that a range exists.
 }
-

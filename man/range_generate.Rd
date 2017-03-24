@@ -30,4 +30,3 @@ range_generate("172.18.0.0/28")
 \code{\link{ip_to_numeric}} for converting \code{generate_range}'s
 output to its numeric form.
 }
-

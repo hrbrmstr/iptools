@@ -31,4 +31,3 @@ ip_to_hostname("162.243.111.4")
 \seealso{
 \code{\link{hostname_to_ip}}, for the reverse operation.
 }
-

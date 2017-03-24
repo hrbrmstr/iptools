@@ -26,4 +26,3 @@ extract the "real" IP closest to the client.
 xff_extract("192.168.0.1", "193.168.0.1, 230.98.107.1")
 
 }
-

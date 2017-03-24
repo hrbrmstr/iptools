@@ -34,4 +34,3 @@ falls within a particular range, or \code{\link{ip_to_numeric}} to
 convert the dotted-decimal notation of returned IP addresses to their
 numeric representation.
 }
-

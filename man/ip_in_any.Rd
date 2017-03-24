@@ -44,4 +44,3 @@ sum(who_knows_de)
 ## [1] 43
 }
 }
-

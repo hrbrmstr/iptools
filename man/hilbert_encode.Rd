@@ -14,4 +14,3 @@ hilbert_encode(x, bpp = 8L)
 \description{
 Encode an IPv4 address to Hilbert space
 }
-

@@ -38,4 +38,3 @@ ip_classify("East Coast Twitter is Best Twitter")
 hostnames, and \code{\link{ip_to_numeric}} for converting (IPv4) IP addresses
 to their numeric representation.
 }
-

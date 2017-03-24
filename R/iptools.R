@@ -7,7 +7,7 @@
 #'
 #' @name iptools
 #' @docType package
-#' @useDynLib iptools
+#' @useDynLib iptools, .registration=TRUE
 #' @importFrom Rcpp sourceCpp
 # @import grid
 # @importFrom RColorBrewer brewer.pal
@@ -15,12 +15,11 @@
 # @importFrom ggplot2 scale_x_continuous scale_y_reverse coord_equal
 # @importFrom ggplot2 element_blank element_rect element_text theme theme_bw
 #' @importFrom readr read_tsv
-#' @importFrom stringi stri_sub
+#' @import stringi
 #' @importFrom tidyr separate
 #' @importFrom dplyr mutate data_frame %>%
 #' @import triebeard
 #' @import utils
 #' @import stats
 #' @import AsioHeaders
-#' @import ISOcodes
 NULL

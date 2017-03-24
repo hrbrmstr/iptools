@@ -46,4 +46,3 @@ Last updated 2014-08-07
 and \code{\link{iana_assignments}} for a dataset covering general (non-special) IPv4 assignments.
 }
 \keyword{datasets}
-

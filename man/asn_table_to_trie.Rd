@@ -12,4 +12,3 @@ asn_table_to_trie(asn_table_file)
 \description{
 Convert a \emph{pyasn} generated CIDR dat to a trie
 }
-

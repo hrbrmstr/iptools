@@ -18,4 +18,3 @@ Return the scope of an IPv6 address (string)
 \references{
 \url{https://tools.ietf.org/html/rfc4007}
 }
-

@@ -18,4 +18,3 @@ Expand an IPv6 address from an abbreviated version
 \references{
 \url{http://www.ipv6tf.org/index.php?page=meet/faqs&faq_id=1000&q=11}
 }
-

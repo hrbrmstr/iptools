@@ -28,4 +28,3 @@ ip_random(1)
 output to its numeric form, and \code{\link{range_generate}} for
 generating all IP addresses within a specific range.
 }
-

@@ -14,4 +14,3 @@ ip_numeric_to_binary_string(input)
 Convert a charcter vector of IPv4 addresses to a character vector of
 bit strings.
 }
-

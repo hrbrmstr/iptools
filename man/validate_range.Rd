@@ -31,4 +31,3 @@ validate_range("127.0.0.1/33")
 \code{\link{range_boundaries}} for identifying the minimum
 and maximum IPs within a range.
 }
-

@@ -1,3 +1,29 @@
+# these are the 2-letter codes that http://www.iwik.org/ipcountry/ uses
+# rather than do yet-another-web-call we'll update this as the world changes
+
+c("AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AP", "AR",
+"AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF",
+"BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS",
+"BT", "BW", "BY", "BZ", "CA", "CD", "CF", "CG", "CH", "CI", "CK",
+"CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CY", "CZ", "DE",
+"DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "ER", "ES", "ET",
+"EU", "FI", "FJ", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF",
+"GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GT", "GU",
+"GW", "GY", "HK", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM",
+"IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM", "JO", "JP", "KE",
+"KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA",
+"LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA",
+"MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO",
+"MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ",
+"NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU",
+"NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PR",
+"PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA",
+"SB", "SC", "SD", "SE", "SG", "SI", "SK", "SL", "SM", "SN", "SO",
+"SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TG", "TH",
+"TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ",
+"UA", "UG", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN",
+"VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW") -> iso2c
+
 #' Return CIDR ranges for given ISO 3166-1 alpha-2 country codes
 #'
 #' Query \url{http://www.iwik.org/ipcountry/} for the CIDR ranges for a given
@@ -17,12 +43,10 @@
 #' rng <- country_ranges(c("PW", "UZ"))
 country_ranges <- function(countries) {
 
-  ISO_3166_1 <- get("ISO_3166_1", envir=.pkgenv)
-
   countries <- toupper(countries)
-  retrieve <- countries[countries %in% ISO_3166_1$Alpha_2]
+  retrieve <- countries[countries %in% iso2c]
   if (length(retrieve) != length(countries)) {
-    warning("Skipping invalid country coides")
+    warning("Skipping invalid country codes")
   }
 
   if (length(retrieve) > 0) {
@@ -54,7 +78,7 @@ cached_country_cidrs <- function() {
 
 #' Fetch all country CIDR blocks
 #'
-#' Iterates through all the country codes in \code{ISO_3166_1$Alpha_2} and returns
+#' Iterates through all the country codes and returns
 #' a named list of CIDR blocks for all those countries.
 #'
 #' @return named list of character vectors of CIDR blocks
@@ -63,9 +87,7 @@ cached_country_cidrs <- function() {
 #' @export
 get_all_country_ranges <- function() {
 
-  ISO_3166_1 <- get("ISO_3166_1", envir=.pkgenv)
-
-  setNames(lapply(ISO_3166_1$Alpha_2, get_country_cidrs), ISO_3166_1$Alpha_2)
+  setNames(lapply(iso2c, get_country_cidrs), iso2c)
 
 }
 
