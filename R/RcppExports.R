@@ -7,7 +7,7 @@
 #' @param bpp Hilbert depth (max 12)
 #' @export
 hilbert_encode <- function(x, bpp = 8L) {
-    .Call('iptools_hilbert_encode', PACKAGE = 'iptools', x, bpp)
+    .Call(iptools_hilbert_encode, x, bpp)
 }
 
 #' @title Returns the IP addresses associated with a hostname.
@@ -42,7 +42,7 @@ hilbert_encode <- function(x, bpp = 8L) {
 #' }
 #' @export
 hostname_to_ip <- function(hostnames) {
-    .Call('iptools_hostname_to_ip', PACKAGE = 'iptools', hostnames)
+    .Call(iptools_hostname_to_ip, hostnames)
 }
 
 #' @title Return the hostname associated with particular IP addresses
@@ -68,7 +68,7 @@ hostname_to_ip <- function(hostnames) {
 #'
 #' @export
 ip_to_hostname <- function(ip_addresses) {
-    .Call('iptools_ip_to_hostname', PACKAGE = 'iptools', ip_addresses)
+    .Call(iptools_ip_to_hostname, ip_addresses)
 }
 
 #' @title convert between numeric and dotted-decimal IPv4 forms.
@@ -101,7 +101,7 @@ ip_to_hostname <- function(ip_addresses) {
 #' @rdname ip_numeric
 #' @export
 ip_to_numeric <- function(ip_addresses) {
-    .Call('iptools_ip_to_numeric', PACKAGE = 'iptools', ip_addresses)
+    .Call(iptools_ip_to_numeric, ip_addresses)
 }
 
 #' Return the scope of an IPv6 address (string)
@@ -111,7 +111,7 @@ ip_to_numeric <- function(ip_addresses) {
 #' @return a numeric vector of scopes
 #' @export
 v6_scope <- function(ip_addresses) {
-    .Call('iptools_v6_scope', PACKAGE = 'iptools', ip_addresses)
+    .Call(iptools_v6_scope, ip_addresses)
 }
 
 #' Expand an IPv6 address from an abbreviated version
@@ -121,13 +121,13 @@ v6_scope <- function(ip_addresses) {
 #' @return a character vector of expanded IPv6 addresses
 #' @export
 expand_ipv6 <- function(ip_addresses) {
-    .Call('iptools_expand_ipv6', PACKAGE = 'iptools', ip_addresses)
+    .Call(iptools_expand_ipv6, ip_addresses)
 }
 
 #' @rdname ip_numeric
 #' @export
 numeric_to_ip <- function(ip_addresses) {
-    .Call('iptools_numeric_to_ip', PACKAGE = 'iptools', ip_addresses)
+    .Call(iptools_numeric_to_ip, ip_addresses)
 }
 
 #'@title Identify whether an IP address is IPv4 or IPv6
@@ -160,7 +160,7 @@ numeric_to_ip <- function(ip_addresses) {
 #'
 #'@export
 ip_classify <- function(ip_addresses) {
-    .Call('iptools_ip_classify', PACKAGE = 'iptools', ip_addresses)
+    .Call(iptools_ip_classify, ip_addresses)
 }
 
 #' @title calculate the maximum and minimum IPs in an IP range
@@ -189,7 +189,7 @@ ip_classify <- function(ip_addresses) {
 #'
 #' @export
 range_boundaries <- function(ranges) {
-    .Call('iptools_range_boundaries', PACKAGE = 'iptools', ranges)
+    .Call(iptools_range_boundaries, ranges)
 }
 
 #'@title check if IP addresses fall within particular IP ranges
@@ -219,7 +219,7 @@ range_boundaries <- function(ranges) {
 #'
 #'@export
 ip_in_range <- function(ip_addresses, ranges) {
-    .Call('iptools_ip_in_range', PACKAGE = 'iptools', ip_addresses, ranges)
+    .Call(iptools_ip_in_range, ip_addresses, ranges)
 }
 
 #'@title check if IP address falls within any of the ranges specified
@@ -255,7 +255,7 @@ ip_in_range <- function(ip_addresses, ranges) {
 #'}
 #'@export
 ip_in_any <- function(ip_addresses, ranges) {
-    .Call('iptools_ip_in_any', PACKAGE = 'iptools', ip_addresses, ranges)
+    .Call(iptools_ip_in_any, ip_addresses, ranges)
 }
 
 #'@title check whether IPv4 ranges are valid
@@ -281,7 +281,7 @@ ip_in_any <- function(ip_addresses, ranges) {
 #'
 #' @export
 validate_range <- function(ranges) {
-    .Call('iptools_validate_range', PACKAGE = 'iptools', ranges)
+    .Call(iptools_validate_range, ranges)
 }
 
 #'@title Take vectors of IPs and X-Forwarded-For headers and produce single, normalised
@@ -303,7 +303,7 @@ validate_range <- function(ranges) {
 #'
 #'@export
 xff_extract <- function(ip_addresses, x_forwarded_for) {
-    .Call('iptools_xff_extract', PACKAGE = 'iptools', ip_addresses, x_forwarded_for)
+    .Call(iptools_xff_extract, ip_addresses, x_forwarded_for)
 }
 
 #'@title Logical checks for IP addresses
@@ -332,7 +332,7 @@ xff_extract <- function(ip_addresses, x_forwarded_for) {
 #'@rdname is_checks
 #'@export
 is_multicast <- function(ip_addresses) {
-    .Call('iptools_is_multicast', PACKAGE = 'iptools', ip_addresses)
+    .Call(iptools_is_multicast, ip_addresses)
 }
 
 #' Convert a charcter vector of IPv4 addresses to a character vector of
@@ -341,7 +341,7 @@ is_multicast <- function(ip_addresses) {
 #' @param input numeric vector of IP addresses
 #' @export
 ip_numeric_to_binary_string <- function(input) {
-    .Call('iptools_ip_numeric_to_binary_string', PACKAGE = 'iptools', input)
+    .Call(iptools_ip_numeric_to_binary_string, input)
 }
 
 #' Convert a numeric vector of IPv4 addresses to a character vector of
@@ -350,6 +350,6 @@ ip_numeric_to_binary_string <- function(input) {
 #' @param input character vector of IP addresses
 #' @export
 ip_to_binary_string <- function(input) {
-    .Call('iptools_ip_to_binary_string', PACKAGE = 'iptools', input)
+    .Call(iptools_ip_to_binary_string, input)
 }
 
