@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // hilbert_encode
 NumericMatrix hilbert_encode(std::vector<unsigned> x, int bpp);
-RcppExport SEXP iptools_hilbert_encode(SEXP xSEXP, SEXP bppSEXP) {
+RcppExport SEXP _iptools_hilbert_encode(SEXP xSEXP, SEXP bppSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +19,7 @@ END_RCPP
 }
 // hostname_to_ip
 std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::string > hostnames);
-RcppExport SEXP iptools_hostname_to_ip(SEXP hostnamesSEXP) {
+RcppExport SEXP _iptools_hostname_to_ip(SEXP hostnamesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -30,7 +30,7 @@ END_RCPP
 }
 // ip_to_hostname
 std::list < std::vector < std::string > > ip_to_hostname(std::vector < std::string > ip_addresses);
-RcppExport SEXP iptools_ip_to_hostname(SEXP ip_addressesSEXP) {
+RcppExport SEXP _iptools_ip_to_hostname(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -41,7 +41,7 @@ END_RCPP
 }
 // ip_to_numeric
 std::vector < unsigned int > ip_to_numeric(std::vector < std::string > ip_addresses);
-RcppExport SEXP iptools_ip_to_numeric(SEXP ip_addressesSEXP) {
+RcppExport SEXP _iptools_ip_to_numeric(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -52,7 +52,7 @@ END_RCPP
 }
 // v6_scope
 std::vector < unsigned long > v6_scope(std::vector < std::string > ip_addresses);
-RcppExport SEXP iptools_v6_scope(SEXP ip_addressesSEXP) {
+RcppExport SEXP _iptools_v6_scope(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -63,7 +63,7 @@ END_RCPP
 }
 // expand_ipv6
 std::vector < std::string > expand_ipv6(std::vector < std::string > ip_addresses);
-RcppExport SEXP iptools_expand_ipv6(SEXP ip_addressesSEXP) {
+RcppExport SEXP _iptools_expand_ipv6(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -74,7 +74,7 @@ END_RCPP
 }
 // numeric_to_ip
 std::vector < std::string > numeric_to_ip(std::vector < unsigned int > ip_addresses);
-RcppExport SEXP iptools_numeric_to_ip(SEXP ip_addressesSEXP) {
+RcppExport SEXP _iptools_numeric_to_ip(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -85,7 +85,7 @@ END_RCPP
 }
 // ip_classify
 CharacterVector ip_classify(CharacterVector ip_addresses);
-RcppExport SEXP iptools_ip_classify(SEXP ip_addressesSEXP) {
+RcppExport SEXP _iptools_ip_classify(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -96,7 +96,7 @@ END_RCPP
 }
 // range_boundaries
 DataFrame range_boundaries(std::vector < std::string > ranges);
-RcppExport SEXP iptools_range_boundaries(SEXP rangesSEXP) {
+RcppExport SEXP _iptools_range_boundaries(SEXP rangesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -107,7 +107,7 @@ END_RCPP
 }
 // ip_in_range
 std::vector < bool > ip_in_range(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
-RcppExport SEXP iptools_ip_in_range(SEXP ip_addressesSEXP, SEXP rangesSEXP) {
+RcppExport SEXP _iptools_ip_in_range(SEXP ip_addressesSEXP, SEXP rangesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -119,7 +119,7 @@ END_RCPP
 }
 // ip_in_any
 std::vector < bool > ip_in_any(std::vector < std::string > ip_addresses, std::vector < std::string > ranges);
-RcppExport SEXP iptools_ip_in_any(SEXP ip_addressesSEXP, SEXP rangesSEXP) {
+RcppExport SEXP _iptools_ip_in_any(SEXP ip_addressesSEXP, SEXP rangesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -131,7 +131,7 @@ END_RCPP
 }
 // validate_range
 std::vector < bool > validate_range(std::vector < std::string > ranges);
-RcppExport SEXP iptools_validate_range(SEXP rangesSEXP) {
+RcppExport SEXP _iptools_validate_range(SEXP rangesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -142,7 +142,7 @@ END_RCPP
 }
 // xff_extract
 std::vector < std::string > xff_extract(std::vector < std::string > ip_addresses, std::vector < std::string > x_forwarded_for);
-RcppExport SEXP iptools_xff_extract(SEXP ip_addressesSEXP, SEXP x_forwarded_forSEXP) {
+RcppExport SEXP _iptools_xff_extract(SEXP ip_addressesSEXP, SEXP x_forwarded_forSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -154,7 +154,7 @@ END_RCPP
 }
 // is_multicast
 LogicalVector is_multicast(CharacterVector ip_addresses);
-RcppExport SEXP iptools_is_multicast(SEXP ip_addressesSEXP) {
+RcppExport SEXP _iptools_is_multicast(SEXP ip_addressesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -165,7 +165,7 @@ END_RCPP
 }
 // ip_numeric_to_binary_string
 CharacterVector ip_numeric_to_binary_string(std::vector < unsigned int > input);
-RcppExport SEXP iptools_ip_numeric_to_binary_string(SEXP inputSEXP) {
+RcppExport SEXP _iptools_ip_numeric_to_binary_string(SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -176,7 +176,7 @@ END_RCPP
 }
 // ip_to_binary_string
 CharacterVector ip_to_binary_string(std::vector < std::string > input);
-RcppExport SEXP iptools_ip_to_binary_string(SEXP inputSEXP) {
+RcppExport SEXP _iptools_ip_to_binary_string(SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -187,22 +187,22 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"iptools_hilbert_encode", (DL_FUNC) &iptools_hilbert_encode, 2},
-    {"iptools_hostname_to_ip", (DL_FUNC) &iptools_hostname_to_ip, 1},
-    {"iptools_ip_to_hostname", (DL_FUNC) &iptools_ip_to_hostname, 1},
-    {"iptools_ip_to_numeric", (DL_FUNC) &iptools_ip_to_numeric, 1},
-    {"iptools_v6_scope", (DL_FUNC) &iptools_v6_scope, 1},
-    {"iptools_expand_ipv6", (DL_FUNC) &iptools_expand_ipv6, 1},
-    {"iptools_numeric_to_ip", (DL_FUNC) &iptools_numeric_to_ip, 1},
-    {"iptools_ip_classify", (DL_FUNC) &iptools_ip_classify, 1},
-    {"iptools_range_boundaries", (DL_FUNC) &iptools_range_boundaries, 1},
-    {"iptools_ip_in_range", (DL_FUNC) &iptools_ip_in_range, 2},
-    {"iptools_ip_in_any", (DL_FUNC) &iptools_ip_in_any, 2},
-    {"iptools_validate_range", (DL_FUNC) &iptools_validate_range, 1},
-    {"iptools_xff_extract", (DL_FUNC) &iptools_xff_extract, 2},
-    {"iptools_is_multicast", (DL_FUNC) &iptools_is_multicast, 1},
-    {"iptools_ip_numeric_to_binary_string", (DL_FUNC) &iptools_ip_numeric_to_binary_string, 1},
-    {"iptools_ip_to_binary_string", (DL_FUNC) &iptools_ip_to_binary_string, 1},
+    {"_iptools_hilbert_encode", (DL_FUNC) &_iptools_hilbert_encode, 2},
+    {"_iptools_hostname_to_ip", (DL_FUNC) &_iptools_hostname_to_ip, 1},
+    {"_iptools_ip_to_hostname", (DL_FUNC) &_iptools_ip_to_hostname, 1},
+    {"_iptools_ip_to_numeric", (DL_FUNC) &_iptools_ip_to_numeric, 1},
+    {"_iptools_v6_scope", (DL_FUNC) &_iptools_v6_scope, 1},
+    {"_iptools_expand_ipv6", (DL_FUNC) &_iptools_expand_ipv6, 1},
+    {"_iptools_numeric_to_ip", (DL_FUNC) &_iptools_numeric_to_ip, 1},
+    {"_iptools_ip_classify", (DL_FUNC) &_iptools_ip_classify, 1},
+    {"_iptools_range_boundaries", (DL_FUNC) &_iptools_range_boundaries, 1},
+    {"_iptools_ip_in_range", (DL_FUNC) &_iptools_ip_in_range, 2},
+    {"_iptools_ip_in_any", (DL_FUNC) &_iptools_ip_in_any, 2},
+    {"_iptools_validate_range", (DL_FUNC) &_iptools_validate_range, 1},
+    {"_iptools_xff_extract", (DL_FUNC) &_iptools_xff_extract, 2},
+    {"_iptools_is_multicast", (DL_FUNC) &_iptools_is_multicast, 1},
+    {"_iptools_ip_numeric_to_binary_string", (DL_FUNC) &_iptools_ip_numeric_to_binary_string, 1},
+    {"_iptools_ip_to_binary_string", (DL_FUNC) &_iptools_ip_to_binary_string, 1},
     {NULL, NULL, 0}
 };
 
