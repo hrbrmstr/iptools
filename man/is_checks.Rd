@@ -5,9 +5,6 @@
 \alias{is_ipv4}
 \alias{is_ipv6}
 \alias{is_valid}
-\alias{is_ipv4}
-\alias{is_ipv6}
-\alias{is_valid}
 \title{Logical checks for IP addresses}
 \usage{
 is_multicast(ip_addresses)

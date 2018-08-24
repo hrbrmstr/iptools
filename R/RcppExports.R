@@ -10,6 +10,22 @@ hilbert_encode <- function(x, bpp = 8L) {
     .Call(`_iptools_hilbert_encode`, x, bpp)
 }
 
+#' @title Convert a start+end IP address range pair to representative CIDR blocks
+#' @description takes in a single start/end pair and returns a charcter vector
+#'              of all the CIDR blocks necessary to contain the range.
+#' @param ip_start,ip_end range start/end (numeric)
+#' @return character vector
+#' @export
+#' @examples
+#' range_boundaries_to_cidr(
+#'  ip_to_numeric("192.100.176.0"),
+#'  ip_to_numeric("192.100.179.255")
+#' )
+#' ## [1] "192.100.176.0/22"
+range_boundaries_to_cidr <- function(ip_start, ip_end) {
+    .Call(`_iptools_range_boundaries_to_cidr`, ip_start, ip_end)
+}
+
 #' @title Returns the IP addresses associated with a hostname.
 #' @description takes in a vector of hostnames and returns the IP addresses from
 #' each hostname's DNS entries. Compatible with both IPv4 and IPv6 addresses.

@@ -2,6 +2,7 @@
 // [[Rcpp::depends(AsioHeaders)]]
 
 #include <Rcpp.h>
+#include <cstdint>
 
 #ifdef __APPLE__
 #pragma clang diagnostic push
@@ -17,6 +18,54 @@
 #include "asio_bindings.h"
 
 using namespace Rcpp;
+
+//' @title Convert a start+end IP address range pair to representative CIDR blocks
+//' @description takes in a single start/end pair and returns a charcter vector
+//'              of all the CIDR blocks necessary to contain the range.
+//' @param ip_start,ip_end range start/end (numeric)
+//' @return character vector
+//' @export
+//' @examples
+//' range_boundaries_to_cidr(
+//'  ip_to_numeric("192.100.176.0"),
+//'  ip_to_numeric("192.100.179.255")
+//' )
+//' ## [1] "192.100.176.0/22"
+//[[Rcpp::export]]
+std::vector < std::string > range_boundaries_to_cidr(long int ip_start, long int ip_end) {
+
+  uint8_t bits = 1;
+  long int mask = 1;
+  long int new_ip;
+  std::stringstream ss;
+  std::vector < std::string > cidrs;
+
+  while (bits < 32) {
+    new_ip = ip_start | mask;
+    if ((new_ip > ip_end) || (((ip_start >> bits) << bits) != ip_start)) {
+      bits--;
+      mask = mask >> 1;
+      break;
+    }
+    bits++;
+    mask = (mask << 1) + 1;
+  }
+
+  new_ip = ip_start | mask;
+  bits = 32 - bits;
+
+  // get the first (possibly only) CIDR block
+  ss << ((long int)bits);
+  cidrs.push_back(asio::ip::address_v4(ip_start).to_string() + "/" + ss.str());
+
+  if (new_ip < ip_end) { // if we're not done, compute more and join everything together
+    std::vector < std::string > tmp_cidrs = range_boundaries_to_cidr(new_ip+1, ip_end);
+    cidrs.insert(cidrs.end(), tmp_cidrs.begin(), tmp_cidrs.end());
+  }
+
+  return(cidrs);
+
+}
 
 //' @title Returns the IP addresses associated with a hostname.
 //' @description takes in a vector of hostnames and returns the IP addresses from

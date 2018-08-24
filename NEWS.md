@@ -1,6 +1,10 @@
-iptools 0.5.0 [WIP]
+iptools 0.6.0 [WIP]
 =============
+* `range_boundaries_to_cidr()` will take a start/stop numeric range
+  and turn it into representative/encompassing CIDR blocks
 
+iptools 0.5.0
+=============
 * NA support added for IP validity checkers and classifiers
 * Hilbert coordiates generator function added
 * `ip_in_any()` added for a more generic range membership test

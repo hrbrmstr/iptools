@@ -17,6 +17,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// range_boundaries_to_cidr
+std::vector < std::string > range_boundaries_to_cidr(long int ip_start, long int ip_end);
+RcppExport SEXP _iptools_range_boundaries_to_cidr(SEXP ip_startSEXP, SEXP ip_endSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< long int >::type ip_start(ip_startSEXP);
+    Rcpp::traits::input_parameter< long int >::type ip_end(ip_endSEXP);
+    rcpp_result_gen = Rcpp::wrap(range_boundaries_to_cidr(ip_start, ip_end));
+    return rcpp_result_gen;
+END_RCPP
+}
 // hostname_to_ip
 std::list < std::vector < std::string > > hostname_to_ip(std::vector < std::string > hostnames);
 RcppExport SEXP _iptools_hostname_to_ip(SEXP hostnamesSEXP) {
@@ -188,6 +200,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_iptools_hilbert_encode", (DL_FUNC) &_iptools_hilbert_encode, 2},
+    {"_iptools_range_boundaries_to_cidr", (DL_FUNC) &_iptools_range_boundaries_to_cidr, 2},
     {"_iptools_hostname_to_ip", (DL_FUNC) &_iptools_hostname_to_ip, 1},
     {"_iptools_ip_to_hostname", (DL_FUNC) &_iptools_ip_to_hostname, 1},
     {"_iptools_ip_to_numeric", (DL_FUNC) &_iptools_ip_to_numeric, 1},
