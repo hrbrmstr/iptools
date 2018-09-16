@@ -5,7 +5,6 @@
 ^NEWS\.md$
 ^README\.md$
 ^CONDUCT\.md$
-^README\.Rmd$
 ^README-.*\.png$
 ^\.Rhistory$
 ^cran-comments\.md$
