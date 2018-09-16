@@ -4,14 +4,14 @@
 #include <Rcpp.h>
 #include <stdio.h>
 
-#ifdef __APPLE__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-local-typedef"
-#endif
+// #ifdef __APPLE__
+// #pragma clang diagnostic push
+// #pragma clang diagnostic ignored "-Wunused-local-typedef"
+// #endif
 #include <asio.hpp>
-#ifdef __APPLE__
-#pragma clang diagnostic pop
-#endif
+// #ifdef __APPLE__
+// #pragma clang diagnostic pop
+// #endif
 
 #include "asio_bindings.h"
 
@@ -232,7 +232,12 @@ bool asio_bindings::single_ip_in_range(std::string ip_address, std::string range
   char *slash_pos;
   bool output = false;
 
-  strncpy(range_copy, range.c_str(), 24); // safe copy
+  int sz = strnlen(range.c_str(), 23);
+
+  // safe'r' copy according to CRAN & gcc-8
+  memcpy(&range_copy[0], range.c_str(), sz);
+  range_copy[sz] = '\0';
+  // strncpy(range_copy, range.c_str(), 24); // safe copy
   slash_pos = strchr(range_copy, '/'); // find the "/"
 
   if(slash_pos == NULL){
@@ -266,7 +271,12 @@ std::vector < std::string > asio_bindings::calculate_ip_range(std::string range)
   char *slash_pos;
   std::vector < std::string > output;
 
-  strncpy(cidr_copy, range.c_str(), 24);
+  int sz = strnlen(range.c_str(), 23);
+
+  // safe'r' copy according to CRAN & gcc-8
+  memcpy(&cidr_copy[0], range.c_str(), sz);
+  cidr_copy[sz] = '\0';
+  // strncpy(cidr_copy, range.c_str(), 24);
   slash_pos = strchr(cidr_copy, '/');
   if (slash_pos == NULL){
     output.push_back("Invalid");

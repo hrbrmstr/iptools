@@ -4,14 +4,14 @@
 #include <Rcpp.h>
 #include <cstdint>
 
-#ifdef __APPLE__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-local-typedef"
-#endif
-#include <asio.hpp>
-#ifdef __APPLE__
-#pragma clang diagnostic pop
-#endif
+// #ifdef __APPLE__
+// #pragma clang diagnostic push
+// #pragma clang diagnostic ignored "-Wunused-local-typedef"
+// #endif
+// #include <asio.hpp>
+// #ifdef __APPLE__
+// #pragma clang diagnostic pop
+// #endif
 
 #include <bitset>
 

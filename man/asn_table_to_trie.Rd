@@ -2,7 +2,7 @@
 % Please edit documentation in R/cidr.r
 \name{asn_table_to_trie}
 \alias{asn_table_to_trie}
-\title{Convert a \emph{pyasn} generated CIDR dat to a trie}
+\title{Convert a \emph{pyasn} generated CIDR data file to a trie}
 \usage{
 asn_table_to_trie(asn_table_file)
 }
@@ -10,5 +10,5 @@ asn_table_to_trie(asn_table_file)
 \item{asn_table_file}{filename of dat file (can be gzip'd)}
 }
 \description{
-Convert a \emph{pyasn} generated CIDR dat to a trie
+Convert a \emph{pyasn} generated CIDR data file to a trie
 }

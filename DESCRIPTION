@@ -26,9 +26,6 @@ Imports:
     utils,
     stats,
     AsioHeaders,
-    dplyr,
-    readr,
-    tidyr,
     stringi,
     triebeard
 Encoding: UTF-8

@@ -7,17 +7,9 @@
 #'
 #' @name iptools
 #' @docType package
-#' @useDynLib iptools, .registration=TRUE
+#' @useDynLib iptools
 #' @importFrom Rcpp sourceCpp
-# @import grid
-# @importFrom RColorBrewer brewer.pal
-# @importFrom ggplot2 ggplot geom_point aes labs scale_color_manual element_blank
-# @importFrom ggplot2 scale_x_continuous scale_y_reverse coord_equal
-# @importFrom ggplot2 element_blank element_rect element_text theme theme_bw
-#' @importFrom readr read_tsv
 #' @import stringi
-#' @importFrom tidyr separate
-#' @importFrom dplyr mutate data_frame %>%
 #' @import triebeard
 #' @import utils
 #' @import stats

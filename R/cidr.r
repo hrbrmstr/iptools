@@ -1,15 +1,23 @@
-#' Convert a \emph{pyasn} generated CIDR dat to a trie
+#' Convert a \emph{pyasn} generated CIDR data file to a trie
 #'
 #' @param asn_table_file filename of dat file (can be gzip'd)
 #' @export
 asn_table_to_trie <- function(asn_table_file) {
 
-  rip <- readr::read_tsv(asn_table_file, comment=";", col_names=c("cidr", "asn"))
-  rip %>%
-    tidyr::separate(cidr, c("ip", "mask"), "/") %>%
-    dplyr::mutate(prefix=stringi::stri_sub(ip_to_binary_string(ip), 1, mask)) -> rip_df
+  read.csv(
+    file = asn_table_file,
+    sep = "\t",
+    comment.char = ";",
+    col.names = c("cidr", "asn")
+  ) -> rip
 
-  triebeard::trie(rip_df$prefix, rip_df$asn)
+  cidr_split <- stri_split_fixed(rip$cidr, "/", 2, simplify = TRUE)
+
+  ip <- cidr_split[,1]
+  mask <- cidr_split[,1]
+  prefix = stri_sub(ip_to_binary_string(ip), 1, mask)
+
+  triebeard::trie(prefix, rip$asn)
 
 }
 
@@ -39,19 +47,25 @@ ip_to_asn <- function(cidr_trie, ip) {
 #' @export
 ips_in_cidrs <- function(ips, cidrs) {
 
-  cidrs[!grepl("/", cidrs)] <- sprintf("%s/32", cidrs[!grepl("/", cidrs)])
+  cidrs[!stri_detect_fixed(cidrs, "/")] <- sprintf("%s/32", cidrs[!stri_detect_fixed(cidrs, "/")])
 
-  dplyr::data_frame(cidr=cidrs) %>%
-    tidyr::separate(cidr, c("ip", "mask"), "/") %>%
-    dplyr::mutate(prefix=stri_sub(ip_to_binary_string(ip), 1, mask),
-                  value=TRUE) -> tr
+  cidr_split <- stri_split_fixed(cidr, "/", 2, simplify = TRUE)
 
-  cidr_trie <- trie(tr$prefix, tr$value)
+  ip <- cidr_split[,1]
+  mask <- cidr_split[,2]
+  prefix <- stri_sub(ip_to_binary_string(ip), 1, mask)
+  value <- rep(TRUE, length(prefix))
 
-  dplyr::data_frame(ips=ips,
-                    in_cidr=longest_match(cidr_trie,
-                                          ip_to_binary_string(ips))) %>%
-    mutate(in_cidr=!is.na(in_cidr))
+  cidr_trie <- trie(prefix, value)
+
+  data.frame(
+    ips = ips,
+    in_cidr = !is.na(longest_match(cidr_trie, ip_to_binary_string(ips)))
+  ) -> out
+
+  class(out) <- c("tbl_df", "tbl", "data.frame")
+
+  out
 
 }
 
@@ -67,9 +81,9 @@ host_count <- function(cidrs) {
 
   cidrs[!is_cidr] <- sprintf("%s/32", cidrs[!is_cidr])
 
-  stri_split_fixed(cidrs, "/") %>%
-    sapply("[", 2) %>%
-    as.numeric() %>%
-    sapply(function(x) (2^(32-x)))
+  tmp <- stri_split_fixed(cidrs, "/")
+  tmp <- sapply(tmp, "[", 2)
+  tmp <- as.numeric(tmp)
+  sapply(tmp, function(x) (2^(32-x)))
 
 }

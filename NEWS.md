@@ -1,4 +1,4 @@
-iptools 0.6.0 [WIP]
+iptools 0.6.0
 =============
 * `range_boundaries_to_cidr()` will take a start/stop numeric range
   and turn it into representative/encompassing CIDR blocks
