@@ -5,7 +5,15 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 1 note
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Bob Rudis <bob@rud.is>'
+
+New maintainer:
+  Bob Rudis <bob@rud.is>
+Old maintainer(s):
+  Bob Rudis <bob@rudis.net>
 
 * This is a maintenance release
 
@@ -14,3 +22,4 @@
 * Adds C registration
 * Fixes major CRAN warnings over strncpy
 * Adds new functions
+* Updated my e-mail address 

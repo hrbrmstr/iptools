@@ -49,7 +49,7 @@ ips_in_cidrs <- function(ips, cidrs) {
 
   cidrs[!stri_detect_fixed(cidrs, "/")] <- sprintf("%s/32", cidrs[!stri_detect_fixed(cidrs, "/")])
 
-  cidr_split <- stri_split_fixed(cidr, "/", 2, simplify = TRUE)
+  cidr_split <- stri_split_fixed(cidrs, "/", 2, simplify = TRUE)
 
   ip <- cidr_split[,1]
   mask <- cidr_split[,2]

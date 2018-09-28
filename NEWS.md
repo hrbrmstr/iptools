@@ -1,3 +1,7 @@
+iptools 0.6.1
+=============
+* Fixed serious bug in `ips_in_cidrs()` introduced after removing tidyverse deps
+
 iptools 0.6.0
 =============
 * `range_boundaries_to_cidr()` will take a start/stop numeric range
