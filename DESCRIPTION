@@ -28,6 +28,7 @@ Imports:
     stats,
     AsioHeaders,
     stringi,
+    readr,
     triebeard
 Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders

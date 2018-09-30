@@ -12,3 +12,6 @@ host_count(cidrs)
 \description{
 TODO: ipv4 validation
 }
+\examples{
+host_count("1.52.0.0/14")
+}

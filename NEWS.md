@@ -1,6 +1,10 @@
 iptools 0.6.1
 =============
 * Fixed serious bug in `ips_in_cidrs()` introduced after removing tidyverse deps
+* Fixed serious bug in `asn_table_to_trie()` introduced after removing
+  tidyverse deps (Fixes #36)
+* Added tests & examples for all CIDR ops
+* Added test data file for ASN trie ops
 
 iptools 0.6.0
 =============

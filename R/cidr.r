@@ -2,20 +2,21 @@
 #'
 #' @param asn_table_file filename of dat file (can be gzip'd)
 #' @export
+#' @examples
+#' asn_table_to_trie(system.file("test", "rib.tst.gz", package="iptools"))
 asn_table_to_trie <- function(asn_table_file) {
 
-  read.csv(
+  readr::read_tsv(
     file = asn_table_file,
-    sep = "\t",
-    comment.char = ";",
-    col.names = c("cidr", "asn")
+    comment = ";",
+    col_names = c("cidr", "asn")
   ) -> rip
 
   cidr_split <- stri_split_fixed(rip$cidr, "/", 2, simplify = TRUE)
 
   ip <- cidr_split[,1]
-  mask <- cidr_split[,1]
-  prefix = stri_sub(ip_to_binary_string(ip), 1, mask)
+  mask <- cidr_split[,2]
+  prefix <- stri_sub(ip_to_binary_string(ip), 1, mask)
 
   triebeard::trie(prefix, rip$asn)
 
@@ -26,6 +27,9 @@ asn_table_to_trie <- function(asn_table_file) {
 #' @param cidr_trie trie created with \code{asn_table_to_trie()}
 #' @param ip character vector or numeric vector of IPv4 addresses
 #' @export
+#' @examples
+#' tbl <- asn_table_to_trie(system.file("test", "rib.tst.gz", package="iptools"))
+#' ip_to_asn(tbl, "5.192.0.1")
 ip_to_asn <- function(cidr_trie, ip) {
 
   if (inherits(ip, "numeric")) {
@@ -45,6 +49,11 @@ ip_to_asn <- function(cidr_trie, ip) {
 #' @note auto-appends \code{/32} if a bare IPv4 is detected
 #' @return \code{data_frame} with \code{ips} column and a logical \code{in_cdir} column
 #' @export
+#' @examples
+#' ips_in_cidrs(
+#'   c("4.3.2.1", "1.2.3.4", "1.20.113.10", "5.190.145.5"),
+#'   c("5.190.144.0/21", "1.20.113.0/24")
+#' )
 ips_in_cidrs <- function(ips, cidrs) {
 
   cidrs[!stri_detect_fixed(cidrs, "/")] <- sprintf("%s/32", cidrs[!stri_detect_fixed(cidrs, "/")])
@@ -75,6 +84,8 @@ ips_in_cidrs <- function(ips, cidrs) {
 #'
 #' @param cidrs character vector of IPv4 CIDRs
 #' @export
+#' @examples
+#' host_count("1.52.0.0/14")
 host_count <- function(cidrs) {
 
   is_cidr <- stri_detect_fixed(cidrs, "/")

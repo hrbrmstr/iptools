@@ -14,4 +14,5 @@
 #' @import utils
 #' @import stats
 #' @import AsioHeaders
+#' @importFrom readr read_tsv
 NULL
