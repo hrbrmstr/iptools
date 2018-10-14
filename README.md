@@ -1,28 +1,51 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.44526.svg)](https://zenodo.org/record/44526) [![Travis-CI Build Status](https://travis-ci.org/hrbrmstr/iptools.svg?branch=master)](https://travis-ci.org/hrbrmstr/iptools) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/iptools)](http://cran.r-project.org/web/packages/iptools) ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/iptools)
 
-Easy IP address handling with iptools
--------------------------------------
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.44526.svg)](https://zenodo.org/record/44526)
+[![Travis-CI Build
+Status](https://travis-ci.org/hrbrmstr/iptools.svg?branch=master)](https://travis-ci.org/hrbrmstr/iptools)
+[![Project Status: Active - The project has reached a stable, usable
+state and is being actively
+developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/iptools)](http://cran.r-project.org/web/packages/iptools)
+![downloads](http://cranlogs.r-pkg.org/badges/grand-total/iptools)
 
-`iptools` is a set of tools for working with IP addresses. The aim is to provide functionality not presently available with any existing R package and to do so with as much speed as possible. To that end, many of the operations are written in `Rcpp` and require installation of the `AsioHeaders` package. A current, lofty goal is to mimic most of the functionality of the Python `iptools` module and make IP addresses first class R objects.
+## Easy IP address handling with iptools
+
+`iptools` is a set of tools for working with IP addresses. The aim is to
+provide functionality not presently available with any existing R
+package and to do so with as much speed as possible. To that end, many
+of the operations are written in `Rcpp` and require installation of the
+`AsioHeaders` package. A current, lofty goal is to mimic most of the
+functionality of the Python `iptools` module and make IP addresses first
+class R objects.
 
 Available [on CRAN](http://cran.r-project.org/web/packages/iptools/)
 
-### NEW FOR 0.3.0.x+!
+### NEW FOR 0.3.0.x+\!
 
-Thanks to @eddelbuettel we've thinned down this version of `iptools` and it should also work on Windows now!
+Thanks to @eddelbuettel we’ve thinned down this version of `iptools` and
+it should also work on Windows now\!
 
 ### Functionality
 
-The package primarily supports IPv4 addresses due to deficiencies in R's support for large numbers, but there is IPv6 support for some functionality, and we plan to build more in as R improves and as we do. Functionality includes:
+The package primarily supports IPv4 addresses due to deficiencies in R’s
+support for large numbers, but there is IPv6 support for some
+functionality, and we plan to build more in as R improves and as we do.
+Functionality includes:
 
--   Converting IP addresses to their numeric form, and then back to strings, with `ip_to_numeric` and `numeric_to_ip`;
--   Validating and classifying IP addresses with `ip_classify`;
--   Range generation and checking with `range_boundaries`, `range_generate` and `validate_range`, `country_ranges`, and;
--   Several inbuilt IP-related datasets.
+  - Converting IP addresses to their numeric form, and then back to
+    strings, with `ip_to_numeric` and `numeric_to_ip`;
+  - Validating and classifying IP addresses with `ip_classify`;
+  - Range generation and checking with `range_boundaries`,
+    `range_generate` and `validate_range`, `country_ranges`, and;
+  - Several inbuilt IP-related datasets.
 
-For more information, see the vignettes on [the functionality](https://github.com/hrbrmstr/iptools/blob/master/vignettes/introduction_to_iptools.Rmd) and [the datasets](https://github.com/hrbrmstr/iptools/blob/master/vignettes/iptools_datasets.Rmd) within `iptools`.
+For more information, see the vignettes on [the
+functionality](https://github.com/hrbrmstr/iptools/blob/master/vignettes/introduction_to_iptools.Rmd)
+and [the
+datasets](https://github.com/hrbrmstr/iptools/blob/master/vignettes/iptools_datasets.Rmd)
+within `iptools`.
 
 ### Installation
 
@@ -34,7 +57,9 @@ devtools::install_github("hrbrmstr/iptools")
 install.packages("iptools")
 ```
 
-`iptools` depends on the [AsioHeaders](https://github.com/eddelbuettel/asioheaders) package which is now in CRAN.
+`iptools` depends on the
+[AsioHeaders](https://github.com/eddelbuettel/asioheaders) package which
+is now in CRAN.
 
 ### Test Results
 
@@ -43,15 +68,34 @@ library(iptools)
 library(testthat)
 
 date()
-#> [1] "Fri Apr 29 15:02:00 2016"
+#> [1] "Sun Oct 14 11:29:55 2018"
 
 test_dir("tests/")
-#> testthat results ===========================================================
-#> OK: 75 SKIPPED: 0 FAILED: 0
+#> ✔ | OK F W S | Context
+#> ══ testthat results  ══════════════════════════════════════════════════════
+#> OK: 82 SKIPPED: 0 FAILED: 0
 #> 
-#> DONE ======================================================================
+#> ══ Results ════════════════════════════════════════════════════════════════
+#> Duration: 0.4 s
+#> 
+#> OK:       0
+#> Failed:   0
+#> Warnings: 0
+#> Skipped:  0
 ```
+
+## iptools Metrics
+
+| Lang         | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
+| :----------- | -------: | ---: | --: | ---: | ----------: | ---: | -------: | ---: |
+| C++          |        4 | 0.13 | 846 | 0.52 |         167 | 0.38 |      375 | 0.28 |
+| R            |       20 | 0.67 | 444 | 0.27 |         133 | 0.31 |      638 | 0.47 |
+| HTML         |        2 | 0.07 | 228 | 0.14 |          47 | 0.11 |        2 | 0.00 |
+| Rmd          |        3 | 0.10 |  60 | 0.04 |          57 | 0.13 |      109 | 0.08 |
+| C/C++ Header |        1 | 0.03 |  37 | 0.02 |          30 | 0.07 |      223 | 0.17 |
 
 ### Code of Conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CONDUCT.md). By participating in this project you agree to
+abide by its terms.
