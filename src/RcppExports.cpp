@@ -17,6 +17,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ipv6_to_bytes
+List ipv6_to_bytes(std::vector < std::string > input);
+RcppExport SEXP _iptools_ipv6_to_bytes(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(ipv6_to_bytes(input));
+    return rcpp_result_gen;
+END_RCPP
+}
 // range_boundaries_to_cidr
 std::vector < std::string > range_boundaries_to_cidr(long int ip_start, long int ip_end);
 RcppExport SEXP _iptools_range_boundaries_to_cidr(SEXP ip_startSEXP, SEXP ip_endSEXP) {
@@ -200,6 +211,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_iptools_hilbert_encode", (DL_FUNC) &_iptools_hilbert_encode, 2},
+    {"_iptools_ipv6_to_bytes", (DL_FUNC) &_iptools_ipv6_to_bytes, 1},
     {"_iptools_range_boundaries_to_cidr", (DL_FUNC) &_iptools_range_boundaries_to_cidr, 2},
     {"_iptools_hostname_to_ip", (DL_FUNC) &_iptools_hostname_to_ip, 1},
     {"_iptools_ip_to_hostname", (DL_FUNC) &_iptools_ip_to_hostname, 1},

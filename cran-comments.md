@@ -2,6 +2,7 @@
 * local OS X install, R 3.5.1
 * ubuntu 14.04 (on travis-ci), R 3.5.1
 * win-builder (devel and release)
+* r-hub
 
 ## R CMD check results
 
@@ -10,16 +11,8 @@
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: 'Bob Rudis <bob@rud.is>'
 
-New maintainer:
-  Bob Rudis <bob@rud.is>
-Old maintainer(s):
-  Bob Rudis <bob@rudis.net>
-
 * This is a maintenance release
 
 ------
 
-* Adds C registration
-* Fixes major CRAN warnings over strncpy
-* Adds new functions
-* Updated my e-mail address 
+* Bug-fix for 2 functions

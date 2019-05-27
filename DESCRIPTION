@@ -1,8 +1,8 @@
 Package: iptools
 Type: Package
 Title: Manipulate, Validate and Resolve 'IP' Addresses
-Version: 0.6.1
-Date: 2018-09-28
+Version: 0.7.0
+Date: 2019-05-27
 Author: Bob Rudis <bob@rud.is> [aut, cre],
         Oliver Keyes <ironholds@gmail.com> [aut],
         Tim Smith [ctb]
@@ -33,4 +33,4 @@ Imports:
 Encoding: UTF-8
 LinkingTo: BH, Rcpp, AsioHeaders
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.1
