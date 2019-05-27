@@ -21,11 +21,18 @@
 #'
 #' ipv6_to_nibble(tst6, ip6_arpa = TRUE)
 ipv6_to_nibble <- function(x, ip6_arpa = FALSE) {
+
   b <- iptools:::ipv6_to_bytes(x)
   m <- stri_list2matrix(b, byrow = TRUE)
+
   apply(m, 1, function(.x) {
     if (is.na(.x[1])) return(NA_character_)
-    paste0(rev(unlist(strsplit(.x, ""))), collapse = ".")
-  }) -> out
-  if (ip6_arpa) sprintf("%s.ip6.arpa.", out) else out
+    tmp <- paste0(rev(unlist(strsplit(.x, ""))), collapse = ".")
+    if (ip6_arpa) sprintf("%s.ip6.arpa.", tmp) else tmp
+  })
+
 }
+
+
+
+
