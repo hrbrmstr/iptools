@@ -22,7 +22,7 @@
 #' ipv6_to_nibble(tst6, ip6_arpa = TRUE)
 ipv6_to_nibble <- function(x, ip6_arpa = FALSE) {
 
-  b <- iptools:::ipv6_to_bytes(x)
+  b <- ipv6_to_bytes(x)
   m <- stri_list2matrix(b, byrow = TRUE)
 
   apply(m, 1, function(.x) {
