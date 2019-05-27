@@ -12,3 +12,4 @@
 ^\.travis\.yml$
 ^docs$
 ^map\.png$
+^.vscode$
