@@ -41,3 +41,14 @@ test_that("Error handlers for numeric to dotted-decimal work",{
   expect_that(length(result), equals(1))
   expect_that(result, equals("0.0.0.0"))
 })
+
+test_that("Subnet calculations work", {
+
+  host_ip <- c("1.2.3.4", "4.3.2.1")
+  subnet_len <- c(24L, 25L)
+  expect_equal(
+    ip_to_subnet(host_ip, subnet_len),
+    ip_to_subnet(c("1.2.3.4/24", "4.3.2.1/25"))
+  )
+
+})

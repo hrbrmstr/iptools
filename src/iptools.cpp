@@ -16,8 +16,34 @@
 #include <bitset>
 
 #include "asio_bindings.h"
+#include <asio/ip/network_v4.hpp>
 
 using namespace Rcpp;
+using namespace asio::ip;
+
+//[[Rcpp::export]]
+StringVector int_ip_to_subnet(StringVector ip_addresses, IntegerVector prefix_lengths) {
+
+  unsigned int input_size = ip_addresses.size();
+  asio::ip::address holding;
+  StringVector output(input_size);
+
+  for(unsigned int i = 0; i < input_size; i++){
+    if ((i % 10000) == 0) Rcpp::checkUserInterrupt();
+    if (ip_addresses[i] == NA_STRING){
+      output[i] = NA_STRING;
+    } else {
+      network_v4 net = network_v4(
+        address_v4::from_string(ip_addresses[i]),
+        prefix_lengths[i]
+      );
+      output[i] = net.network().to_string() + "/" + std::to_string(prefix_lengths[i]);
+    }
+  }
+
+  return(output);
+
+}
 
 //' Convert a character vector of IPv6 addresses to a list of raw vectors of bytes
 //'

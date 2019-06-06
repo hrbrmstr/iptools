@@ -10,6 +10,10 @@ hilbert_encode <- function(x, bpp = 8L) {
     .Call('_iptools_hilbert_encode', PACKAGE = 'iptools', x, bpp)
 }
 
+int_ip_to_subnet <- function(ip_addresses, prefix_lengths) {
+    .Call('_iptools_int_ip_to_subnet', PACKAGE = 'iptools', ip_addresses, prefix_lengths)
+}
+
 #' Convert a character vector of IPv6 addresses to a list of raw vectors of bytes
 #'
 #' @param input input IPv6 string vector
