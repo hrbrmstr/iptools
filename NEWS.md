@@ -1,3 +1,8 @@
+iptools 0.7.x
+=============
+* New `ip6_to_bytes()` and `ip6_to_nibble()`
+* New `ip_to_subnet()` (implements #38)
+
 iptools 0.6.1
 =============
 * Fixed serious bug in `ips_in_cidrs()` introduced after removing tidyverse deps
