@@ -366,7 +366,7 @@ std::vector < bool > ip_in_range(std::vector < std::string > ip_addresses, std::
 //'fall within any of the speficied ranges.
 //'
 //'@param ip_addresses character vector of IP addresses
-//'@param ranges character vector of CIDR reanges
+//'@param ranges character vector of CIDR ranges
 //'@return a logical vector of whether a given IP was in any of the ranges
 //'@examples \dontrun{
 //' north_america <- unlist(country_ranges(countries=c("US", "CA", "MX")))
