@@ -4,7 +4,9 @@
 \name{iana_ports}
 \alias{iana_ports}
 \title{IANA Service Name and Transport Protocol Port Number Registry}
-\format{A data frame with 13,659 rows and 12 variables}
+\format{
+A data frame with 13,659 rows and 12 variables
+}
 \usage{
 data(iana_ports)
 }
@@ -36,8 +38,8 @@ Last updated 2015-05-02
 }
 \references{
 \itemize{
-  The \href{http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml}{IANA list}.
-  \href{http://tools.ietf.org/html/rfc6335}{RFC6335}
+  The \href{https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml}{IANA list}.
+  \href{https://tools.ietf.org/html/rfc6335}{RFC6335}
 }
 }
 \keyword{datasets}

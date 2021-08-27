@@ -23,9 +23,9 @@
 #' @references
 #'
 #' \itemize{
-#'   \item The \href{http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{
+#'   \item The \href{https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{
 #'   IANA page} on the IPv4 assignments.
-#'   \item \href{http://tools.ietf.org/html/rfc1466}{RFC1466}.
+#'   \item \href{https://tools.ietf.org/html/rfc1466}{RFC1466}.
 #'
 #' }
 #' @usage data(iana_assignments)
@@ -63,10 +63,10 @@ NULL
 #' and \code{\link{iana_assignments}} for a dataset covering general (non-special) IPv4 assignments.
 #'
 #' @references \itemize{
-#'   \item The \href{http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{
+#'   \item The \href{https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{
 #'   IANA page} on specially assigned blocks.
-#'   \item \href{http://tools.ietf.org/html/rfc5376}{RFC5376}
-#'   \item \href{http://tools.ietf.org/html/rfc6890}{RFC6890}
+#'   \item \href{https://tools.ietf.org/html/rfc5376}{RFC5376}
+#'   \item \href{https://tools.ietf.org/html/rfc6890}{RFC6890}
 #' }
 #' @usage data(iana_special_assignments)
 #' @note Last updated 2014-08-07
@@ -102,8 +102,8 @@ NULL
 #'
 #' @references
 #' \itemize{
-#'   The \href{http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml}{IANA list}.
-#'   \href{http://tools.ietf.org/html/rfc6335}{RFC6335}
+#'   The \href{https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml}{IANA list}.
+#'   \href{https://tools.ietf.org/html/rfc6335}{RFC6335}
 #' }
 #' @usage data(iana_ports)
 #' @note Last updated 2015-05-02

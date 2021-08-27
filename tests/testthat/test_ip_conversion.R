@@ -39,7 +39,7 @@ test_that("Error handlers for numeric to dotted-decimal work",{
   result <- numeric_to_ip(9000000000001000043343210000)
   expect_true(is.vector(result, "character"))
   expect_that(length(result), equals(1))
-  expect_that(result, equals("0.0.0.0"))
+  expect_true(result %in% c("0.0.0.0", "255.255.255.255"))
 })
 
 test_that("Subnet calculations work", {

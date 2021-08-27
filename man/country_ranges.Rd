@@ -13,7 +13,7 @@ country_ranges(countries)
 named list of character vectors of CIDR blocks
 }
 \description{
-Query \url{http://www.iwik.org/ipcountry/} for the CIDR ranges for a given
+Query \url{https://www.iwik.org/ipcountry/} for the CIDR ranges for a given
 set of ISO 3166-1 alpha-2 country codes and return the results in a named
 list of character vectors.
 }
@@ -24,7 +24,7 @@ which codes have been cached can be retrieved with \code{cached_country_cidrs)}.
 }
 \note{
 This function requires internet connectivity as it pulls daily updated data
-      from \url{http://www.iwik.org/ipcountry/}.
+      from \url{https://www.iwik.org/ipcountry/}.
 }
 \examples{
 rng <- country_ranges(c("PW", "UZ"))

@@ -3,7 +3,6 @@
 \docType{package}
 \name{iptools}
 \alias{iptools}
-\alias{iptools-package}
 \title{A package to quickly and easily handle IP addresses.}
 \description{
 A toolkit for manipulating, validating and testing 'IP' addresses and

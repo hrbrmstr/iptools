@@ -13,5 +13,5 @@ asn_table_to_trie(asn_table_file)
 Convert a \emph{pyasn} generated CIDR data file to a trie
 }
 \examples{
-asn_table_to_trie(system.file("test", "rib.tst.gz", package="iptools"))
+asn_table_to_trie(system.file("test", "rib.tst", package="iptools"))
 }

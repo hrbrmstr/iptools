@@ -1,4 +1,4 @@
-# these are the 2-letter codes that http://www.iwik.org/ipcountry/ uses
+# these are the 2-letter codes that https://www.iwik.org/ipcountry/ uses
 # rather than do yet-another-web-call we'll update this as the world changes
 
 c("AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AP", "AR",
@@ -26,7 +26,7 @@ c("AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AP", "AR",
 
 #' Return CIDR ranges for given ISO 3166-1 alpha-2 country codes
 #'
-#' Query \url{http://www.iwik.org/ipcountry/} for the CIDR ranges for a given
+#' Query \url{https://www.iwik.org/ipcountry/} for the CIDR ranges for a given
 #' set of ISO 3166-1 alpha-2 country codes and return the results in a named
 #' list of character vectors.
 #'
@@ -37,7 +37,7 @@ c("AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AP", "AR",
 #' @param countries character vector of ISO 3166-1 alpha-2 country codes (case-insensitive)
 #' @return named list of character vectors of CIDR blocks
 #' @note This function requires internet connectivity as it pulls daily updated data
-#'       from \url{http://www.iwik.org/ipcountry/}.
+#'       from \url{https://www.iwik.org/ipcountry/}.
 #' @export
 #' @examples
 #' rng <- country_ranges(c("PW", "UZ"))
@@ -83,7 +83,7 @@ cached_country_cidrs <- function() {
 #'
 #' @return named list of character vectors of CIDR blocks
 #' @note This is an expensive operation as it pulls 249 files from
-#'       \url{http://www.iwik.org/ipcountry/}. Try not to do this too often.
+#'       \url{https://www.iwik.org/ipcountry/}. Try not to do this too often.
 #' @export
 get_all_country_ranges <- function() {
 
@@ -102,7 +102,7 @@ get_country_cidrs <- function(cn) {
     suppressWarnings(
       cn_ret <- grep("^#",
            tryCatch(
-             readLines(sprintf("http://www.iwik.org/ipcountry/%s.cidr", cn), warn=FALSE),
+             readLines(sprintf("https://www.iwik.org/ipcountry/%s.cidr", cn), warn=FALSE),
              error=function(err) { NA }
            ),
            invert=TRUE, value=TRUE)

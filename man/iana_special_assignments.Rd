@@ -4,7 +4,9 @@
 \name{iana_special_assignments}
 \alias{iana_special_assignments}
 \title{IANA IPv4 Special-Purpose Address Registry}
-\format{A data frame with 256 rows and 5 variables}
+\format{
+A data frame with 256 rows and 5 variables
+}
 \usage{
 data(iana_special_assignments)
 }
@@ -35,10 +37,10 @@ Last updated 2014-08-07
 }
 \references{
 \itemize{
-  \item The \href{http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{
+  \item The \href{https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}{
   IANA page} on specially assigned blocks.
-  \item \href{http://tools.ietf.org/html/rfc5376}{RFC5376}
-  \item \href{http://tools.ietf.org/html/rfc6890}{RFC6890}
+  \item \href{https://tools.ietf.org/html/rfc5376}{RFC5376}
+  \item \href{https://tools.ietf.org/html/rfc6890}{RFC6890}
 }
 }
 \seealso{

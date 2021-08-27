@@ -1,5 +1,6 @@
-iptools 0.7.x
+iptools 0.7.2
 =============
+* Fixes CRAN checks and removes dependency on {readr} (which appears to be the cause).
 * New `ip6_to_bytes()` and `ip6_to_nibble()`
 * New `ip_to_subnet()` (implements #38)
 

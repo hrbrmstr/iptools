@@ -25,7 +25,7 @@ using namespace Rcpp;
 #endif
 
 #ifdef IS_WINDOWS
-/* http://stackoverflow.com/questions/15370033/how-to-use-inet-pton-with-the-mingw-compiler */
+/* https://stackoverflow.com/questions/15370033/how-to-use-inet-pton-with-the-mingw-compiler */
 #define NS_INADDRSZ  4
 #define NS_IN6ADDRSZ 16
 #define NS_INT16SZ   2

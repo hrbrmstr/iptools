@@ -27,7 +27,7 @@
 iana_assignments_refresh <- function(){
 
   #Read in and clean
-  connection <- url("http://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.csv")
+  connection <- url("https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.csv")
   data <- read.csv(connection, as.is = TRUE, encoding="UTF-8")
   names(data) <- c("prefix","designation","date","whois","rdap","status", "note")
   data <- data[,c("prefix","designation","date","whois","status")]
@@ -53,7 +53,7 @@ iana_special_assignments_refresh <- function(){
   }
 
   #Read in
-  connection <- url("http://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry-1.csv")
+  connection <- url("https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry-1.csv")
   data <- read.csv(connection, as.is = TRUE, encoding="UTF-8")
   names(data) <- c("address_block","name","rfc","allocation_date","termination_date","source",
                    "destination","forwardable","global","reserved_by_protocol")
@@ -75,7 +75,7 @@ iana_special_assignments_refresh <- function(){
 #'@rdname iptools_refresh
 #'@export
 iana_ports_refresh <- function(){
-  connection <- url("http://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv")
+  connection <- url("https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.csv")
   data <- read.csv(connection, as.is = TRUE, encoding="UTF-8")
   names(data) <- c("service_name","port_number","transport_protocol", "description", "assignee", "contact",
                    "registration_date","modification_date","reference","service_code","known_unauthorised_uses",

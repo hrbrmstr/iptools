@@ -8,7 +8,7 @@ ip_to_subnet(ip_addresses, prefix_lengths = NULL)
 }
 \arguments{
 \item{ip_addresses}{either a character vector of IP addresses in CIDR notation
-(e.g. \code{1.2.3.4/24}) --- in which case \code{prefix_lengths} should be \code{NULL} ---
+(e.g. \verb{1.2.3.4/24}) --- in which case \code{prefix_lengths} should be \code{NULL} ---
 or a character vector of IP addresses --- in which case \code{prefix_lengths} should
 be a character vector of the same length as \code{ip_addresses}.}
 
@@ -17,7 +17,7 @@ a character vector of IP addresses in CIDR notation otherwise should be
 a character vector of the same length as \code{ip_addresses}.}
 }
 \description{
-Given a character vector of IP addresses in CIDR notation (e.g. \code{1.2.3.4/24})
+Given a character vector of IP addresses in CIDR notation (e.g. \verb{1.2.3.4/24})
 or a character vector of IP addresses and an integer vector of prefix lengths,
 return a character vector of the network (in CIDR notation).
 }

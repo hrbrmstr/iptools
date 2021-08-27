@@ -15,5 +15,5 @@ a named list of CIDR blocks for all those countries.
 }
 \note{
 This is an expensive operation as it pulls 249 files from
-      \url{http://www.iwik.org/ipcountry/}. Try not to do this too often.
+      \url{https://www.iwik.org/ipcountry/}. Try not to do this too often.
 }

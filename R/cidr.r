@@ -3,13 +3,20 @@
 #' @param asn_table_file filename of dat file (can be gzip'd)
 #' @export
 #' @examples
-#' asn_table_to_trie(system.file("test", "rib.tst.gz", package="iptools"))
+#' asn_table_to_trie(system.file("test", "rib.tst", package="iptools"))
 asn_table_to_trie <- function(asn_table_file) {
 
-  readr::read_tsv(
+  if (grepl("gz$", asn_table_file[1])) {
+    asn_table_file <- gzfile(asn_table_file)
+  }
+
+  read.csv(
     file = asn_table_file,
-    comment = ";",
-    col_names = c("cidr", "asn")
+    comment.char = ";",
+    sep = "\t",
+    header = FALSE,
+    col.names = c("cidr", "asn"),
+    colClasses = c("character", "character")
   ) -> rip
 
   cidr_split <- stri_split_fixed(rip$cidr, "/", 2, simplify = TRUE)
@@ -28,7 +35,7 @@ asn_table_to_trie <- function(asn_table_file) {
 #' @param ip character vector or numeric vector of IPv4 addresses
 #' @export
 #' @examples
-#' tbl <- asn_table_to_trie(system.file("test", "rib.tst.gz", package="iptools"))
+#' tbl <- asn_table_to_trie(system.file("test", "rib.tst", package="iptools"))
 #' ip_to_asn(tbl, "5.192.0.1")
 ip_to_asn <- function(cidr_trie, ip) {
 

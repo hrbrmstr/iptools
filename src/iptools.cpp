@@ -246,7 +246,6 @@ std::vector < unsigned long > v6_scope(std::vector < std::string > ip_addresses)
 //' Expand an IPv6 address from an abbreviated version
 //'
 //' @param ip_addresses a vector of IPv6 IP addresses.
-//' @references \url{http://www.ipv6tf.org/index.php?page=meet/faqs&faq_id=1000&q=11}
 //' @return a character vector of expanded IPv6 addresses
 //' @export
 // [[Rcpp::export]]

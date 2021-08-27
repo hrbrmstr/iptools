@@ -15,6 +15,6 @@ ip_to_asn(cidr_trie, ip)
 Match IP addresses to autonomous systems
 }
 \examples{
-tbl <- asn_table_to_trie(system.file("test", "rib.tst.gz", package="iptools"))
+tbl <- asn_table_to_trie(system.file("test", "rib.tst", package="iptools"))
 ip_to_asn(tbl, "5.192.0.1")
 }

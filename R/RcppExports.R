@@ -159,7 +159,6 @@ v6_scope <- function(ip_addresses) {
 #' Expand an IPv6 address from an abbreviated version
 #'
 #' @param ip_addresses a vector of IPv6 IP addresses.
-#' @references \url{http://www.ipv6tf.org/index.php?page=meet/faqs&faq_id=1000&q=11}
 #' @return a character vector of expanded IPv6 addresses
 #' @export
 expand_ipv6 <- function(ip_addresses) {

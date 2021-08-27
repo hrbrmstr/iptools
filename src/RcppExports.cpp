@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // hilbert_encode
 NumericMatrix hilbert_encode(std::vector<unsigned> x, int bpp);
 RcppExport SEXP _iptools_hilbert_encode(SEXP xSEXP, SEXP bppSEXP) {

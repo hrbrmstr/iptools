@@ -36,7 +36,7 @@ private:
   asio::io_service io_service;
 
   /**
-   * A function for taking a hostname ("http://en.wikipedia.org")
+   * A function for taking a hostname ("https://en.wikipedia.org")
    * and converting it to the actual IP addresses it resolves to.
    *
    * @param hostname a hostname.
@@ -125,7 +125,7 @@ private:
 public:
 
   /**
-   * A function for taking a vector of hostnames ("http://en.wikipedia.org")
+   * A function for taking a vector of hostnames ("https://en.wikipedia.org")
    * and converting it to the actual IP addresses it resolves to.
    *
    * @param a vector of strings representing the hostnames.
