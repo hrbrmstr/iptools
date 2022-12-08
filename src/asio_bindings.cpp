@@ -372,7 +372,7 @@ std::vector < std::string > asio_bindings::expand_ipv6_(std::vector < std::strin
     try{
       //      output[i] = asio::ip::address_v6::from_string(ip_addresses[i]).to_string();
       v = asio::ip::address_v6::from_string(ip_addresses[i]).to_bytes();
-      (void)sprintf(str, "%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x",
+      (void)snprintf(str, 50, "%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x:%02x%02x",
        (uint8_t)v[0], (uint8_t)v[1], (uint8_t)v[2], (uint8_t)v[3], (uint8_t)v[4], (uint8_t)v[5], (uint8_t)v[6], (uint8_t)v[7], (uint8_t)v[8], (uint8_t)v[9], (uint8_t)v[10], (uint8_t)v[11], (uint8_t)v[12], (uint8_t)v[13], (uint8_t)v[14], (uint8_t)v[15]);
       output[i] = std::string(str);
     } catch (...) {
